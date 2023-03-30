@@ -16,5 +16,8 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "sass": "^1.60.0"
+    },
+    "dependencies": {
+        "vite": "^4.2.1"
     }
 }
