@@ -20,10 +20,7 @@ Route::get('/home', function () {
     return view('auth.dashboard');
     })->middleware('auth');
 
-<<<<<<< Updated upstream
-=======
 Route::get('/home', function () {
     return view('auth.dashboard');
     })->middleware('auth','verified');
 
->>>>>>> Stashed changes
