@@ -24,3 +24,7 @@ Route::get('/home', function () {
     return view('auth.dashboard');
     })->middleware('auth','verified');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
