@@ -12,13 +12,13 @@
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="/resources/views/img/Merchandising1.jpg" class="d-block w-100" alt="Merchandising 1">
+                <img src="{{URL::asset('/img/Merchandising1.jpg')}}" class="d-block w-100" alt="Merchandising 1"/>
               </div>
               <div class="carousel-item">
-                <img src="/resources/views/img/Merchandising2.jpg" class="d-block w-100" alt="Merchandising 2">
+                <img src="{{URL::asset('/img/Merchandising2.jpg')}}" class="d-block w-100" alt="Merchandising 2">
               </div>
               <div class="carousel-item">
-                <img src="/resources/views/img/Merchandising3.jpg" class="d-block w-100" alt="Merchandising 3">
+                <img src="{{URL::asset('/img/Merchandising3.jpg')}}" class="d-block w-100" alt="Merchandising 3">
               </div>
 
             </div>
