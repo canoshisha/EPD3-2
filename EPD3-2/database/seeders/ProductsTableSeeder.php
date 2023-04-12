@@ -26,7 +26,7 @@ class ProductsTableSeeder extends Seeder
             [        "name" => "Gorra Aston Martin Cognizant F1 Team 2021",        "size" => "S",        "category" => "gorra"    ,"price"=> 23.99, "stock"=>2, "description"=>""],
             [        "name" => "McLaren F1 Team Men's Logo T-Shirt",        "size" => "S",        "category" => "camiseta"    ,"price"=> 45.99, "stock"=>6, "description"=>""],
             [        "name" => "Gorra McLaren F1 Team 2021",        "size" => "M",        "category" => "gorra"    ,"price"=> 17.99, "stock"=>5, "description"=>""],
-            [        "name" => "Aston Martin Cognizant F1 Team Men's Logo T-Shirt",        "size" => "M",        "category" => "camiseta"    ,"price"=> 32.99, "stock"=>4, "description"=>""]
+            [        "name" => "Mercedes-AMG Petronas F1 Team Men's Black Logo T-Shirt",        "size" => "M",        "category" => "camiseta"    ,"price"=> 32.99, "stock"=>4, "description"=>""]
                     
                 ]);
     }
