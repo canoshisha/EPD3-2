@@ -1,6 +1,6 @@
 footer {
-    background-color: #212529;
-    /* background-image:  linear-gradient(black, red); */
+    /* background-color: #212529; */
+    background-image:  linear-gradient(black, red);
     color: white;
   }
 footer a .text-muted{

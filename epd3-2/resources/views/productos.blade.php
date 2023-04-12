@@ -1,28 +1,66 @@
 @extends('welcome')
-@section('title',"Productos")
+@section('title', 'Productos')
+@section('scs')
+    <link rel="stylesheet" href="{{ asset('css/productos.css') }}">
+@endsection
 @section('contenido')
-<section class="products">
-    <div class="product">
-      <a href="product-page.html">
-        <img src="product1.jpg" alt="Producto 1">
-        <h3>Producto 1</h3>
-        <p>Precio: $19.99</p>
-      </a>
-    </div>
-    <div class="product">
-      <a href="product-page.html">
-        <img src="product2.jpg" alt="Producto 2">
-        <h3>Producto 2</h3>
-        <p>Precio: $24.99</p>
-      </a>
-    </div>
-    <div class="product">
-      <a href="product-page.html">
-        <img src="product3.jpg" alt="Producto 3">
-        <h3>Producto 3</h3>
-        <p>Precio: $29.99</p>
-      </a>
-    </div>
+    <section class="products">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Productos</h2>
+                <hr>
+            </div>
+            <div class="product col-md-3">
+                <div class="card h-100">
+                    <a href="product-page.html" class="text-decoration-none">
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <img class="img-product" src="{{ URL::asset('/img/Merchandising1.jpg') }}"
+                                alt="Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto del equipo Fernando Alonso">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="text-center fs-5">Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto
+                                del equipo Fernando Alonso</h3>
+                            <p>Precio: 79.99€</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="product col-md-3">
+                <div class="card h-100">
+
+
+                    <a href="product-page.html" class="text-decoration-none">
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <img class="img-product" src="{{ URL::asset('/img/Merchandising2.jpg') }}"
+                                alt="Gorra oficial del equipo Aston Martin Aramco Cognizant F1 2023 - Verde">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="text-center fs-5">Gorra oficial del equipo Aston Martin Aramco Cognizant F1 2023 -
+                                Verde</h3>
+                            <p>Precio: 39.00€</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="product col-md-3">
+            <div class="card h-100">
+
+
+                <a href="product-page.html" class="text-decoration-none">
+                    <div class="d-flex align-items-center justify-content-center mb-3">
+                        <img class="img-product" src="{{ URL::asset('/img/Merchandising3.jpg') }}"
+                            alt="Camiseta del equipo Scuderia Ferrari 2022">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="text-center fs-5">Camiseta del equipo Scuderia Ferrari 2022</h3>
+                        <p>Precio: 38.25€</p>
+                </a>
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
     {{-- <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -31,7 +69,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach($products as $product)
+            @foreach ($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <img src="{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}">
@@ -42,6 +80,8 @@
                             <a href="{{ route('product.show', $product->id) }}" class="btn btn-primary">Ver más</a>
                         </div>
                     </div>
+
+
                 </div>
             @endforeach
         </div>

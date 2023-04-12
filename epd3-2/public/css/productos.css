@@ -1,0 +1,11 @@
+a {
+    color:black;
+}
+a:hover {
+    color:red;
+}
+
+.img-product {
+    width: 200px;
+    height: 300px;
+  }
