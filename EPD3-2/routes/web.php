@@ -24,6 +24,10 @@ Route::get('/home', function () {
     return view('auth.dashboard');
     })->middleware('auth','verified');
 
+Route::get('/productos', function () {
+    return view('productos');
+});
+
 
 Auth::routes();
 
