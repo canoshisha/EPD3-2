@@ -12,7 +12,7 @@
                 <h1 class="display-4">Bienvenidos a F1 UPO</h1>
                 <p class="lead">Encuentra la mejor selección de merchandising de Fórmula 1 en nuestra tienda online.</p>
                 <hr class="my-4">
-                <a class="btn btn-danger btn-lg" href="#" role="button">Comprar ahora</a>
+                <a class="btn btn-danger btn-lg" href="/productos" role="button">Comprar ahora</a>
               </div>
         </div>
         <div class="col-md-6">
