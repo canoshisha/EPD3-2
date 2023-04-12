@@ -5,6 +5,7 @@
 @endsection
 @section('contenido')
 <div class="container mt-5">
+  <div class="card h-100">
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="jumbotron text-center my-auto">
@@ -37,6 +38,7 @@
             </button>
           </div>
         </div>
+      </div>
       </div>
 
 </div>

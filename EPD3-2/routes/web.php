@@ -27,6 +27,9 @@ Route::get('/home', function () {
 Route::get('/productos', function () {
     return view('productos');
 });
+Route::get('/des_producto', function () {
+    return view('product_des');
+});
 
 
 Auth::routes();

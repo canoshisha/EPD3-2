@@ -12,7 +12,7 @@
             </div>
             <div class="product col-md-3">
                 <div class="card h-100">
-                    <a href="product-page.html" class="text-decoration-none">
+                    <a href="/des_producto" class="text-decoration-none">
                         <div class="d-flex align-items-center justify-content-center mb-3">
                             <img class="img-product" src="{{ URL::asset('/img/Merchandising1.jpg') }}"
                                 alt="Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto del equipo Fernando Alonso">
@@ -29,7 +29,7 @@
                 <div class="card h-100">
 
 
-                    <a href="product-page.html" class="text-decoration-none">
+                    <a href="/des_producto" class="text-decoration-none">
                         <div class="d-flex align-items-center justify-content-center mb-3">
                             <img class="img-product" src="{{ URL::asset('/img/Merchandising2.jpg') }}"
                                 alt="Gorra oficial del equipo Aston Martin Aramco Cognizant F1 2023 - Verde">
@@ -46,7 +46,7 @@
             <div class="card h-100">
 
 
-                <a href="product-page.html" class="text-decoration-none">
+                <a href="/des_producto" class="text-decoration-none">
                     <div class="d-flex align-items-center justify-content-center mb-3">
                         <img class="img-product" src="{{ URL::asset('/img/Merchandising3.jpg') }}"
                             alt="Camiseta del equipo Scuderia Ferrari 2022">
