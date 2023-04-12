@@ -30,6 +30,9 @@ Route::get('/productos', function () {
 Route::get('/des_producto', function () {
     return view('product_des');
 });
+Route::get('/cesta', function () {
+    return view('cesta');
+});
 
 
 Auth::routes();

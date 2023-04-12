@@ -27,8 +27,6 @@
             </div>
             <div class="product col-md-3">
                 <div class="card h-100">
-
-
                     <a href="/des_producto" class="text-decoration-none">
                         <div class="d-flex align-items-center justify-content-center mb-3">
                             <img class="img-product" src="{{ URL::asset('/img/Merchandising2.jpg') }}"
