@@ -6,3 +6,18 @@
 .carousel-control-prev-icon, .carousel-control-next-icon {
     background-color: black;
 }
+
+.display-4, .lead {
+ font-family: 'Montserrat', sans-serif;
+ color: black ;
+}
+
+.btn-danger {
+ background-color: #d50000;
+ border-color: #d50000;
+ }
+
+ .btn-danger:hover {
+    background-color:black;
+    border-color: black;
+    }

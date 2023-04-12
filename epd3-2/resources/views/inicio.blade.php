@@ -5,14 +5,17 @@
 @endsection
 @section('contenido')
 <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-6">
-        <h1>Bienvenidos a F1 UPO</h1>
-        <p>Encuentra la mejor selección de merchandising de Fórmula 1 en nuestra tienda online.</p>
-        <a href="#" class="btn btn-primary">Comprar ahora</a>
-      </div>
-      <div class="col-md-6">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <div class="jumbotron text-center my-auto">
+                <h1 class="display-4">Bienvenidos a F1 UPO</h1>
+                <p class="lead">Encuentra la mejor selección de merchandising de Fórmula 1 en nuestra tienda online.</p>
+                <hr class="my-4">
+                <a class="btn btn-danger btn-lg" href="#" role="button">Comprar ahora</a>
+              </div>
+        </div>
+        <div class="col-md-6">
+          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <img src="{{URL::asset('/img/Merchandising1.jpg')}}" class="d-block w-100 carousel-img" alt="Merchandising 1"/>
@@ -33,8 +36,8 @@
               <span class="visually-hidden">Siguiente</span>
             </button>
           </div>
+        </div>
+      </div>
 
-    </div>
-  </div>
 </div>
 @endsection
