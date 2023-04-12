@@ -12,3 +12,6 @@ footer a .text-muted{
 svg{
     color: white;
 }
+.btn:hover{
+    box-shadow: 0px 0px 38px -9px rgba(0, 0, 0, 8);
+}
