@@ -9,3 +9,6 @@ footer a .text-muted{
 .container {
     min-height: 100vh;
   }
+svg{
+    color: white;
+}
