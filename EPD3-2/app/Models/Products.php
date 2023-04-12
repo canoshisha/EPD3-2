@@ -23,5 +23,8 @@ class Products extends Model
     public function favorites(){
         return $this->hasOne(Favorites::class,'favorites_id');
     }
+    public function shoppingBasket(){
+        return $this->belongsTo(ShoppingBasket::class,"shopping_basket_id");
+    }
 
 }

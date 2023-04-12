@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('category');
             $table->double('price');
             $table->integer('stock');
-            $table->foreignId('orders_id')->constrained();
+            $table-> string('description')->nullable();
+            
         });
     }
 
