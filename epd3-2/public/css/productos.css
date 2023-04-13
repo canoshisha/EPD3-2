@@ -6,6 +6,9 @@ a:hover {
 }
 
 .img-product {
-    width: 300px;
-    height: 300px;
+    /* display: felx;
+    flex-direction: row;
+    flex-wrap: ; */
+    max-width: 300px;
+    max-height: 300px;
   }

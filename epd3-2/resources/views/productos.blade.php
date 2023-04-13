@@ -10,8 +10,6 @@
                 <h2>Productos</h2>
                 <hr>
             </div>
-            <?php
-            ?>
             @foreach($products as $product)
             <div class="product col-md-3">
                 <div class="card h-100 align-items-center justify-content-center">
@@ -21,18 +19,18 @@
                       $img = $imagen->first();
                     ?>
                     <div class="d-flex mb-3">
-                      <img class="img-fluid img-product"  src="{{ URL::asset($img->routeImg) }}" alt="Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto del equipo Fernando Alonso" style="margin-top: 10px;">
+                      <img class="img-fluid img-product align-self-center" src="{{ URL::asset($img->routeImg) }}" alt="Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto del equipo Fernando Alonso" style="margin-top: 10px; flex-shrink: 0;">
                     </div>
                     <div class="card-body d-flex flex-column justify-content-end">
                       <h3 class="text-center fs-5">{{$product->name}}</h3>
-
                     </div>
                     <div class="card-footer text-center">
-                        <p>{{$product->price}}€</p>
+                      <p>{{$product->price}}€</p>
                     </div>
                   </a>
                 </div>
               </div>
+
 
 
             @endforeach
