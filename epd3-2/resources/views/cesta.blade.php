@@ -29,22 +29,6 @@
                         </form>
                     </td>
                 @endforeach
-                {{-- <tr>
-                    <td>Producto 1</td>
-                    <td>2</td>
-                    <td>$19.99</td>
-                    <td>$39.98</td>
-                    <td><button class="btn btn-danger btn-sm">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>Producto 2</td>
-                    <td>1</td>
-                    <td>$24.99</td>
-                    <td>$24.99</td>
-                    <td><button class="btn btn-danger btn-sm">Eliminar</button></td>
-                </tr>
-            </tbody> --}}
-            <tfoot>
                 <tr>
                     <th colspan="3">Total</th>
                     <td>{{ $shoppingBasket->calcularTotal() }} </td>
