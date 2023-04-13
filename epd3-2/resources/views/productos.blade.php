@@ -10,12 +10,19 @@
                 <h2>Productos</h2>
                 <hr>
             </div>
-            @foreach ($products as $product)
+            <?php 
+            ?>
+            @foreach($products as $product)
             <div class="product col-md-3">
                 <div class="card h-100">
-                    <a href="/des_producto" class="text-decoration-none">
+                    <a href="{{url('/des_producto/{$product->id}')}}" class="text-decoration-none">
+                        <?php
+                        
+                        $imagen = $imgProducts->where('products_id' , $product->id);
+                        $img = $imagen->first();
+                            ?>
                         <div class="d-flex align-items-center justify-content-center mb-3">
-                            <img class="img-product" src="{{ URL::asset($imgProducts->routeImg) }}"
+                            <img class="img-product" src="{{ URL::asset($img->routeImg) }}"
                                 alt="Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto del equipo Fernando Alonso">
                         </div>
                         <div class="card-body">

@@ -16,6 +16,7 @@ class productosController extends Controller
      */
     public function index()
     {   
+        
         $products = Products::all();
         $imgProducts = DB::table('img_products')->where('tipo', 'imagenMenu')->get();
         return view('productos', compact('products','imgProducts'));

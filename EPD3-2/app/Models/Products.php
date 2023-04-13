@@ -17,7 +17,6 @@ class Products extends Model
         'price',
         'stock',
         'description',
-        'img_products_id',
     ];
 
     public function orders(){
@@ -33,7 +32,7 @@ class Products extends Model
         return $this->hasOne(Favorites::class,'favorites_id');
     }
     public function shoppingBasket(){
-        return $this->belongsTo(ShoppingBasket::class,"shopping_basket_id");
+        return $this->belongsTo(ShoppingBasket::class,"shopping_baskets_id");
     }
 
 }
