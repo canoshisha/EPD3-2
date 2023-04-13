@@ -10,6 +10,7 @@
                 <h2>Productos</h2>
                 <hr>
             </div>
+            @foreach ($products as $product)
             <div class="product col-md-3">
                 <div class="card h-100">
                     <a href="/des_producto" class="text-decoration-none">
@@ -18,14 +19,15 @@
                                 alt="Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto del equipo Fernando Alonso">
                         </div>
                         <div class="card-body">
-                            <h3 class="text-center fs-5">Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto
-                                del equipo Fernando Alonso</h3>
-                            <p>Precio: 79.99€</p>
+                            <h3 class="text-center fs-5">{{$product->name}}</h3>
+                            <p>{{$product->price}}€</p>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="product col-md-3">
+            @endforeach
+           
+            {{-- <div class="product col-md-3">
                 <div class="card h-100">
                     <a href="/des_producto" class="text-decoration-none">
                         <div class="d-flex align-items-center justify-content-center mb-3">
@@ -42,8 +44,6 @@
         </div>
         <div class="product col-md-3">
             <div class="card h-100">
-
-
                 <a href="/des_producto" class="text-decoration-none">
                     <div class="d-flex align-items-center justify-content-center mb-3">
                         <img class="img-product" src="{{ URL::asset('/img/Merchandising3.jpg') }}"
@@ -55,7 +55,7 @@
                 </a>
             </div>
         </div>
-        </div>
+        </div> --}}
         </div>
     </section>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Products;
 
 class productosController extends Controller
 {
@@ -12,8 +13,9 @@ class productosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('productos');
+    {   
+        $products = Products::all();
+        return view('productos', compact('products'));
     }
 
     /**

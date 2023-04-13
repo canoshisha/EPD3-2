@@ -39,5 +39,4 @@ Route::get('/cesta', function () {
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/products', [productosController::class, 'index'])->name('products.menu');
