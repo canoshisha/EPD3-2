@@ -42,6 +42,7 @@
             </div>
             <div class="col-md-6 text-end">
                 <a href="#" class="btn btn-danger">Realizar Pedido</a>
+                {{-- falta que se cree una compra(orders) y un ticket de forma automatica al pulsar aqui, ademas de borrar la shoppingBasket. --}}
             </div>
         </div>
     </div>
