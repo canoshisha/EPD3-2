@@ -52,6 +52,15 @@
             </select>
           </div>
           <div class="mb-3">
+            <label for="cantidad" class="form-label">Talla</label>
+            <select id="cantidad" class="form-select custom-select">
+              <option class="opt" selected>Selecciona una cantidad</option>
+              <option class="opt" value="1">1</option>
+              <option class="opt" value="2">2</option>
+              <option class="opt" value="3">3</option>
+            </select>
+          </div>
+          <div class="mb-3">
             <button type="submit" class="btn btn-danger">Añadir a la cesta</button>
           </div>
         </form>
