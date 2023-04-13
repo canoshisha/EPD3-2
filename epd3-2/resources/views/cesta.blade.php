@@ -42,7 +42,7 @@
             <a href="/productos" class="btn btn-secondary">Seguir Comprando</a>
         </div>
         <div class="col-md-6 text-end">
-            @if ($shoppingBasket)
+            @if ($shoppingBasket->products->isNotEmpty())
             <form class="row g-3" action="{{ route('cesta.destroy') }}" method="POST">
                 @csrf
                 @method('DELETE')
