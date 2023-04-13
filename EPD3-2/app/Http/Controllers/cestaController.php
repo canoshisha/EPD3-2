@@ -69,7 +69,12 @@ class cestaController extends Controller
      */
     public function update(Request $request, ShoppingBasket $shoppingBasket)
     {
-        //
+
+        $productId = $request->input("product_id"); // id del producto que deseas eliminar
+        $productsIds = array_diff($shoppingBasket->products_id, [$productId]);
+        $shoppingBasket->products()->sync($productsIds);
+        return redirect()->route('cesta.show');
+
     }
 
     /**
@@ -80,6 +85,6 @@ class cestaController extends Controller
      */
     public function destroy(ShoppingBasket $shoppingBasket)
     {
-        //
+
     }
 }
