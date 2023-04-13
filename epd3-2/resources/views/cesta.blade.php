@@ -11,13 +11,18 @@
       <thead>
         <tr>
           <th>Producto</th>
-          <th>Cantidad</th>
           <th>Precio</th>
           <th>Total</th>
           <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
+        @foreach ( $shoppingBasket->products as $product)
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->price }}</td>
+            <td>{{ $product->price }}</td>
+            <td><a href="{{ route('gerente.edit', $gerente) }}" class="btn btn-danger btn-sm"">Eliminar</a></td>
+        @endforeach
         <tr>
           <td>Producto 1</td>
           <td>2</td>

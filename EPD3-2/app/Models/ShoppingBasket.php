@@ -11,6 +11,8 @@ class ShoppingBasket extends Model
     public $timestamps = false;
     protected $table = 'shopping_baskets';
 
+    protected $primaryKey = 'id';
+
     public function users(){
         return $this->belongsTo(User::class,"users_id");
     }

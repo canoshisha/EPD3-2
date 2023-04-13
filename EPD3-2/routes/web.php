@@ -32,11 +32,12 @@ Route::get('/productos', function () {
 Route::get('/des_producto', function () {
     return view('product_des');
 });
-Route::get('/cesta', function () {
-    return view('cesta');
-});
+
 
 
 Auth::routes();
 
 Route::get('/products', [productosController::class, 'index'])->name('products.menu');
+
+
+Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show');

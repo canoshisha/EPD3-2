@@ -45,14 +45,6 @@
               <option class="opt" value="XXL">XXL</option>
               <option class="opt" value="XXXL">XXXL</option>
             </select>
-            <br>
-            <label for="cantidad" class="form-label">Cantidad</label>
-            <select id="cantidad" class="form-select custom-select">
-              <option class="opt" selected>Selecciona una cantidad</option>
-              <option class="opt" value="1">1</option>
-              <option class="opt" value="2">2</option>
-              <option class="opt" value="3">3</option>
-            </select>
           </div>
           <div class="mb-3">
             <button type="submit" class="btn btn-danger">Añadir a la cesta</button>

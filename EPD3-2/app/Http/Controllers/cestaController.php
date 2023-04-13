@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ShoppingBasket;
 use Illuminate\Http\Request;
 
-class cesta extends Controller
+class cestaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,21 +41,21 @@ class cesta extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\ShoppingBasket  $shoppingBasket
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ShoppingBasket $shoppingBasket)
     {
-        //
+        return view('cesta',compact('shoppingBasket'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\ShoppingBasket  $shoppingBasket
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ShoppingBasket $shoppingBasket)
     {
         //
     }
@@ -63,10 +64,10 @@ class cesta extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\ShoppingBasket  $shoppingBasket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ShoppingBasket $shoppingBasket)
     {
         //
     }
@@ -74,10 +75,10 @@ class cesta extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\ShoppingBasket  $shoppingBasket
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ShoppingBasket $shoppingBasket)
     {
         //
     }

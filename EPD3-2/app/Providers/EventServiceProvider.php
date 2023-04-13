@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Models\ShoppingBasket;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -25,10 +26,23 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+
     public function boot()
     {
-        //
+        parent::boot();
+
+        Event::listen('Illuminate\Auth\Events\Authenticated', function ($event) {
+            if (!$event->user->shoppingBasket) {
+                $basket = new ShoppingBasket();
+                $basket->users_id = $event->user->id;
+                $basket->save();
+            }
+        });
     }
+
+
+
 
     /**
      * Determine if events and listeners should be automatically discovered.
