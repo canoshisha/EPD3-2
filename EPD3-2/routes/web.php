@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\productosController;
+use App\Http\Controllers\cestaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +40,4 @@ Route::get('/cesta', function () {
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/products', [HomeController::class, 'productsMenu'])->name('products.buy');
+Route::get('/products', [productosController::class, 'index'])->name('products.menu');
