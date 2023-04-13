@@ -39,7 +39,7 @@
     <hr>
     <div class="row">
         <div class="col-md-6">
-            <a href="/productos" class="btn btn-secondary">Seguir Comprando</a>
+            <a href="/products" class="btn btn-secondary">Seguir Comprando</a>
         </div>
         <div class="col-md-6 text-end">
             @if ($shoppingBasket->products->isNotEmpty())
