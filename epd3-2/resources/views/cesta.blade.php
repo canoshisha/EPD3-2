@@ -47,9 +47,7 @@
             <tfoot>
                 <tr>
                     <th colspan="3">Total</th>
-                    <td>
-                        
-                    </td>
+                    <td>{{ $shoppingBasket->calcularTotal() }} </td>
                 </tr>
             </tfoot>
         </table>

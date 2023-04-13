@@ -23,4 +23,14 @@ class ShoppingBasket extends Model
     public function products(){
         return $this->hasMany(Products::class,"products_id");
     }
+    public function calcularTotal(){
+        $products = $this->products;
+        $total=0;
+        foreach ($products as $product){
+            $total = $total + $product->price;
+        }
+
+        return $total;
+    }
+
 }
