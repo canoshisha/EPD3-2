@@ -15,7 +15,7 @@
                 <div class="card h-100">
                     <a href="/des_producto" class="text-decoration-none">
                         <div class="d-flex align-items-center justify-content-center mb-3">
-                            <img class="img-product" src="{{ URL::asset('/img/Merchandising1.jpg') }}"
+                            <img class="img-product" src="{{ URL::asset($imgProducts->routeImg) }}"
                                 alt="Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto del equipo Fernando Alonso">
                         </div>
                         <div class="card-body">

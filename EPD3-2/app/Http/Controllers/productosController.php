@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Products;
+use App\Models\ImgProducts;
 
 class productosController extends Controller
 {
@@ -15,7 +16,9 @@ class productosController extends Controller
     public function index()
     {   
         $products = Products::all();
-        return view('productos', compact('products'));
+        $imgProducts = ImgProducts::all();
+        dd($imgProducts);
+        return view('productos', compact('products','imgProducts'));
     }
 
     /**
