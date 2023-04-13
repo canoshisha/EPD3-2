@@ -86,8 +86,9 @@ class cestaController extends Controller
      * @param  \App\Models\ShoppingBasket  $shoppingBasket
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ShoppingBasket $shoppingBasket)
+    public function destroy(Request $request)
     {
+        $shoppingBasket = $request->input("shoppingBasket");
         $fechaActual = Carbon::now();
         $order = new Order();
         $order->pagement = 'online';
@@ -105,8 +106,8 @@ class cestaController extends Controller
         $ticket->save();
 
         $shoppingBasket->delete();
-        return redirect()->route('inicio')->with('success', 'La compra ha sido realizada con exito');
+        return redirect()->route('inicio');
 
-        
+
     }
 }
