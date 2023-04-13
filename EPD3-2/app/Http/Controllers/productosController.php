@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\ImgProducts;
+use Illuminate\Support\Facades\DB;
 
 class productosController extends Controller
 {
@@ -16,8 +17,7 @@ class productosController extends Controller
     public function index()
     {   
         $products = Products::all();
-        $imgProducts = ImgProducts::all();
-        dd($imgProducts);
+        $imgProducts = DB::table('img_products')->where('tipo', 'imagenMenu')->get();
         return view('productos', compact('products','imgProducts'));
     }
 

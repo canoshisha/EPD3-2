@@ -12,8 +12,8 @@ class ImgProducts extends Model
     protected $table = 'img_products';
     protected $fillable = [
         'routeImg',
-        'products_id',
         'tipo',
+        'products_id',
     ];
 
     public function products(){
