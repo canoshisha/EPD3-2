@@ -10,6 +10,13 @@ class Order extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'orders';
+    protected $fillable = [
+        'pagement',
+        'date',
+        'state',
+        'users_id',
+        'products_id',
+    ];
 
     public function user(){
         return $this->belongsTo(User::class,"users_id");

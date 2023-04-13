@@ -10,6 +10,10 @@ class ShoppingBasket extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'shopping_baskets';
+    protected $fillable = [
+        'products_id',
+        'users_id',
+    ];
 
     protected $primaryKey = 'id';
 

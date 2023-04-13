@@ -10,6 +10,15 @@ class Products extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'products';
+    protected $fillable = [
+        'name',
+        'size',
+        'category',
+        'price',
+        'stock',
+        'description',
+        'img_products_id',
+    ];
 
     public function orders(){
         return $this->belongsToMany(Order::class,"orders_id");

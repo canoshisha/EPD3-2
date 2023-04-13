@@ -10,6 +10,11 @@ class ImgProducts extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'img_products';
+    protected $fillable = [
+        'routeImg',
+        'products_id',
+        'tipo',
+    ];
 
     public function products(){
         return $this->belongsTo(Products::class,"products_id");

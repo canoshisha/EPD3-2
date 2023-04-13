@@ -10,6 +10,9 @@ class Favorites extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'favorites';
+    protected $fillable = [
+        'products_id',
+    ];
 
     public function products(){
         return $this->belongsToMany(Products::class,"products_id");

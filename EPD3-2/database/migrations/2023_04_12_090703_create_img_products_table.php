@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('img_products', function (Blueprint $table) {
             $table->id();
             $table->string('routeImg');
+            $table->string('tipo');
             $table->foreignId('products_id')->constrained();
         });
     }
