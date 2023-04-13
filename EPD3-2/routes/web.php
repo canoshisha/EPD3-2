@@ -41,3 +41,4 @@ Route::get('/products', [productosController::class, 'index'])->name('products.m
 
 
 Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show');
+Route::put('cesta/{cesta}/actualizar', [cestaController::class, 'update'])->name('cesta.update');
