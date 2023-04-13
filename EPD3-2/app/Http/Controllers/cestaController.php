@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\ShoppingBasket;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class cestaController extends Controller
 {
@@ -85,6 +88,25 @@ class cestaController extends Controller
      */
     public function destroy(ShoppingBasket $shoppingBasket)
     {
+        $fechaActual = Carbon::now();
+        $order = new Order();
+        $order->pagement = 'online';
+        $order->date = $fechaActual;
+        $order->state = 'enviado';
+        $order->users_id = $shoppingBasket->users_id;
+        $order->products_id = $shoppingBasket->products_id;
 
+        $order->save();
+
+        $ticket = new Ticket();
+        $ticket->price_total = $shoppingBasket->calcularTotal();
+        $ticket->date = $fechaActual;
+        $ticket->orders_id = $order->id;
+        $ticket->save();
+
+        $shoppingBasket->delete();
+        return redirect()->route('inicio')->with('success', 'La compra ha sido realizada con exito');
+
+        
     }
 }

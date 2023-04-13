@@ -17,7 +17,7 @@ use App\Http\Controllers\cestaController;
 
 Route::get('/', function () {
     return view('inicio');
-});
+})->name('inicio');
 Route::get('/home', function () {
     return view('auth.dashboard');
     })->middleware('auth');
@@ -42,3 +42,4 @@ Route::get('/products', [productosController::class, 'index'])->name('products.m
 
 Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show');
 Route::put('cesta/{cesta}/actualizar', [cestaController::class, 'update'])->name('cesta.update');
+Route::delete('cesta/{cesta}/delete', [cestaController::class, 'destroy'])->name('cesta.delete');

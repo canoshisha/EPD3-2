@@ -41,7 +41,12 @@
                 <a href="/productos" class="btn btn-secondary">Seguir Comprando</a>
             </div>
             <div class="col-md-6 text-end">
-                <a href="#" class="btn btn-danger">Realizar Pedido</a>
+                <form class="row g-3" action="{{ route('cesta.delete', $shoppingBasket) }}"
+                            method="PUT">
+                            @method('delete')
+                            @csrf
+                            <button class="btn btn-danger" type="submit">Realizar Pedido</button>
+                        </form>
                 {{-- falta que se cree una compra(orders) y un ticket de forma automatica al pulsar aqui, ademas de borrar la shoppingBasket. --}}
             </div>
         </div>
