@@ -38,6 +38,7 @@ Route::get('/des_producto', function () {
 Auth::routes();
 
 Route::get('/products', [productosController::class, 'index'])->name('products.menu');
+Route::get('products/{product}/descripcion', [productosController::class, 'show'])->name('producto.descripcion');
 
 
 Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show');

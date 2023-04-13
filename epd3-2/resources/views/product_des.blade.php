@@ -9,12 +9,17 @@
     <div class="row mx-auto">
       <div class="col-md-6">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <?php
+                        
+             $img1 = $imgProduct->first();
+             $img2 = $imgProduct->last();
+             ?>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="https://via.placeholder.com/400x400.png?text=Camiseta1" class="d-block w-100" alt="Camiseta1">
+              <img src="{{ URL::asset($img1->routeImg) }}" class="img-product d-block w-100" alt="Camiseta1">
             </div>
             <div class="carousel-item">
-              <img src="https://via.placeholder.com/400x400.png?text=Camiseta2" class="d-block w-100" alt="Camiseta2">
+              <img src="{{ URL::asset($img2->routeImg) }}" class="img-product d-block w-100" alt="Camiseta2">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -28,12 +33,12 @@
         </div>
       </div>
       <div class="col-md-6">
-        <h1>Camiseta X</h1>
+        <h1>Camiseta {{$product->name}}</h1>
         <p class="lead">Descripción:<br>
-          Aston Martin Aramco Cognizant F1 2023 Camiseta oficial del piloto del equipo Fernando Alonso
+          {{$product->description}}
         </p>
-        <p class="lead">Precio: 79.99€</p>
-        <form action="#">
+        <p class="lead">{{$product->price}}€</p>
+        <form action="{{route('producto.add')}}">
           <div class="mb-3">
             <label for="talla" class="form-label">Talla</label>
             <select id="talla" class="form-select custom-select">

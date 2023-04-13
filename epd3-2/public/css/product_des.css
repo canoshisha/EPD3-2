@@ -61,3 +61,6 @@ select.custom-select option:hover {
 .custom-select option:hover, .custom-select option:focus {
     background-color: gray;
   }
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: black;
+}

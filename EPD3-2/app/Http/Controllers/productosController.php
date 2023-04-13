@@ -49,9 +49,11 @@ class productosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Products $product)
     {
-        //
+        $id = $product->id;
+        $imgProduct = DB::table('img_products')->where('products_id', $id)->get();
+        return view('product_des',compact('product','imgProduct'));
     }
 
     /**
