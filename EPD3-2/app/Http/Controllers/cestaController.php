@@ -83,8 +83,8 @@ class cestaController extends Controller
     {
         $datos = $request->validate(
             [
-                'talla' => 'required',
-                'cantidad' => 'required'
+                'talla' => 'required|in:S,M,L,XL XXL,XXXL',
+                'cantidad' => 'required|in:1,2,3'
             ]
         );
     
