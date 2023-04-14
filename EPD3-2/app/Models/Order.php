@@ -23,6 +23,6 @@ class Order extends Model
     }
     
     public function ticket(){
-        return $this->hasOne(Ticket::class,"tickets_id");
+        return $this->hasOne(Ticket::class,"id");
     }
 }

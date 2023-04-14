@@ -95,6 +95,16 @@ class cestaController extends Controller
 
 
     }
+    public function misPedidos(Request $request)
+    {
+        $user = User::where('id', Auth::id())->first();
+        $orders = $user->orders;
+        return view('mispedidos', compact('orders'));
+
+
+    }
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -114,6 +124,9 @@ class cestaController extends Controller
         return redirect()->route('cesta.show');
 
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
