@@ -10,10 +10,7 @@ class ShoppingBasket extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'shopping_baskets';
-    protected $fillable = [
-        'productsB_id',
-        'users_id',
-    ];
+
 
     protected $primaryKey = 'id';
 
@@ -21,7 +18,7 @@ class ShoppingBasket extends Model
         return $this->belongsTo(User::class,"users_id");
     }
     public function productBasket(){
-        return $this->hasMany(ProductBasket::class,"productsB_id");
+        return $this->hasMany(ProductBasket::class,'shopping_basket_id');
     }
     public function calcularTotal(){
         $products = $this->productBasket;

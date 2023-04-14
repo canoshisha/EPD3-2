@@ -28,7 +28,7 @@
                         <form class="row g-3" action="{{ route('cesta.update', $shoppingBasket) }}" method="POST">
                             @method('update')
                             @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="product_id" value="{{ $productB->product->id }}">
                             <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
                         </form>
                     </td>
@@ -51,7 +51,7 @@
             <form class="row g-3" action="{{ route('cesta.destroy') }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <input type="hidden" name="product_id" value="{{ $shoppingBasket }}">
+                <input type="hidden" name="shoppingBasket" value="{{ $shoppingBasket }}">
                 <button class="btn btn-danger" type="submit">Realizar compra</button>
             </form>
             @endif

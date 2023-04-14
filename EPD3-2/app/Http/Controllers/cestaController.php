@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\productBasket;
+use App\Models\Products;
 use App\Models\ShoppingBasket;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Type\Integer;
 
 class cestaController extends Controller
 {
@@ -52,8 +56,13 @@ class cestaController extends Controller
      * @param  \App\Models\ShoppingBasket  $shoppingBasket
      * @return \Illuminate\Http\Response
      */
-    public function show(ShoppingBasket $shoppingBasket)
-    {
+    public function show()
+    {   
+        // $user = User::where('id', Auth::id())->first();
+        $shoppingBasket = ShoppingBasket::where('users_id', Auth::id())->first();
+
+        
+        // $shopping_basket = DB::table('product_baskets')->where('shopping_basket_id', $shoppingBasket->id )->get();
         return view('cesta',compact('shoppingBasket'));
     }
 
@@ -70,15 +79,14 @@ class cestaController extends Controller
     public function addProductB(Request $request)
     {
         $shopping_basket = ShoppingBasket::where('users_id', Auth::id())->first();
-        $productBasket = new ProductBasket();
+        $productBasket = new ProductBasket();     
         $productBasket->size = $request->input('talla');
         $productBasket->cantidad = $request->input('cantidad');
         $productBasket->product_id = $request->input('product_id');
         $productBasket->shopping_basket_id = $shopping_basket->id;
         $productBasket->save();
+        
 
-        $shopping_basket->productBasket()->save($productBasket);
-        $shopping_basket->save();
 
         return redirect()->route('inicio');
 
@@ -109,15 +117,19 @@ class cestaController extends Controller
      */
     public function destroy(Request $request)
     {
-        $shoppingBasket = $request->input("shoppingBasket");
+        $shoppingBasket = ShoppingBasket::where('users_id', Auth::id())->first();
+        // dd($shoppingBasket);
         $fechaActual = Carbon::now();
         $order = new Order();
         $order->pagement = 'online';
         $order->date = $fechaActual;
         $order->state = 'enviado';
         $order->users_id = $shoppingBasket->users_id;
-        $order->products_id = $shoppingBasket->products_id;
-
+        foreach ($shoppingBasket->productBasket as $productB) {
+           $order->products()->attach($productB->product_id);
+        }
+        
+        // $order->products()->createMany($productData);
         $order->save();
 
         $ticket = new Ticket();

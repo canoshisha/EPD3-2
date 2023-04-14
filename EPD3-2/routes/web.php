@@ -37,11 +37,11 @@ Route::get('/des_producto', function () {
 
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth');
 
-Auth::routes();
+
 
 Route::get('/products', [productosController::class, 'index'])->name('products.menu');
 Route::get('products/{product}/descripcion', [productosController::class, 'show'])->name('producto.descripcion');
 
-Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show');
+Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show')->Middleware('auth');
 Route::put('cesta/{shoppingBasket}/actualizar', [cestaController::class, 'update'])->name('cesta.update');
-Route::delete('cesta/eliminar', [CestaController::class, 'destroy'])->name('cesta.destroy');
+Route::delete('cesta/eliminar', [CestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth');
