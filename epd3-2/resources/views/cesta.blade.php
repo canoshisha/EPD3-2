@@ -26,9 +26,9 @@
                     <td>{{ $productB->size}}</td>
                     <td>
                         <form class="row g-3" action="{{ route('cesta.update', $shoppingBasket) }}" method="POST">
-                            @method('update')
+                            @method('put')
                             @csrf
-                            <input type="hidden" name="product_id" value="{{ $productB->product->id }}">
+                            <input type="hidden" name="productB_id" value="{{ $productB->id }}">
                             <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
                         </form>
                     </td>

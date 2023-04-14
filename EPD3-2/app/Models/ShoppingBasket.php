@@ -10,7 +10,7 @@ class ShoppingBasket extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'shopping_baskets';
-
+    
 
     protected $primaryKey = 'id';
 

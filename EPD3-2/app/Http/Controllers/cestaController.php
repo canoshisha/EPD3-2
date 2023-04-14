@@ -88,7 +88,7 @@ class cestaController extends Controller
         
 
 
-        return redirect()->route('inicio');
+        return redirect()->route('products.menu');
 
 
     }
@@ -102,9 +102,12 @@ class cestaController extends Controller
     public function update(Request $request, ShoppingBasket $shoppingBasket)
     {
 
-        $productId = $request->input("product_id"); // id del producto que deseas eliminar
-        $productsIds = array_diff($shoppingBasket->products_id, [$productId]);
-        $shoppingBasket->products()->sync($productsIds);
+        
+
+        $productId = $request->input("productB_id"); // id del producto que deseas eliminar
+        $productB = productBasket::find($productId);
+        $productB->delete(); // Eliminar el producto correspondiente a la ID
+
         return redirect()->route('cesta.show');
 
     }
@@ -125,12 +128,12 @@ class cestaController extends Controller
         $order->date = $fechaActual;
         $order->state = 'enviado';
         $order->users_id = $shoppingBasket->users_id;
+        $order->save();
         foreach ($shoppingBasket->productBasket as $productB) {
-           $order->products()->attach($productB->product_id);
+            $order->products()->attach($productB->product_id, ['quantity' => $productB->cantidad],['size' => $productB->size]);
         }
         
-        // $order->products()->createMany($productData);
-        $order->save();
+        
 
         $ticket = new Ticket();
         $ticket->price_total = $shoppingBasket->calcularTotal();
@@ -139,7 +142,8 @@ class cestaController extends Controller
         $ticket->save();
 
         $shoppingBasket->delete();
-        return redirect()->route('inicio');
+        return redirect()->route('inicio')->with('mensaje', 'Pedido realizado con éxito');
+
 
 
     }

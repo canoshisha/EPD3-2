@@ -10,13 +10,6 @@ class Products extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'products';
-    protected $fillable = [
-        'name',
-        'category',
-        'price',
-        'stock',
-        'description',
-    ];
 
     public function orders()
     {

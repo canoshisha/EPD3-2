@@ -27,9 +27,6 @@ Route::get('/home', function () {
     return view('auth.dashboard');
     })->middleware('auth','verified');
 
-Route::get('/productos', function () {
-    return view('productos');
-});
 Route::get('/des_producto', function () {
     return view('product_des');
 });

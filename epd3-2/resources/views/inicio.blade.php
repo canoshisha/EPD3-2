@@ -5,6 +5,11 @@
 @endsection
 @section('contenido')
 <div class="container mt-5">
+@if (session('mensaje'))
+    <div class="alert alert-success">
+        {{ session('mensaje') }}
+    </div>
+@endif
   <div class="card h-100">
     <div class="row align-items-center">
         <div class="col-md-6">

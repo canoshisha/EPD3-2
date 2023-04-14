@@ -18,7 +18,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Products::class, 'order_product');
+        return $this->belongsToMany(Products::class, 'order_product', 'order_id', 'product_id');
     }
     
     public function ticket(){

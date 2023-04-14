@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('product_baskets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('shopping_basket_id')->constrained('shopping_baskets');
+            $table->foreignId('shopping_basket_id')->constrained('shopping_baskets')->nullable()
+            ->cascadeOnUpdate()
+            ->cascadeOnDelete();
             $table->foreignId('product_id')->constrained('products');
             $table->integer('cantidad');
             $table->string('size');
