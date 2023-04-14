@@ -81,6 +81,13 @@ class cestaController extends Controller
     }
     public function addProductB(Request $request)
     {
+        $datos = $request->validate(
+            [
+                'talla' => 'required',
+                'cantidad' => 'required'
+            ]
+        );
+    
         $shopping_basket = ShoppingBasket::where('users_id', Auth::id())->first();
         $productBasket = new ProductBasket();     
         $productBasket->size = $request->input('talla');

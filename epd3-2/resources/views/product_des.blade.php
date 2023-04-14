@@ -5,15 +5,15 @@
 @endsection
 @section('contenido')
 <div class="container py-5">
-<div class="card h-100">
+  <div class="card h-100">
     <div class="row mx-auto">
       <div class="col-md-6">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <?php
-                        
-             $img1 = $imgProduct->first();
-             $img2 = $imgProduct->last();
-             ?>
+
+          $img1 = $imgProduct->first();
+          $img2 = $imgProduct->last();
+          ?>
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img src="{{ URL::asset($img1->routeImg) }}" class="img-product d-block w-100" alt="Camiseta1">
@@ -38,12 +38,12 @@
           {{$product->description}}
         </p>
         <p class="lead">{{$product->price}}€</p>
-        <form action="{{route('cesta.addProductB')}}" method="POST">
-        @csrf
+        <form class="needs-validation" action="{{route('cesta.addProductB')}}" method="POST" novalidate>
+          @csrf
           <div class="mb-3">
             <label for="talla" class="form-label">Talla</label>
-            <select id="talla" name="talla" class="form-select custom-select">
-              <option class="opt" selected>Selecciona una talla</option>
+            <select id="talla" name="talla" class="form-select custom-select" required data-error="Por favor, selecciona una talla">
+              <option class="opt" selected disabled value="">Selecciona una talla</option>
               <option class="opt" value="S">S</option>
               <option class="opt" value="M">M</option>
               <option class="opt" value="L">L</option>
@@ -53,9 +53,9 @@
             </select>
           </div>
           <div class="mb-3">
-            <label for="cantidad" class="form-label">Talla</label>
-            <select id="cantidad" name="cantidad" class="form-select custom-select">
-              <option class="opt" selected>Selecciona una cantidad</option>
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <select id="cantidad" name="cantidad" class="form-select custom-select" required data-error="Por favor, selecciona una cantidad">
+              <option class="opt" selected disabled value="">Selecciona una cantidad</option>
               <option class="opt" value="1">1</option>
               <option class="opt" value="2">2</option>
               <option class="opt" value="3">3</option>
@@ -67,7 +67,8 @@
           </div>
         </form>
       </div>
-    </div></div>
+    </div>
   </div>
+</div>
 
 @endsection
