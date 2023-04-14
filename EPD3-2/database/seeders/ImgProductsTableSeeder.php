@@ -20,7 +20,7 @@ class ImgProductsTableSeeder extends Seeder
         [    "routeImg" => "/img/camisetaAston2.jpg", "tipo"=>"imagen"   ,"products_id" => 1  ],
         [    "routeImg" => "/img/gorraAston1.jpg",  "tipo"=>"imagenMenu" , "products_id" => 2  ],
         [    "routeImg" => "/img/gorraAston2.jpg",  "tipo"=>"imagen" , "products_id" => 2  ],
-        [    "routeImg" => "/img/Merchandising2.jpg",  "tipo"=>"imagenMenu"  ,"products_id" => 3  ],
+        [    "routeImg" => "/img/Merchandising3.jpg",  "tipo"=>"imagenMenu"  ,"products_id" => 3  ],
         [    "routeImg" => "/img/Merchandising4.jpg",  "tipo"=>"imagen"  ,"products_id" => 3  ],
         [    "routeImg" => "/img/redbull1.jpg",  "tipo"=>"imagenMenu",  "products_id" => 4  ],
         [    "routeImg" => "/img/redbull2.jpg",  "tipo"=>"imagen"  ,"products_id" => 4  ],
