@@ -38,10 +38,11 @@
           {{$product->description}}
         </p>
         <p class="lead">{{$product->price}}€</p>
-        <form action="{{route('producto.add')}}">
+        <form action="{{route('cesta.addProductB')}}" method="POST">
+        @csrf
           <div class="mb-3">
             <label for="talla" class="form-label">Talla</label>
-            <select id="talla" class="form-select custom-select">
+            <select id="talla" name="talla" class="form-select custom-select">
               <option class="opt" selected>Selecciona una talla</option>
               <option class="opt" value="S">S</option>
               <option class="opt" value="M">M</option>
@@ -53,13 +54,14 @@
           </div>
           <div class="mb-3">
             <label for="cantidad" class="form-label">Talla</label>
-            <select id="cantidad" class="form-select custom-select">
+            <select id="cantidad" name="cantidad" class="form-select custom-select">
               <option class="opt" selected>Selecciona una cantidad</option>
               <option class="opt" value="1">1</option>
               <option class="opt" value="2">2</option>
               <option class="opt" value="3">3</option>
             </select>
           </div>
+          <input type="hidden" name="product_id" value="{{$product->id}}">
           <div class="mb-3">
             <button type="submit" class="btn btn-danger">Añadir a la cesta</button>
           </div>

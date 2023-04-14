@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('shopping_baskets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('products_id')->nullable();
+            $table->unsignedBigInteger('productsB_id')->nullable();
             $table->foreignId('users_id')->constrained();
         });
     }

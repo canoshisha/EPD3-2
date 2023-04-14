@@ -11,7 +11,7 @@ class ShoppingBasket extends Model
     public $timestamps = false;
     protected $table = 'shopping_baskets';
     protected $fillable = [
-        'products_id',
+        'productsB_id',
         'users_id',
     ];
 
@@ -20,14 +20,14 @@ class ShoppingBasket extends Model
     public function users(){
         return $this->belongsTo(User::class,"users_id");
     }
-    public function products(){
-        return $this->hasMany(Products::class,"products_id");
+    public function productBasket(){
+        return $this->hasMany(ProductBasket::class,"productsB_id");
     }
     public function calcularTotal(){
-        $products = $this->products;
+        $products = $this->productBasket;
         $total=0;
-        foreach ($products as $product){
-            $total = $total + $product->price;
+        foreach ($products as $productB){
+            $total = $total + $productB->product->price * $productB->cantidad;
         }
 
         return $total;

@@ -12,14 +12,18 @@
             <tr>
                 <th>Producto</th>
                 <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Talla</th>
                 <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($shoppingBasket->products as $product)
+            @foreach ($shoppingBasket->productBasket as $productB)
                 <tr>
-                    <td>{{ $product->name }}</td>
-                    <td>{{ $product->price }}</td>
+                    <td>{{ $productB->product->name }}</td>
+                    <td>{{ $productB->product->price }}</td>
+                    <td>{{ $productB->cantidad}}</td>
+                    <td>{{ $productB->size}}</td>
                     <td>
                         <form class="row g-3" action="{{ route('cesta.update', $shoppingBasket) }}" method="POST">
                             @method('update')
@@ -28,10 +32,11 @@
                             <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
                         </form>
                     </td>
+                    
                 </tr>
             @endforeach
             <tr>
-                <th colspan="3">Total</th>
+                <th colspan="5">Total</th>
                 <td>{{ $shoppingBasket->calcularTotal() }} </td>
             </tr>
         </tbody>
@@ -42,7 +47,7 @@
             <a href="/products" class="btn btn-secondary">Seguir Comprando</a>
         </div>
         <div class="col-md-6 text-end">
-            @if ($shoppingBasket->products->isNotEmpty())
+            @if ($shoppingBasket->productBasket->isNotEmpty())
             <form class="row g-3" action="{{ route('cesta.destroy') }}" method="POST">
                 @csrf
                 @method('DELETE')

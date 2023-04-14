@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\productBasket;
 use App\Models\ShoppingBasket;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class cestaController extends Controller
 {
@@ -38,7 +40,10 @@ class cestaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productBasket = new ProductBasket();
+        $productBasket->size = $request->input('talla');
+        $productBasket->cantidad = $request->input('cantidad');
+        $productBasket->save();
     }
 
     /**
@@ -62,7 +67,23 @@ class cestaController extends Controller
     {
         //
     }
+    public function addProductB(Request $request)
+    {
+        $shopping_basket = ShoppingBasket::where('users_id', Auth::id())->first();
+        $productBasket = new ProductBasket();
+        $productBasket->size = $request->input('talla');
+        $productBasket->cantidad = $request->input('cantidad');
+        $productBasket->product_id = $request->input('product_id');
+        $productBasket->shopping_basket_id = $shopping_basket->id;
+        $productBasket->save();
 
+        $shopping_basket->productBasket()->save($productBasket);
+        $shopping_basket->save();
+
+        return redirect()->route('inicio');
+
+
+    }
     /**
      * Update the specified resource in storage.
      *
