@@ -51,16 +51,26 @@
               <option class="opt" value="XXL">XXL</option>
               <option class="opt" value="XXXL">XXXL</option>
             </select>
+            @if ($errors->has('talla'))
+              <div class="alert alert-danger">{{ $errors->first('talla') }}</div>
+            @endif
+
+            
           </div>
           <div class="mb-3">
             <label for="cantidad" class="form-label">Cantidad</label>
-            <select id="cantidad" name="cantidad" class="form-select custom-select" required data-error="Por favor, selecciona una cantidad">
+            <select id="cantidad" name="cantidad" class="form-select custom-select " required data-error="Por favor, selecciona una cantidad">
               <option class="opt" selected disabled value="">Selecciona una cantidad</option>
               <option class="opt" value="1">1</option>
               <option class="opt" value="2">2</option>
               <option class="opt" value="3">3</option>
             </select>
+            @if ($errors->has('cantidad'))
+              <div class="alert alert-danger">{{ $errors->first('cantidad') }}</div>
+            @endif
+            
           </div>
+          
           <input type="hidden" name="product_id" value="{{$product->id}}">
           <div class="mb-3">
             <button type="submit" class="btn btn-danger">Añadir a la cesta</button>
