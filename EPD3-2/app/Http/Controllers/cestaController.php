@@ -13,6 +13,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Type\Integer;
+use App\Mail\OrderConfirmation;
+use Illuminate\Support\Facades\Mail;
+
 
 class cestaController extends Controller
 {
@@ -142,6 +145,13 @@ class cestaController extends Controller
         $ticket->save();
 
         $shoppingBasket->delete();
+
+        $user = User::where('id', Auth::id())->first();
+
+        Mail::to(Auth::user()->email)->send(new OrderConfirmation($user,$order, $ticket));
+
+        return redirect()->route('inicio')->with('success', 'Pedido realizado');
+
         return redirect()->route('inicio')->with('mensaje', 'Pedido realizado con éxito');
 
 
