@@ -15,11 +15,11 @@
           $img2 = $imgProduct->last();
           ?>
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="{{ URL::asset($img1->routeImg) }}" class="img-product d-block w-100" alt="Camiseta1">
+            <div class="carousel-item  align-items-center justify-content-center active">
+              <img src="{{ URL::asset($img1->routeImg) }}" class="img-fluid img-product align-self-center" alt="Camiseta1">
             </div>
             <div class="carousel-item">
-              <img src="{{ URL::asset($img2->routeImg) }}" class="img-product d-block w-100" alt="Camiseta2">
+              <img src="{{ URL::asset($img2->routeImg) }}" class="img-fluid img-product align-self-center" alt="Camiseta2">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <h1>Camiseta {{$product->name}}</h1>
+        <h1>{{$product->name}}</h1>
         <p class="lead">Descripción:<br>
           {{$product->description}}
         </p>

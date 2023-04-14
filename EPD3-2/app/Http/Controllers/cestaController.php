@@ -144,6 +144,16 @@ class cestaController extends Controller
     public function destroy(Request $request)
     {
         $shoppingBasket = ShoppingBasket::where('users_id', Auth::id())->first();
+
+        foreach ($shoppingBasket->productBasket as $productB) {
+
+            $stock=  $productB->product->stock  - $productB->cantidad;
+            if( $stock < 0 ){
+                return redirect()->route('cesta.show')->withErrors(['mensaje' => 'El producto '.  $productB->product->name . ' no tiene suficiente stock para la venta, retirelo de la cesta']);
+
+            }
+        }
+
         $fechaActual = Carbon::now();
         $order = new Order();
         $order->pagement = 'online';
@@ -152,9 +162,15 @@ class cestaController extends Controller
         $order->users_id = $shoppingBasket->users_id;
         $order->save();
         foreach ($shoppingBasket->productBasket as $productB) {
+           
+            $productB->product->stock = $productB->product->stock - $productB->cantidad;
+            $productB->product->save();
             $order->products()->attach($productB->product_id, ['quantity' => $productB->cantidad,'size' => $productB->size]);
+
+
         }
         
+
         
 
         $ticket = new Ticket();

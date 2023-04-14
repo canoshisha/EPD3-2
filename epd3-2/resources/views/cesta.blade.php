@@ -7,6 +7,12 @@
 <div class="container py-5">
     <h1>Cesta de Compra</h1>
     <hr>
+    @if($errors->has('mensaje'))
+    <div class="alert alert-danger" role="alert">
+        {{ $errors->first('mensaje') }}
+    </div>
+@endif
+
     <table class="table">
         <thead>
             <tr>
