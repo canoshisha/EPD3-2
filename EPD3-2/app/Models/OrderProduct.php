@@ -11,11 +11,7 @@ class OrderProduct extends Model
     public $timestamps = false;
     protected $table = 'order_product';
 
-    protected $fillable = [
-        'order_id',
-        'product_id',
-        'quantity'
-    ];
+
     
     public function order()
     {

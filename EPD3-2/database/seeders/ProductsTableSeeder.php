@@ -40,7 +40,7 @@ class ProductsTableSeeder extends Seeder
             [
                 "name" => "Gorra oficial del equipo Aston Martin Aramco Cognizant F1 2023 - Verde",
                 "category" => "gorra",
-                "price" => 39.00,
+                "price" => 38.99,
                 "stock" => 10,
                 "description" => "Gorra oficial del equipo Aston Martin Aramco Cognizant F1 2023 de color verde."
             ],

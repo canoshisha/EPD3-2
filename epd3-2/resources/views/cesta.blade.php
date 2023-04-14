@@ -21,7 +21,7 @@
             @foreach ($shoppingBasket->productBasket as $productB)
                 <tr>
                     <td>{{ $productB->product->name }}</td>
-                    <td>{{ $productB->product->price }}</td>
+                    <td>{{ $productB->product->price }} €</td>
                     <td>{{ $productB->cantidad}}</td>
                     <td>{{ $productB->size}}</td>
                     <td>
@@ -37,7 +37,7 @@
             @endforeach
             <tr>
                 <th colspan="5">Total</th>
-                <td>{{ $shoppingBasket->calcularTotal() }} </td>
+                <td>{{ $shoppingBasket->calcularTotal() }} €</td>
             </tr>
         </tbody>
     </table>

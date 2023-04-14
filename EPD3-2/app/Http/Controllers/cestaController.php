@@ -124,7 +124,6 @@ class cestaController extends Controller
     public function destroy(Request $request)
     {
         $shoppingBasket = ShoppingBasket::where('users_id', Auth::id())->first();
-        // dd($shoppingBasket);
         $fechaActual = Carbon::now();
         $order = new Order();
         $order->pagement = 'online';
@@ -133,7 +132,7 @@ class cestaController extends Controller
         $order->users_id = $shoppingBasket->users_id;
         $order->save();
         foreach ($shoppingBasket->productBasket as $productB) {
-            $order->products()->attach($productB->product_id, ['quantity' => $productB->cantidad],['size' => $productB->size]);
+            $order->products()->attach($productB->product_id, ['quantity' => $productB->cantidad,'size' => $productB->size]);
         }
         
         
@@ -149,8 +148,6 @@ class cestaController extends Controller
         $user = User::where('id', Auth::id())->first();
 
         Mail::to(Auth::user()->email)->send(new OrderConfirmation($user,$order, $ticket));
-
-        return redirect()->route('inicio')->with('success', 'Pedido realizado');
 
         return redirect()->route('inicio')->with('mensaje', 'Pedido realizado con éxito');
 

@@ -38,7 +38,7 @@
 							</tbody>
 						</table>
 
-						<p class="lead">Total: {{ $ticket->price_total }}</p>
+						<p class="lead">Total: {{ $ticket->price_total }} €</p>
 
 						<p>¡Esperamos que disfrutes tu compra!</p>
 
