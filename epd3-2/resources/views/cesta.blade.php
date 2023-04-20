@@ -4,66 +4,88 @@
     <link rel="stylesheet" href="{{ asset('css/cesta.css') }}">
 @endsection
 @section('contenido')
-<div class="container py-5">
-    <h1>Cesta de Compra</h1>
-    <hr>
-    @if($errors->has('mensaje'))
-    <div class="alert alert-danger" role="alert">
-        {{ $errors->first('mensaje') }}
-    </div>
-@endif
+    <div class="container py-5">
+        <h1>Cesta de Compra</h1>
+        <hr>
+        @if ($errors->has('mensaje'))
+            <div class="alert alert-danger" role="alert">
+                {{ $errors->first('mensaje') }}
+            </div>
+        @endif
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Talla</th>
-                <th>Eliminar</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($shoppingBasket->productBasket as $productB)
-                <tr>
-                    <td>{{ $productB->product->name }}</td>
-                    <td>{{ $productB->product->price }} €</td>
-                    <td>{{ $productB->cantidad}}</td>
-                    <td>{{ $productB->size}}</td>
-                    <td>
-                        <form class="row g-3" action="{{ route('cesta.update', $shoppingBasket) }}" method="POST">
-                            @method('put')
-                            @csrf
-                            <input type="hidden" name="productB_id" value="{{ $productB->id }}">
-                            <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
-                        </form>
-                    </td>
-                    
-                </tr>
-            @endforeach
-            <tr>
-                <th colspan="5">Total</th>
-                <td>{{ $shoppingBasket->calcularTotal() }} €</td>
-            </tr>
-        </tbody>
-    </table>
-    <hr>
-    <div class="row">
-        <div class="col-md-6">
-            <a href="/products" class="btn btn-secondary">Seguir Comprando</a>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Talla</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($shoppingBasket->productBasket as $productB)
+                        <tr>
+                            <td>{{ $productB->product->name }}</td>
+                            <td>{{ $productB->product->price }} €</td>
+                            <td>
+                                <form action="{{ route('cesta.updateCantidad', $shoppingBasket) }}" method="POST" class="d-inline">
+                                    @method('PUT')
+                                    @csrf
+                                    <input type="hidden" name="productB_id" value="{{ $productB->id }}">
+                                    <div class="input-group">
+                                        <button type="submit" class="input-group-text">-</button>
+                                        </div>
+                                </form>
+                                <input type="number" name="cantidad" value="{{ $productB->cantidad }}">
+                                <form action="{{ route('cesta.updateCantidad', $shoppingBasket) }}" method="POST" class="d-inline">
+                                <input type="hidden" name="productB_id" value="{{ $productB->id }}">
+                                    <div class="input-group">
+                                        <button type="submit" class="input-group-text">+</button>
+
+                                        </div>
+                                </form>
+
+
+
+                            </td>
+                            <td>{{ $productB->size }}</td>
+                            <td>
+                                <form action="{{ route('cesta.update', $shoppingBasket) }}" method="POST">
+                                    @method('PUT')
+                                    @csrf
+                                    <input type="hidden" name="productB_id" value="{{ $productB->id }}">
+                                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    <tr>
+                        <td colspan="4" class="text-end fw-bold">Total:</td>
+                        <td colspan="1" class="fw-bold">{{ $shoppingBasket->calcularTotal() }} €</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="col-md-6 text-end">
-            @if ($shoppingBasket->productBasket->isNotEmpty())
-            <form class="row g-3" action="{{ route('cesta.destroy') }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <input type="hidden" name="shoppingBasket" value="{{ $shoppingBasket }}">
-                <button class="btn btn-danger" type="submit">Realizar compra</button>
-            </form>
-            @endif
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{ route('products.menu') }}" class="btn btn-secondary"><i
+                        class="fas fa-shopping-cart me-2"></i>Seguir Comprando</a>
+            </div>
+            <div class="col-md-6 text-end">
+                @if ($shoppingBasket->productBasket->isNotEmpty())
+                    <form action="{{ route('cesta.destroy') }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="shoppingBasket" value="{{ $shoppingBasket }}">
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-credit-card me-2"></i>Realizar
+                            Compra</button>
+                    </form>
+                @endif
+            </div>
         </div>
     </div>
-</div>
 
 
 @endsection

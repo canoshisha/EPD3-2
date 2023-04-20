@@ -44,4 +44,5 @@ Route::get('/misPedidos', [cestaController::class, 'misPedidos'])->name('cesta.m
 
 Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show')->Middleware('auth');
 Route::put('cesta/{shoppingBasket}/actualizar', [cestaController::class, 'update'])->name('cesta.update');
+Route::put('cesta/{shoppingBasket}/actualizarCantidad', [cestaController::class, 'updateCantidad'])->name('cesta.updateCantidad');
 Route::delete('cesta/eliminar', [CestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth');

@@ -134,6 +134,18 @@ class cestaController extends Controller
      * @param  \App\Models\ShoppingBasket  $shoppingBasket
      * @return \Illuminate\Http\Response
      */
+    public function updateCantidad(Request $request, ShoppingBasket $shoppingBasket)
+    {
+
+
+
+        $productId = $request->input("productB_id"); // id del producto que deseas eliminar
+        $productB = productBasket::find($productId);
+        $productB->cantidad = $request->input("cantidad"); // Eliminar el producto correspondiente a la ID
+        $productB->save();
+        return redirect()->route('cesta.show');
+
+    }
     public function update(Request $request, ShoppingBasket $shoppingBasket)
     {
 
