@@ -12,9 +12,13 @@ class Favorites extends Model
     protected $table = 'favorites';
     protected $fillable = [
         'products_id',
+        'users_id',
     ];
 
     public function products(){
         return $this->belongsToMany(Products::class,"products_id");
+    }
+    public function user(){
+        return $this->belongsTo(User::class,"users_id");
     }
 }

@@ -47,4 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function shoppingBasket(){
         return $this->hasOne(ShoppingBasket::class,"users_id");
     }
+    public function favorites(){
+        return $this->hasMany(Favorites::class,"favorites_id");
+    }
 }
