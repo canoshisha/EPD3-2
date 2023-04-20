@@ -19,6 +19,7 @@ use GuzzleHttp\Middleware;
 Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
+
 Route::get('/home', function () {
     return view('auth.dashboard');
     })->middleware('auth');

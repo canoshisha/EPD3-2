@@ -43,7 +43,7 @@
 						<p>¡Esperamos que disfrutes tu compra!</p>
 
 						<p>Saludos,<br>
-						Tu tienda en línea</p>
+						UPO F1</p>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,5 @@
 @extends('welcome')
-@section('title',"Camiseta X")
+@section('title',"$product->name")
 @section('scs')
 <link rel="stylesheet" href="{{ asset('css/product_des.css') }}">
 @endsection
@@ -55,7 +55,7 @@
               <div class="alert alert-danger">{{ $errors->first('talla') }}</div>
             @endif
 
-            
+
           </div>
           <div class="mb-3">
             <label for="cantidad" class="form-label">Cantidad</label>
@@ -68,9 +68,9 @@
             @if ($errors->has('cantidad'))
               <div class="alert alert-danger">{{ $errors->first('cantidad') }}</div>
             @endif
-            
+
           </div>
-          
+
           <input type="hidden" name="product_id" value="{{$product->id}}">
           <div class="mb-3">
             <button type="submit" class="btn btn-danger">Añadir a la cesta</button>
