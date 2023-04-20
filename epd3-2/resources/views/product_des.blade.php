@@ -59,12 +59,13 @@
           </div>
           <div class="mb-3">
             <label for="cantidad" class="form-label">Cantidad</label>
-            <select id="cantidad" name="cantidad" class="form-select custom-select " required data-error="Por favor, selecciona una cantidad">
-              <option class="opt" selected disabled value="">Selecciona una cantidad</option>
-              <option class="opt" value="1">1</option>
-              <option class="opt" value="2">2</option>
-              <option class="opt" value="3">3</option>
+            <select id="cantidad" name="cantidad" class="form-select custom-select" required data-error="Por favor, selecciona una cantidad">
+                <option class="opt" selected disabled value="">Selecciona una cantidad</option>
+                @for ($i = 1; $i <= min($product->stock, 10); $i++)
+                    <option class="opt" value="{{ $i }}">{{ $i }}</option>
+                @endfor
             </select>
+
             @if ($errors->has('cantidad'))
               <div class="alert alert-danger">{{ $errors->first('cantidad') }}</div>
             @endif

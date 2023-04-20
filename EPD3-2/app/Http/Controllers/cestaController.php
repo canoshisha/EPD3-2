@@ -84,7 +84,7 @@ class cestaController extends Controller
         $datos = $request->validate(
             [
                 'talla' => 'required|in:S,M,L,XL XXL,XXXL',
-                'cantidad' => 'required|in:1,2,3'
+                'cantidad' => 'required|in:1,2,3,4,5,6,7,8,9,10'
             ]
         );
         $shopping_basket = ShoppingBasket::where('users_id', Auth::id())->first();
