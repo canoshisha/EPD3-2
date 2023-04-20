@@ -98,7 +98,7 @@ class cestaController extends Controller
                 break;
             }
         }
-        if(!$enCesta){
+        if (!$enCesta) {
             $productBasket = new ProductBasket();
             $productBasket->size = $request->input('talla');
             $productBasket->cantidad = $request->input('cantidad');
@@ -136,14 +136,31 @@ class cestaController extends Controller
      */
     public function updateCantidad(Request $request, ShoppingBasket $shoppingBasket)
     {
+        $cantidad = $request->input("cantidad");
 
+        if ($cantidad == 0) {
+            $productId = $request->input("productB_id"); // id del producto que deseas eliminar
+            $productB = productBasket::find($productId);
+            $productB->delete(); // Eliminar el producto correspondiente a la ID
 
+        }
+        else{
+            $productId = $request->input("productB_id"); // id del producto que deseas eliminar
+            $productB = productBasket::find($productId);
+            $stock = $productB->product->stock - $cantidad;
+            if ($stock < 0) {
+                return redirect()->route('cesta.show')->withErrors(['mensaje' => 'El producto ' . $productB->product->name . ' no dispone de más stock']);
 
-        $productId = $request->input("productB_id"); // id del producto que deseas eliminar
-        $productB = productBasket::find($productId);
-        $productB->cantidad = $request->input("cantidad"); // Eliminar el producto correspondiente a la ID
-        $productB->save();
+            }else{
+                $productId = $request->input("productB_id"); // id del producto que deseas eliminar
+                $productB->cantidad = $request->input("cantidad"); // Eliminar el producto correspondiente a la ID
+                $productB->save();
+
+            }
+        }
+
         return redirect()->route('cesta.show');
+
 
     }
     public function update(Request $request, ShoppingBasket $shoppingBasket)

@@ -29,26 +29,31 @@
                         <tr>
                             <td>{{ $productB->product->name }}</td>
                             <td>{{ $productB->product->price }} €</td>
-                            <td>
-                                <form action="{{ route('cesta.updateCantidad', $shoppingBasket) }}" method="POST" class="d-inline">
+                            <td class="d-flex align-items-center">
+
+                                <form action="{{ route('cesta.updateCantidad', $shoppingBasket) }}" method="POST"
+                                    class="d-inline">
                                     @method('PUT')
                                     @csrf
                                     <input type="hidden" name="productB_id" value="{{ $productB->id }}">
-                                    <div class="input-group">
+                                    <input type="hidden" name="cantidad" value="{{ $productB->cantidad - 1 }}">
+                                    <div class="input-group h-100">
                                         <button type="submit" class="input-group-text">-</button>
-                                        </div>
+                                    </div>
                                 </form>
-                                <input type="number" name="cantidad" value="{{ $productB->cantidad }}">
-                                <form action="{{ route('cesta.updateCantidad', $shoppingBasket) }}" method="POST" class="d-inline">
-                                <input type="hidden" name="productB_id" value="{{ $productB->id }}">
-                                    <div class="input-group">
+
+                                <span class="mx-2">{{ $productB->cantidad }}</span>
+
+                                <form action="{{ route('cesta.updateCantidad', $shoppingBasket) }}" method="POST"
+                                    class="d-inline">
+                                    @method('PUT')
+                                    @csrf
+                                    <input type="hidden" name="productB_id" value="{{ $productB->id }}">
+                                    <input type="hidden" name="cantidad" value="{{ $productB->cantidad + 1 }}">
+                                    <div class="input-group h-100">
                                         <button type="submit" class="input-group-text">+</button>
-
-                                        </div>
+                                    </div>
                                 </form>
-
-
-
                             </td>
                             <td>{{ $productB->size }}</td>
                             <td>
