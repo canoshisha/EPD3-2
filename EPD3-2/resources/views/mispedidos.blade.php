@@ -27,6 +27,7 @@
                 </div>
             </div>
         @endforeach
+        {{$orders->links()}}
     </div>
-    {{ $orders->links() }}
+    
 @endsection

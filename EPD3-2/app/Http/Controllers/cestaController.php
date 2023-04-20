@@ -120,7 +120,7 @@ class cestaController extends Controller
     public function misPedidos(Request $request)
     {
         $user = User::where('id', Auth::id())->first();
-        $orders = $user->orders;
+        $orders = Order::where('users_id',$user->id)->paginate(3);
         return view('mispedidos', compact('orders'));
 
 
