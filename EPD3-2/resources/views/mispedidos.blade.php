@@ -3,7 +3,7 @@
 @section('contenido')
     <div class="container">
         <h1>Mis pedidos</h1>
-        @foreach($orders as $order)
+        @foreach($orders->reverse() as $order)
             <div class="card my-3">
                 <div class="card-header">
                     Pedido #{{ $order->id }}
@@ -28,4 +28,5 @@
             </div>
         @endforeach
     </div>
+    {{ $orders->links() }}
 @endsection

@@ -10,6 +10,11 @@
                 <h2>Productos</h2>
                 <hr>
             </div>
+            @if (session('mensaje'))
+              <div class="alert alert-success my-4 text-center">
+               {{ session('mensaje') }}
+               </div>
+            @endif
             @foreach($products as $product)
             <div class="product col-md-3">
                 <div class="card h-100 align-items-center justify-content-center">
