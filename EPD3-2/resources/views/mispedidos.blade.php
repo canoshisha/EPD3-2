@@ -1,6 +1,6 @@
-@extends('welcome')
+@extends('auth.template')
 @section('title',"Mis pedidos")
-@section('contenido')
+@section('content')
     <div class="container">
         <h1>Mis pedidos</h1>
         @foreach($orders->reverse() as $order)

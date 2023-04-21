@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Diario del Programador') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,51 +20,60 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Fortify') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            {{-- @if (Auth::user()->email_verified_at) --}}
-                            <li class="nav-item">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                                </li>
-                                
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                            {{-- @endif --}}
- 
-                @endguest
-                </ul>
-            </div>
-    </div>
-    </nav>
+                    <ul class="navbar-nav order-1">
+  <!-- Authentication Links -->
+  @guest
+    @if (Route::has('register'))
+    @endif
+  @else
+    {{-- @if (Auth::user()->email_verified_at) --}}
+    <li>
+    <a href="{{ url('/home') }}" class="nav-link ">Mi perfil</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('cesta.mispedidos')}}"> Mis pedidos </a>
+    </li>
+  @endguest
+</ul>
 
-    <main class="pt-4">
-        @yield('content')
-    </main>
+<div class="navbar-nav order-3 ms-auto">
+  <!-- Authentication Links -->
+  @guest
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+    </li>
+    @if (Route::has('register'))
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+      </li>
+    @endif
+  @else
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+      </form>
+    </li>
+  @endguest
+</div>
+
+            </div>
+        </nav>
+
+        <main class="pt-4">
+            @yield('content')
+        </main>
     </div>
 
 
