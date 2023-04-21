@@ -16,7 +16,7 @@
 
     <!-- Styles -->
     @vite(['resources/js/app.js','resources/css/app.scss'])
-    @yield('scs')
+    <link rel="stylesheet" href="{{ asset('css/perfil.css') }}">
 </head>
 
 <body>
@@ -46,6 +46,9 @@
                     </li>
                     @endif
                     @else
+                    <li class="nav-item">
+                        <a href="{{ url('/home') }}" class="nav-link ">Mi perfil</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>

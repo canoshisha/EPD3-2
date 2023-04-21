@@ -1,8 +1,6 @@
 @extends('auth.template')
 @section('title', 'Mi perfil')
-@section('scs')
-<link rel="stylesheet" href="{{ asset('css/perfil.css') }}">
-@endsection
+
 @section('content')
 
 <div class="container">
