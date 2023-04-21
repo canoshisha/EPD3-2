@@ -1,15 +1,18 @@
-a {
-    color: black;
+.btn-danger {
+    background-color: #d50000;
+    border-color: #d50000;
 }
 
-a:hover {
-    color: red;
+.btn-danger:hover {
+    background-color: black;
+    border-color: black;
+}
+
+.btn:hover {
+    box-shadow: 0px 0px 38px -9px rgba(0, 0, 0, 8);
 }
 
 .img-product {
-    /* display: felx;
-    flex-direction: row;
-    flex-wrap: ; */
     max-width: 300px;
     max-height: 300px;
 }
