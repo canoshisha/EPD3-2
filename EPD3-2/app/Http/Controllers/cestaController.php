@@ -93,6 +93,11 @@ class cestaController extends Controller
         foreach ($shopping_basket->productBasket as $productB) {
             if ($productB->product_id == $request->input('product_id')) {
                 $enCesta = True;
+                $product = Products::find($productB->product_id);
+                if($request->input('cantidad') + $productB->cantidad >$product->stock){
+                    $queda = $product->stock - $productB->cantidad;
+                    return redirect()->route('producto.descripcion',$product)->withErrors(['mensaje' => 'No hay suficiente stock, con lo de la cesta solo quedan '.$queda]);
+                }
                 $productB->cantidad = $request->input('cantidad') + $productB->cantidad;
                 $productB->save();
                 break;

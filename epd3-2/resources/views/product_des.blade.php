@@ -5,6 +5,20 @@
 @endsection
 @section('contenido')
 <div class="container py-5">
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-center">
+        @if ($errors->has('mensaje'))
+        <div class="alert alert-danger" role="alert" style="background-color:#f8d7da; border-color:#f5c6cb; color:#721c24;">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          {{ $errors->first('mensaje') }}
+        </div>
+        @endif
+      </div>
+    </div>
+  </div>
+
+
   <div class="card h-100">
     <div class="row mx-auto">
       <div class="col-md-6">
@@ -52,7 +66,7 @@
               <option class="opt" value="XXXL">XXXL</option>
             </select>
             @if ($errors->has('talla'))
-              <div class="alert alert-danger">{{ $errors->first('talla') }}</div>
+            <div class="alert alert-danger">{{ $errors->first('talla') }}</div>
             @endif
 
 
@@ -60,14 +74,14 @@
           <div class="mb-3">
             <label for="cantidad" class="form-label">Cantidad</label>
             <select id="cantidad" name="cantidad" class="form-select custom-select" required data-error="Por favor, selecciona una cantidad">
-                <option class="opt" selected disabled value="">Selecciona una cantidad</option>
-                @for ($i = 1; $i <= min($product->stock, 10); $i++)
-                    <option class="opt" value="{{ $i }}">{{ $i }}</option>
+              <option class="opt" selected disabled value="">Selecciona una cantidad</option>
+              @for ($i = 1; $i <= min($product->stock, 10); $i++)
+                <option class="opt" value="{{ $i }}">{{ $i }}</option>
                 @endfor
             </select>
 
             @if ($errors->has('cantidad'))
-              <div class="alert alert-danger">{{ $errors->first('cantidad') }}</div>
+            <div class="alert alert-danger">{{ $errors->first('cantidad') }}</div>
             @endif
 
           </div>

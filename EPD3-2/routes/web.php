@@ -5,16 +5,7 @@ use App\Http\Controllers\productosController;
 use App\Http\Controllers\cestaController;
 use GuzzleHttp\Middleware;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('inicio');
@@ -22,7 +13,7 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('auth.dashboard');
-    })->middleware('auth');
+    })->middleware('auth','verified');
 
 Route::get('/home', function () {
     return view('auth.dashboard');
@@ -33,17 +24,19 @@ Route::get('/des_producto', function () {
 });
 
 
-Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth');
+Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth','verified');
 
 
 
 Route::get('/products', [productosController::class, 'index'])->name('products.menu');
 Route::get('products/{product}/descripcion', [productosController::class, 'show'])->name('producto.descripcion');
 
-Route::get('/misPedidos', [cestaController::class, 'misPedidos'])->name('cesta.mispedidos')->Middleware('auth');
+Route::get('/misPedidos', [cestaController::class, 'misPedidos'])->name('cesta.mispedidos')->Middleware('auth','verified');
 
-Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show')->Middleware('auth');
+Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show')->Middleware('auth','verified');
 Route::put('cesta/{shoppingBasket}/actualizar', [cestaController::class, 'update'])->name('cesta.update');
 
 Route::put('cesta/{shoppingBasket}/actualizarCantidad', [cestaController::class, 'updateCantidad'])->name('cesta.updateCantidad');
-Route::delete('cesta/eliminar', [CestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth');
+Route::delete('cesta/eliminar', [CestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth','verified');
+
+
