@@ -1,8 +1,9 @@
 a {
-    color:black;
+    color: black;
 }
+
 a:hover {
-    color:red;
+    color: red;
 }
 
 .img-product {
@@ -11,4 +12,4 @@ a:hover {
     flex-wrap: ; */
     max-width: 300px;
     max-height: 300px;
-  }
+}
