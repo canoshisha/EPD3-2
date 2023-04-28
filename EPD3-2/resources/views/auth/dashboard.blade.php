@@ -19,6 +19,18 @@
 
                     @else
                     <div class="row">
+                        <div class="col">
+                            <div class="d-flex justify-content-center">
+                                @if (session('mensaje'))
+                                <div class="alert alert-success my-4 text-center">
+                                    {{ session('mensaje') }}
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
                         <div class="col-md-4 mt-4">
                             <div class="card h-100">
                                 <img class="card-img-top" src="/img/user.png" alt="Editar usuario">
@@ -52,7 +64,7 @@
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-center">
-                                    <a class="btn btn-danger col-4 mx-auto" href="#">Ver</a>
+                                    <a class="btn btn-danger col-4 mx-auto" href="{{ url('/tarjeta_create') }}">Ver</a>
                                 </div>
                             </div>
                         </div>

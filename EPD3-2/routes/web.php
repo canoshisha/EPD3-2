@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\cestaController;
+use App\Http\Controllers\tarjetaController;
 use GuzzleHttp\Middleware;
 
 
@@ -15,12 +16,11 @@ Route::get('/home', function () {
     return view('auth.dashboard');
     })->middleware('auth','verified');
 
-Route::get('/home', function () {
-    return view('auth.dashboard');
-    })->middleware('auth','verified');
-
 Route::get('/des_producto', function () {
     return view('product_des');
+});
+Route::get('/tarjeta_create', function () {
+    return view('tarjeta_create');
 });
 
 
@@ -40,3 +40,4 @@ Route::put('cesta/{shoppingBasket}/actualizarCantidad', [cestaController::class,
 Route::delete('cesta/eliminar', [CestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth','verified');
 
 
+Route::get('/tarjeta/create',[TarjetaController::class,'store'])->name('creditCard.create')->Middleware('auth','verified');

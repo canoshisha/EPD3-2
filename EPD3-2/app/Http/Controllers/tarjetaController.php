@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+use App\Models\CreditCard;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
-use App\Models\Products;
-use App\Models\ImgProducts;
-use Illuminate\Support\Facades\DB;
 
-class productosController extends Controller
+class tarjetaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,8 @@ class productosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        
-        $products = Products::paginate(9);
-        $imgProducts = DB::table('img_products')->where('tipo', 'imagenMenu')->get();
-        return view('productos', compact('products','imgProducts'));
+    {
+        //
     }
 
     /**
@@ -29,7 +26,9 @@ class productosController extends Controller
      */
     public function create()
     {
-        //
+  
+
+
     }
 
     /**
@@ -40,7 +39,20 @@ class productosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titular_tarjeta' => 'required',
+            'numero_tarjeta' => 'required|digits:16',
+            'fecha_caducidad' => 'required|regex:/^\d{2}\/\d{2}$/',
+            'cvc' => 'required|digits:3',
+        ]);
+        $user = User::where('id', Auth::id())->first();
+        $tarjeta = new CreditCard;
+        $tarjeta->users_id = $user->id;
+        $tarjeta->numero_tarjeta = $request->numero_tarjeta;
+        $tarjeta->fecha_caducidad = $request->fecha_caducidad;
+        $tarjeta->CVC = $request->cvc;
+        $tarjeta->save();
+        return redirect('/home')->with('mensaje', 'La tarjeta se ha creado correctamente');
     }
 
     /**
@@ -49,11 +61,9 @@ class productosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Products $product)
+    public function show($id)
     {
-        $id = $product->id;
-        $imgProduct = DB::table('img_products')->where('products_id', $id)->get();
-        return view('product_des',compact('product','imgProduct'));
+        //
     }
 
     /**
