@@ -30,6 +30,7 @@
         </div>
     
         <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{route('creditCard.read')}}" class="btn btn-danger col-4 mx-auto">Volver</a>
     </form>
 </div>
 

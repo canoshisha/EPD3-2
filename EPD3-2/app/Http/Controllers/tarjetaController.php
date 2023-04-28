@@ -16,7 +16,9 @@ class tarjetaController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::where('id', Auth::id())->first();
+        $tarjeta = CreditCard::where('users_id',$user->id)->first();
+        return view('tarjeta_read', compact('tarjeta')); 
     }
 
     /**
@@ -97,6 +99,6 @@ class tarjetaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

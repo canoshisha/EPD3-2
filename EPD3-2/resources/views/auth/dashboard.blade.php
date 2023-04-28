@@ -64,7 +64,7 @@
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-center">
-                                    <a class="btn btn-danger col-4 mx-auto" href="{{ url('/tarjeta_create') }}">Ver</a>
+                                    <a class="btn btn-danger col-4 mx-auto" href="{{ route('creditCard.read') }}">Ver</a>
                                 </div>
                             </div>
                         </div>

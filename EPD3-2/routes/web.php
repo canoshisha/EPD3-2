@@ -37,7 +37,7 @@ Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show')->Midd
 Route::put('cesta/{shoppingBasket}/actualizar', [cestaController::class, 'update'])->name('cesta.update');
 
 Route::put('cesta/{shoppingBasket}/actualizarCantidad', [cestaController::class, 'updateCantidad'])->name('cesta.updateCantidad');
-Route::delete('cesta/eliminar', [CestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth','verified');
+Route::delete('cesta/eliminar', [cestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth','verified');
 
-
-Route::get('/tarjeta/create',[TarjetaController::class,'store'])->name('creditCard.create')->Middleware('auth','verified');
+Route::get('/tarjeta/read',[tarjetaController::class,'index'])->name('creditCard.read')->Middleware('auth','verified');
+Route::get('/tarjeta/create',[tarjetaController::class,'store'])->name('creditCard.create')->Middleware('auth','verified');
