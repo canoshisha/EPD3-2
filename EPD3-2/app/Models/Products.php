@@ -26,6 +26,10 @@ class Products extends Model
     public function favorites(){
         return $this->hasOne(Favorites::class,'favorites_id');
     }
+    public function category()
+    {
+    return $this->belongsToMany(Category::class, 'category_product');
+    }
     
 
 }

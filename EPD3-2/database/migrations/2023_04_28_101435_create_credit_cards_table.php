@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('credit_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->double('price');
-            $table->integer('stock');
-            $table-> string('description')->nullable();
-            $table -> integer('discount')->nullable();
-            
+            $table -> integer('numero_tarjeta');
+            $table -> string('fecha_caducacion');
+            $table -> integer('CVC');
+            $table->foreignId('users_id')->constrained();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('credit_cards');
     }
 };

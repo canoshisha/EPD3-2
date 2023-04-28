@@ -64,7 +64,8 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+        {{$products->links()}}
     </div>
 </section>
 
