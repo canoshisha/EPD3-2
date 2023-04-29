@@ -1,29 +1,30 @@
 .carousel-img {
     width: 500px;
     height: 750px;
-  }
+}
 
-.carousel-control-prev-icon, .carousel-control-next-icon {
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
     background-color: black;
 }
 
-.display-4, .lead {
- font-family: 'Montserrat', sans-serif;
- color: black ;
+.display-4,
+.lead {
+    font-family: 'Montserrat', sans-serif;
+    color: black;
 }
 
 .btn-danger {
- background-color: #d50000;
- border-color: #d50000;
- }
-
- .btn-danger:hover {
-    background-color:black;
-    border-color: black;
-    }
-img
-{
-    max-height: 33em;
-    min-width:9em;
+    background-color: #d50000;
+    border-color: #d50000;
 }
 
+.btn-danger:hover {
+    background-color: black;
+    border-color: black;
+}
+
+img {
+    max-height: 40em;
+    min-width: 9em;
+}

@@ -45,7 +45,7 @@ class adminController extends Controller
      */
     public function show()
     {
-        return view('admin');
+        return view('dashboard');
     }
 
     /**

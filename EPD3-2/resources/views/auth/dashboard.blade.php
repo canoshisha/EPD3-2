@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        
+
                         <div class="col-md-4 mt-4">
                             <div class="card h-100">
                                 <img class="card-img-top" src="/img/user.png" alt="Editar usuario">
@@ -64,7 +64,8 @@
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-center">
-                                    <a class="btn btn-danger col-4 mx-auto" href="{{ route('creditCard.read') }}">Ver</a>
+                                    <a class="btn btn-danger col-4 mx-auto"
+                                        href="{{ route('creditCard.read') }}">Ver</a>
                                 </div>
                             </div>
                         </div>
@@ -81,6 +82,23 @@
                                 </div>
                             </div>
                         </div>
+                        @if (Auth::check() && Auth::user()->is_admin)
+                        <div class="col-md-4 mt-4">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="/img/admin.png" alt="Mi método de pago">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">Dashboard admin</h5>
+                                    <p class="card-text">Ingresa al panel de administración para gestionar tu sitio web
+                                    </p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-center">
+                                    <a class="btn btn-danger col-4 mx-auto" href="{{ route('admin.dashboard') }}"
+                                        class="nav-link">Ir</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        @endif
                     </div>
 
 
