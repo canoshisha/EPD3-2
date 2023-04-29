@@ -23,7 +23,7 @@ Route::get('/tarjeta_create', function () {
     return view('tarjeta_create');
 });
 
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware(['auth', 'admin']);
+Route::get('/admin', [adminController::class, 'show'])->name('admin.dashboard')->middleware(['auth', 'verified']);
 
 
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth','verified');
