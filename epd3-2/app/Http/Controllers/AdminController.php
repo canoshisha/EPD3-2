@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
@@ -45,7 +46,49 @@ class adminController extends Controller
      */
     public function show()
     {
-        return view('dashboard');
+        // Obtener los 4 productos más vendidos
+        $productosMasVendidos = DB::table('order_product')
+            ->select('product_id', DB::raw('SUM(quantity) as total_vendido'))
+            ->groupBy('product_id')
+            ->orderByDesc('total_vendido')
+            ->limit(4)
+            ->get();
+
+        // Obtener los detalles de los productos más vendidos
+        $productosDetalles = DB::table('products')
+            ->whereIn('id', $productosMasVendidos->pluck('product_id')->toArray())
+            ->get();
+
+        // Preparar los datos para el gráfico
+        $nombresProductos = [];
+        $cantidadesVendidas = [];
+        foreach ($productosMasVendidos as $producto) {
+            $productoDetalle = $productosDetalles->where('id', $producto->product_id)->first();
+            $nombresProductos[] = $productoDetalle->name;
+            $cantidadesVendidas[] = $producto->total_vendido;
+        }
+
+        $productosMasFavoritos = DB::table('favorites')
+            ->select('products_id', DB::raw('COUNT(*) as total_favoritos'))
+            ->groupBy('products_id')
+            ->orderByDesc('total_favoritos')
+            ->limit(5)
+            ->get();
+        $nombresProductos_fav = [];
+        $cantidadFavoritos = [];
+        foreach ($productosMasFavoritos as $producto) {
+            $productoDetalle = $productosDetalles->where('id', $producto->product_id)->first();
+            $nombresProductos_fav[] = $productoDetalle->name;
+            $cantidadFavoritos[] = $producto->total_favoritos;
+        }
+
+        // Renderizar la vista con los datos
+        return view('dashboard', [
+            'nombresProductos' => json_encode($nombresProductos),
+            'cantidadesVendidas' => json_encode($cantidadesVendidas),
+            'nombresProductos_fav' => json_encode($nombresProductos_fav),
+            'cantidadFavoritos' => json_encode($cantidadFavoritos)
+        ]);
     }
 
     /**
