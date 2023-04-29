@@ -87,7 +87,8 @@ class productosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find('id',$id)->get();
+        return view('product_edit',compact('product'));
     }
 
     /**
@@ -97,9 +98,21 @@ class productosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:120',
+            'price' => 'required|digits:4',
+            'stock' => 'required|digits:3',
+            'description' => 'required|max:120',
+        ]);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->description = $request->description;
+        $product->save();
+        //return
+
     }
 
     /**
