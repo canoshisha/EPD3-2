@@ -90,6 +90,12 @@ class adminController extends Controller
             'cantidadFavoritos' => json_encode($cantidadFavoritos)
         ]);
     }
+    public function show_user()
+    {
+
+        return view('users');
+    }
+
 
     /**
      * Show the form for editing the specified resource.

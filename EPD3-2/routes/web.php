@@ -25,7 +25,7 @@ Route::get('/tarjeta_create', function () {
 });
 
 Route::get('/dashboard', [adminController::class, 'show'])->name('admin.dashboard')->middleware(['auth', 'verified']);
-
+Route::get('/users', [adminController::class, 'show_user'])->name('admin.user')->middleware(['auth', 'verified']);
 
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth', 'verified');
 
@@ -44,6 +44,6 @@ Route::delete('cesta/eliminar', [cestaController::class, 'destroy'])->name('cest
 
 Route::get('/tarjeta/read', [tarjetaController::class, 'index'])->name('creditCard.read')->Middleware('auth', 'verified');
 Route::get('/tarjeta/create', [tarjetaController::class, 'store'])->name('creditCard.create')->Middleware('auth', 'verified');
-Route::get('/tarjeta/edit/{tarjeta}',[tarjetaController::class,'edit'])->name('creditCard.edit')->Middleware('auth','verified');
-Route::put('/tarjeta/update/{tarjeta}',[tarjetaController::class,'update'])->name('creditCard.update')->Middleware('auth','verified');
+Route::get('/tarjeta/edit/{tarjeta}', [tarjetaController::class, 'edit'])->name('creditCard.edit')->Middleware('auth', 'verified');
+Route::put('/tarjeta/update/{tarjeta}', [tarjetaController::class, 'update'])->name('creditCard.update')->Middleware('auth', 'verified');
 Route::get('/tarjeta/{tarjeta}/delete', [tarjetaController::class, 'destroy'])->name('creditCard.delete')->Middleware('auth', 'verified');

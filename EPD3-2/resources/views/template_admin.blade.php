@@ -7,7 +7,7 @@
             <!-- Menú lateral -->
             <div class="list-group">
                 <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action">Dashboard</a>
-                <a href="#" class="list-group-item list-group-item-action">Usuarios</a>
+                <a href="{{ route('admin.user') }}" class="list-group-item list-group-item-action">Usuarios</a>
                 <a href="#" class="list-group-item list-group-item-action">Productos</a>
                 <a href="#" class="list-group-item list-group-item-action">Pedidos</a>
             </div>
