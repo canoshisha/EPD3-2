@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Products;
+use App\Models\Category;
+use App\Models\CategoryProduct;
 use App\Models\ImgProducts;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +31,8 @@ class productosController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Category::all();
+        return view('productos_create',compact('categorias'));
     }
 
     /**
@@ -40,7 +43,27 @@ class productosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:120',
+            'price' => 'required|digits:4',
+            'stock' => 'required|digits:3',
+            'description' => 'required|max:120',
+        ]);
+        $product = new Product();
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->description = $request->description;
+        $product->save();
+
+        $categoria = $request->category;
+        $categoryBBDD = Category::find('type',$categoria)->get();
+        $productBBDD = Product::find('name',$request->name)->get();
+        $aux2 = new CategoryProduct();
+        $aux2->product_id = $productBBDD->id;
+        $aux2->category_id = $categoryBBDD->id;
+        $aux2->save(); 
+        //return
     }
 
     /**
@@ -87,6 +110,10 @@ class productosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $relacionProduct = CategoryProduct::find('product_id',$id)->get();
+        $relacionProduct->delete();
+        $product = Product::find('id',$id)->get();
+        $product->delete();
+        // return
     }
 }
