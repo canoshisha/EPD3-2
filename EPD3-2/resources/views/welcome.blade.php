@@ -36,6 +36,11 @@
                     <li class="nav-item">
                         <a class="nav-link " href="#">Contacto</a>
                     </li>
+                    @if (Auth::check() && Auth::user()->is_admin)
+                    <li>
+                        <a href="{{ route('admin.dashboard') }}" class="nav-link text-white">Dashboard Admin</a>
+                    </li>
+                    @endif
                 </ul>
                 <div class="navbar-nav ms-auto">
 
