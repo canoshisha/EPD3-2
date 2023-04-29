@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\cestaController;
 use App\Http\Controllers\tarjetaController;
+use App\Http\Controllers\userController;
 use GuzzleHttp\Middleware;
 
 
@@ -27,6 +28,7 @@ Route::get('/tarjeta_create', function () {
 Route::get('/dashboard', [adminController::class, 'show'])->name('admin.dashboard')->middleware(['auth', 'verified']);
 Route::get('/users', [adminController::class, 'show_user'])->name('admin.user')->middleware(['auth', 'verified']);
 
+
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth', 'verified');
 
 
@@ -41,6 +43,7 @@ Route::put('cesta/{shoppingBasket}/actualizar', [cestaController::class, 'update
 
 Route::put('cesta/{shoppingBasket}/actualizarCantidad', [cestaController::class, 'updateCantidad'])->name('cesta.updateCantidad');
 Route::delete('cesta/eliminar', [cestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth', 'verified');
+Route::delete('/users/{user}', [userController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/tarjeta/read', [tarjetaController::class, 'index'])->name('creditCard.read')->Middleware('auth', 'verified');
 Route::get('/tarjeta/create', [tarjetaController::class, 'store'])->name('creditCard.create')->Middleware('auth', 'verified');

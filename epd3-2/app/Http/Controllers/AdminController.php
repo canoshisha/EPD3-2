@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class adminController extends Controller
 {
@@ -92,8 +93,8 @@ class adminController extends Controller
     }
     public function show_user()
     {
-
-        return view('users');
+        $users = User::paginate(9);
+        return view('users', ['users' => $users]);
     }
 
 
