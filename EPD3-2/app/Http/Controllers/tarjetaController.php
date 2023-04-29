@@ -74,9 +74,9 @@ class tarjetaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CreditCard $tarjeta)
     {
-        //
+        return view('tarjeta_edit',compact('tarjeta'));
     }
 
     /**
@@ -86,9 +86,19 @@ class tarjetaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CreditCard $tarjeta)
     {
-        //
+        $request->validate([
+            'numero_tarjeta' => 'required|digits:16',
+            'fecha_caducidad' => 'required|regex:/^\d{2}\/\d{2}$/',
+            'cvc' => 'required|digits:3',
+        ]);
+        $tarjeta->numero_tarjeta = $request->numero_tarjeta;
+        $tarjeta->fecha_caducidad = $request->fecha_caducidad;
+        $tarjeta->CVC = $request->cvc;
+        $tarjeta->save();
+
+        return redirect('/home')->with('mensaje', 'La tarjeta se ha editado correctamente.');
     }
 
     /**

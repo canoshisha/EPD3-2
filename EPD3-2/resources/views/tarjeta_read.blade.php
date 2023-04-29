@@ -22,7 +22,8 @@
             </div>
           </div>
     
-          <a href="{{route('creditCard.delete',$tarjeta->id)}}" class="btn btn-danger col-4 mx-auto">Eliminar Tarjeta</a>
+          <a href="{{route('creditCard.delete',$tarjeta->id)}}" class="btn btn-danger ">Eliminar Tarjeta</a>
+          <a class="btn btn-primary" href="{{ route('creditCard.edit',$tarjeta) }}">Editar tarjeta</a>
         @endif
         
         
