@@ -44,3 +44,4 @@ Route::delete('cesta/eliminar', [cestaController::class, 'destroy'])->name('cest
 
 Route::get('/tarjeta/read',[tarjetaController::class,'index'])->name('creditCard.read')->Middleware('auth','verified');
 Route::get('/tarjeta/create',[tarjetaController::class,'store'])->name('creditCard.create')->Middleware('auth','verified');
+Route::get('/tarjeta/{tarjeta}/delete',[tarjetaController::class,'destroy'])->name('creditCard.delete')->Middleware('auth','verified');

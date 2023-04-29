@@ -8,9 +8,10 @@
         <h1>Información Tarjeta de Crédito</h1>
         @if ($tarjeta == null)
             <p>No tiene ninguna tarjeta registrada.</p>
+            <a href="{{url('tarjeta_create')}}" class="btn btn-danger col-4 mx-auto">Crear Tarjeta</a>
         @else
         <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="{{URL::asset('/img/visa-dual.png')}}" class="card-img-top" alt="imagen tarjeta Visa">
             <div class="card-body">
               <h5 class="card-title">Tarjeta de credito #{{$tarjeta->id}}</h5>
               <ul class="list-group">
@@ -21,9 +22,10 @@
             </div>
           </div>
     
-
+          <a href="{{route('creditCard.delete',$tarjeta->id)}}" class="btn btn-danger col-4 mx-auto">Eliminar Tarjeta</a>
         @endif
-        <a href="{{url('tarjeta_create')}}" class="btn btn-danger col-4 mx-auto">Crear Tarjeta</a>
+        
+        
     </div>
         
 @endsection

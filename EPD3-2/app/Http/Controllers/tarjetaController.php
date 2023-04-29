@@ -99,6 +99,9 @@ class tarjetaController extends Controller
      */
     public function destroy($id)
     {
-        
+        $user = User::where('id', Auth::id())->first();
+        $tarjeta = CreditCard::where('users_id',$user->id)->first();
+        $tarjeta->delete();
+        return redirect('/home')->with('mensaje', 'La tarjeta se ha eliminado correctamente.');
     }
 }

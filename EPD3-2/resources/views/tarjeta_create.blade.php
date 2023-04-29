@@ -16,7 +16,7 @@
     
         <div class="form-group">
             <label for="numero_tarjeta">Número de Tarjeta</label>
-            <input type="number" name="numero_tarjeta" class="form-control" id="numero_tarjeta" placeholder="xxxx-xxxx-xxxx-xxxx">
+            <input type="number" name="numero_tarjeta" class="form-control" id="numero_tarjeta" placeholder="xxxxxxxxxxxxxxxx">
         </div>
     
         <div class="form-group">
