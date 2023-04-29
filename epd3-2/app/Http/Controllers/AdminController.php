@@ -45,7 +45,7 @@ class adminController extends Controller
      */
     public function show()
     {
-        return redirect()->route('admin.dashboard');
+        return view('admin');
     }
 
     /**
