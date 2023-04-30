@@ -3,7 +3,7 @@ $('button[type="submit"]').click(function(e) {
     e.preventDefault();
     var form = this.form;
     swal({
-            title: "¿Estás seguro?",
+            title: "¿Estás seguro de eliminar este usuario?",
             text: "No podrás revertir esto",
             icon: "warning",
             buttons: ["Cancelar", "Eliminar"],
@@ -11,7 +11,12 @@ $('button[type="submit"]').click(function(e) {
         })
         .then((willDelete) => {
             if (willDelete) {
-                form.submit();
+                swal("Usuario borrado correctamente", {
+                    icon: "success",
+                }).then(() => {
+                    form.submit();
+                });
+
             }
         });
 });

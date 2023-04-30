@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -95,6 +96,12 @@ class adminController extends Controller
     {
         $users = User::paginate(9);
         return view('users', ['users' => $users]);
+    }
+
+    public function show_category()
+    {
+        $categories = Category::paginate(9);
+        return view('categorias_view', ['categories' => $categories]);
     }
 
 

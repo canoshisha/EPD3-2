@@ -27,10 +27,11 @@ Route::get('/tarjeta_create', function () {
 
 Route::get('/dashboard', [adminController::class, 'show'])->name('admin.dashboard')->middleware(['auth', 'verified']);
 Route::get('/users', [adminController::class, 'show_user'])->name('admin.user')->middleware(['auth', 'verified']);
-
+Route::get('/categories', [adminController::class, 'show_category'])->name('admin.category')->middleware(['auth', 'verified']);
 
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth', 'verified');
 
+Route::post('categories/addCategory', [categoryController::class, 'create'])->name('category.create')->Middleware('auth', 'verified');
 
 
 Route::get('/products', [productosController::class, 'index'])->name('products.menu');
@@ -43,7 +44,8 @@ Route::put('cesta/{shoppingBasket}/actualizar', [cestaController::class, 'update
 
 Route::put('cesta/{shoppingBasket}/actualizarCantidad', [cestaController::class, 'updateCantidad'])->name('cesta.updateCantidad');
 Route::delete('cesta/eliminar', [cestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth', 'verified');
-Route::delete('/users/{user}', [userController::class, 'destroy'])->name('users.destroy');
+Route::delete('/user/{user}', [userController::class, 'destroy'])->name('users.destroy');
+Route::delete('/category/{category}', [categoryController::class, 'destroy'])->name('category.destroy');
 
 Route::get('/tarjeta/read', [tarjetaController::class, 'index'])->name('creditCard.read')->Middleware('auth', 'verified');
 Route::get('/tarjeta/create', [tarjetaController::class, 'store'])->name('creditCard.create')->Middleware('auth', 'verified');
