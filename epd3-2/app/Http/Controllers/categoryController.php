@@ -24,12 +24,14 @@ class categoryController extends Controller
      */
     public function create(Request $request)
     {
-
         $category = new Category();
-        $category->type = $request->input('type');
-        $category->save();
-        $categories = Category::paginate(9);
-        return view('categorias_view', ['categories' => $categories]);
+        $type = strtolower($request->input('type')); // Convertir a minúsculas
+        if (!Category::whereRaw('lower(type) = ?', [$type])->exists()) {
+            $category->type = $request->input('type');
+            $category->save();
+        }
+        return redirect()->route('admin.category');
+
     }
 
     /**

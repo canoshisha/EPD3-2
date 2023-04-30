@@ -1,28 +1,7 @@
 const botonMostrarFormulario = document.getElementById('crear_show');
 const formulario = document.getElementById('crear');
 
-
-// const swal = window.swal;
-// $('#crear_btn').click(function(e) {
-//     e.preventDefault();
-//     var form = document.getElementById('crear');
-//     swal({
-//             title: "¿Estás seguro de crear esta categoría?",
-//             icon: "warning",
-//             buttons: ["Cancelar", "Crear"],
-//             dangerMode: true,
-//         })
-//         .then((willBuy) => {
-//             if (willBuy) {
-//                 swal("¡La categría se ha realizado con éxito!", {
-//                         icon: "success",
-//                     })
-//                     .then(() => {
-//                         form.submit();
-//                     });
-//             }
-//         });
-// });
+const swal = window.swal;
 
 botonMostrarFormulario.onclick = function() {
     console.log("Mostrando formulario...");
@@ -30,7 +9,28 @@ botonMostrarFormulario.onclick = function() {
     formulario.style.display = 'block';
 };
 
-formulario.onsubmit = function() {
-    botonMostrarFormulario.style.display = 'block';
-    formulario.style.display = 'none';
+formulario.onsubmit = function(event) {
+    event.preventDefault();
+
+    swal("¡La categoría se ha realizado con éxito!", {
+        icon: "success",
+    }).then(() => {
+        fetch(formulario.action, {
+                method: formulario.method,
+                body: new FormData(formulario)
+            })
+            .then(response => {
+                if (response.ok) {
+                    botonMostrarFormulario.style.display = 'block';
+                    formulario.style.display = 'none';
+                    console.log("Formulario enviado correctamente.");
+                    window.location.href = "/categories"; // Redireccionar a la ruta correspondiente
+                } else {
+                    console.error("Ha habido un error al enviar el formulario.");
+                }
+            })
+            .catch(error => {
+                console.error("Ha habido un error al enviar el formulario.", error);
+            });
+    });
 };
