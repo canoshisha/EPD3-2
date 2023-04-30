@@ -14,9 +14,9 @@
     @vite(['resources/js/app.js', 'resources/css/app.scss'])
     <link rel="stylesheet" href="{{ asset('css/general.css') }}">
     @yield('scs')
-    <script type="module">
-        import swal from 'sweetalert';
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body class="antialiased">

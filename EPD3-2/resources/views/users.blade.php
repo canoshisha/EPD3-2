@@ -30,22 +30,5 @@
         </table>
         {{ $users->links() }}
     </div>
-    <script>
-        $('button[type="submit"]').click(function(e) {
-            e.preventDefault();
-            var form = this.form;
-            swal({
-                    title: "¿Estás seguro?",
-                    text: "No podrás revertir esto",
-                    icon: "warning",
-                    buttons: ["Cancelar", "Eliminar"],
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        form.submit();
-                    }
-                });
-        });
-    </script>
+    <script src="js/alerta_user.js"></script>
 @endsection
