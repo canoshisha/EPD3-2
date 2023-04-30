@@ -26,13 +26,15 @@ class categoryController extends Controller
     {
         $category = new Category();
         $type = strtolower($request->input('type')); // Convertir a minúsculas
+
         if (!Category::whereRaw('lower(type) = ?', [$type])->exists()) {
-            $category->type = $request->input('type');
+            $type = ucwords($type); // Convertir la primera letra de cada palabra en mayúscula
+            $category->type = $type;
             $category->save();
         }
         return redirect()->route('admin.category');
-
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -76,8 +78,18 @@ class categoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id); // encontrar la categoría a actualizar
+        $type = $request->input('type'); // establecer el nuevo valor para el tipo
+        $type = ucwords($type); // Convertir la primera letra de cada palabra en mayúscula
+        $category->type = $type;
+        $category->save();
+
+
+        $category->save(); // guardar los cambios en la base de datos
+
+        return redirect()->route('admin.category'); // redirigir al listado de categorías
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -85,8 +97,9 @@ class categoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->back();
     }
 }

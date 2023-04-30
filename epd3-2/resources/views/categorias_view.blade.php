@@ -27,6 +27,16 @@
                     <tr>
                         <td>{{ $category->type }}</td>
                         <td>
+                            <form id=actualizar_form method="POST" action="{{ route('category.update', $category->id) }}"
+                                style="display:none;">
+                                @csrf
+                                @method('put')
+                                <input type="text" value="{{ $category->type }}" name="type" id="type">
+                                <button id='actualizar' type="submit" class="btn btn-primary">actualizar</button>
+                            </form>
+                            <button id='actualizar_show' type="button" class="btn btn-primary">actualizar</button>
+                        </td>
+                        <td>
                             <form method="POST" action="{{ route('category.destroy', $category->id) }}">
                                 @csrf
                                 @method('DELETE')

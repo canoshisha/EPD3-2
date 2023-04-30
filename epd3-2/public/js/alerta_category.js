@@ -1,5 +1,8 @@
 const botonMostrarFormulario = document.getElementById('crear_show');
 const formulario = document.getElementById('crear');
+const botonMostrarAct = document.getElementById('actualizar_show');
+const form_update = document.getElementById('actualizar_form');
+//me falta poner la confirmacion con el formulario de actualizar
 
 const swal = window.swal;
 
@@ -8,6 +11,38 @@ botonMostrarFormulario.onclick = function() {
     botonMostrarFormulario.style.display = 'none';
     formulario.style.display = 'block';
 };
+
+botonMostrarAct.onclick = function() {
+    console.log("Mostrando formulario...");
+    botonMostrarAct.style.display = 'none';
+    form_update.style.display = 'block';
+}
+
+
+$('#eliminar').click(function(e) {
+    e.preventDefault();
+    var form = this.form;
+    swal({
+            title: "¿Estás seguro de eliminar este type?",
+            text: "No podrás revertir esto",
+            icon: "warning",
+            buttons: ["Cancelar", "Eliminar"],
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("Type borrado correctamente", {
+                    icon: "success",
+                }).then(() => {
+                    form.submit();
+                });
+
+            }
+        });
+});
+
+
+
 
 formulario.onsubmit = function(event) {
     event.preventDefault();

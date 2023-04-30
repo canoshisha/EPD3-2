@@ -100,8 +100,9 @@ class adminController extends Controller
 
     public function show_category()
     {
-        $categories = Category::paginate(9);
+        $categories = Category::orderBy('id', 'desc')->paginate(9);
         return view('categorias_view', ['categories' => $categories]);
+
     }
 
 
