@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Phone;
 use App\Models\User;
 use Illuminate\Http\Request;
+
 
 class userController extends Controller
 {
@@ -79,8 +81,18 @@ class userController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
-    {
-        $user->delete();
-        return redirect()->back();
+{
+    // Seleccionar los registros de phones con el mismo users_id que el usuario que se va a eliminar
+    $phones = Phone::where('users_id', $user->id)->get();
+
+    // Borrar los registros de phones
+    foreach ($phones as $phone) {
+        $phone->delete();
     }
+
+    // Eliminar al usuario
+    $user->delete();
+
+    return redirect()->back();
+}
 }
