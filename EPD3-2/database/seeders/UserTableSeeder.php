@@ -76,6 +76,13 @@ class UserTableSeeder extends Seeder
                 "password" => bcrypt("25522552")
             ],
             [
+                "name" => "Francisco Javier Nunyez Cintado",
+                "email_verified_at" => "2023-04-29 11:39:20",
+                "is_admin" => true,
+                "email" => "francisconuncin@gmail.com",
+                "password" => bcrypt("12345678")
+            ],
+            [
                 "name" => "Jessica Rodriguez",
                 "is_admin" => false,
                 "email" => "jessicarodriguez@gmail.com",

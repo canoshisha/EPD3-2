@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Products;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -104,6 +105,11 @@ class adminController extends Controller
         $categories = Category::orderBy('id', 'desc')->paginate(9);
         return view('categorias_view', ['categories' => $categories]);
 
+    }
+    public function show_products()
+    {
+        $products = Products::paginate(9);
+        return view('productos_view',compact('products'));
     }
     public function show_order()
     {

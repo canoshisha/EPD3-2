@@ -31,7 +31,9 @@ Route::get('/tarjeta_create', function () {
 Route::get('/dashboard', [adminController::class, 'show'])->name('admin.dashboard')->middleware(['auth', 'verified']);
 Route::get('/users', [adminController::class, 'show_user'])->name('admin.user')->middleware(['auth', 'verified']);
 Route::get('/categories', [adminController::class, 'show_category'])->name('admin.category')->middleware(['auth', 'verified']);
+Route::get('/productos', [adminController::class, 'show_products'])->name('admin.products')->middleware(['auth', 'verified']);
 Route::get('/orders', [adminController::class, 'show_order'])->name('admin.order')->middleware(['auth', 'verified']);
+
 
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth', 'verified');
 
@@ -40,6 +42,12 @@ Route::post('categories/addCategory', [categoryController::class, 'create'])->na
 
 Route::get('/products', [productosController::class, 'index'])->name('products.menu');
 Route::get('products/{product}/descripcion', [productosController::class, 'show'])->name('producto.descripcion');
+Route::get('products/form/create', [productosController::class, 'create'])->name('product.create');
+Route::get('products/create', [productosController::class, 'store'])->name('product.store');
+Route::put('products/form/update/{product}', [productosController::class, 'update'])->name('product.update');
+Route::delete('products/form/delete/{product}', [productosController::class, 'destroy'])->name('product.destroy');
+
+
 
 Route::get('/misPedidos', [cestaController::class, 'misPedidos'])->name('cesta.mispedidos')->Middleware('auth', 'verified');
 
