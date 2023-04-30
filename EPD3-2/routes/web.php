@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\categoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\cestaController;

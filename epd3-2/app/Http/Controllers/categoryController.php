@@ -24,11 +24,10 @@ class categoryController extends Controller
      */
     public function create(Request $request)
     {
-        $category = Category::create([
-            'type' => $request->type
-        ]);
-        $category->save();
 
+        $category = new Category();
+        $category->type = $request->input('type');
+        $category->save();
         $categories = Category::paginate(9);
         return view('categorias_view', ['categories' => $categories]);
     }

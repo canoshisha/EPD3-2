@@ -3,11 +3,9 @@
     <div class="container">
         <h1>Lista de Categorias</h1>
         <hr>
-        <a id="mostrar-formulario" class="btn btn-primary mb-3">Crear Categoria</a>
         <form id='crear' method="POST" action="{{ route('category.create') }}" style="display:none;">
             @csrf
             <div class="form-group row">
-
                 <div class="col-8">
                     <div class="input-group">
                         <input id="type" name="type" type="text" placeholder="type" class="form-control">
@@ -16,6 +14,7 @@
                 </div>
             </div>
         </form>
+        <button id="crear_show" type="button" class="btn btn-primary mb-3">Crear Categoria</button>
         <hr>
         <table class="table table-striped">
             <thead>
