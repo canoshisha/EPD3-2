@@ -41,7 +41,31 @@ $('#eliminar').click(function(e) {
         });
 });
 
+form_update.onsubmit = function(event) {
+    event.preventDefault();
 
+    swal("¡La actualización se ha realizado con éxito!", {
+        icon: "success",
+    }).then(() => {
+        fetch(form_update.action, {
+                method: form_update.method,
+                body: new FormData(form_update)
+            })
+            .then(response => {
+                if (response.ok) {
+                    form_update.style.display = 'none';
+                    botonMostrarAct.style.display = 'block';
+                    console.log("Formulario enviado correctamente.");
+                    window.location.href = "/categories"; // Redireccionar a la ruta correspondiente
+                } else {
+                    console.error("Ha habido un error al enviar el formulario.");
+                }
+            })
+            .catch(error => {
+                console.error("Ha habido un error al enviar el formulario.", error);
+            });
+    });
+};
 
 
 formulario.onsubmit = function(event) {

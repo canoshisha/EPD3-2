@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -103,6 +104,17 @@ class adminController extends Controller
         $categories = Category::orderBy('id', 'desc')->paginate(9);
         return view('categorias_view', ['categories' => $categories]);
 
+    }
+    public function show_order()
+    {
+        $orders = Order::orderBy('id', 'desc')->paginate(9);
+
+        foreach ($orders as $order) {
+            $user = User::find($order->users_id);
+            $order->user = $user;
+        }
+
+        return view('pedidos_admin', ['orders' => $orders]);
     }
 
 

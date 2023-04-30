@@ -5,8 +5,10 @@ use App\Http\Controllers\categoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\cestaController;
+use App\Http\Controllers\orderController;
 use App\Http\Controllers\tarjetaController;
 use App\Http\Controllers\userController;
+
 use GuzzleHttp\Middleware;
 
 
@@ -29,6 +31,7 @@ Route::get('/tarjeta_create', function () {
 Route::get('/dashboard', [adminController::class, 'show'])->name('admin.dashboard')->middleware(['auth', 'verified']);
 Route::get('/users', [adminController::class, 'show_user'])->name('admin.user')->middleware(['auth', 'verified']);
 Route::get('/categories', [adminController::class, 'show_category'])->name('admin.category')->middleware(['auth', 'verified']);
+Route::get('/orders', [adminController::class, 'show_order'])->name('admin.order')->middleware(['auth', 'verified']);
 
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth', 'verified');
 
@@ -46,7 +49,11 @@ Route::put('cesta/{shoppingBasket}/actualizar', [cestaController::class, 'update
 Route::put('cesta/{shoppingBasket}/actualizarCantidad', [cestaController::class, 'updateCantidad'])->name('cesta.updateCantidad');
 Route::delete('cesta/eliminar', [cestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth', 'verified');
 Route::delete('/user/{user}', [userController::class, 'destroy'])->name('users.destroy');
+Route::delete('/order/{order}', [orderController::class, 'destroy'])->name('orders.destroy');
+
+
 Route::delete('/category/{category}', [categoryController::class, 'destroy'])->name('category.destroy');
+
 Route::put('/category/update/{category}', [categoryController::class, 'update'])->name('category.update');
 Route::get('/tarjeta/read', [tarjetaController::class, 'index'])->name('creditCard.read')->Middleware('auth', 'verified');
 Route::get('/tarjeta/create', [tarjetaController::class, 'store'])->name('creditCard.create')->Middleware('auth', 'verified');

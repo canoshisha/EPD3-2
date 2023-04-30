@@ -9,7 +9,7 @@
                     <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action">Dashboard</a>
                     <a href="{{ route('admin.user') }}" class="list-group-item list-group-item-action">Usuarios</a>
                     <a href="#" class="list-group-item list-group-item-action">Productos</a>
-                    <a href="#" class="list-group-item list-group-item-action">Pedidos</a>
+                    <a href="{{ route('admin.order') }}" class="list-group-item list-group-item-action">Pedidos</a>
                     <a href="{{ route('admin.category') }}" class="list-group-item list-group-item-action">Categorias</a>
                 </div>
             </div>
