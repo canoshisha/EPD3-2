@@ -34,6 +34,7 @@ Route::get('/categories', [adminController::class, 'show_category'])->name('admi
 Route::get('/productos', [adminController::class, 'show_products'])->name('admin.products')->middleware(['auth', 'verified']);
 Route::get('/orders', [adminController::class, 'show_order'])->name('admin.order')->middleware(['auth', 'verified']);
 
+Route::get('/menu/user/edit', [userController::class, 'show_menu_user'])->name('edit-menu.user')->middleware(['auth', 'verified']);
 
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth', 'verified');
 

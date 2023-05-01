@@ -10,17 +10,23 @@
     <h1>Dashboard con gráficos y datos</h1>
     <hr>
     <div class="row">
-        <div class="col-lg-12 col-md-6">
+        <div class="col-lg-12 col-md-6 mx-auto">
             <!-- Gráfico de barras -->
-            <canvas id="grafico-barras"></canvas>
+            <h3>Los más vendidos</h3>
+            <hr>
+            <canvas id="grafico-pastel-vendidos"></canvas>
         </div>
     </div>
+    <br>
     <div class="row">
         <div class="col-lg-12 col-md-6">
             <!-- Gráfico de pastel -->
+            <h3>Los más favoritos</h3>
+            <hr>
             <canvas id="grafico-pastel-favoritos"></canvas>
         </div>
     </div>
+    <br>
     <script>
         var nombresProductos = <?php echo $nombresProductos; ?>;
         var cantidadesVendidas = <?php echo $cantidadesVendidas; ?>;

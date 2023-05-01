@@ -1,6 +1,6 @@
-var ctx = document.getElementById('grafico-barras').getContext('2d');
-var graficoBarras = new Chart(ctx, {
-    type: 'bar',
+var ctx = document.getElementById('grafico-pastel-vendidos').getContext('2d');
+var graficoPastel = new Chart(ctx, {
+    type: 'pie',
     data: {
         labels: nombresProductos,
         datasets: [{
@@ -21,16 +21,10 @@ var graficoBarras = new Chart(ctx, {
             borderWidth: 1
         }]
     },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
+    options: {}
+
 });
+
 // Crear el gráfico de pastel de productos favoritos
 var ctx = document.getElementById('grafico-pastel-favoritos').getContext('2d');
 var graficoPastelFavoritos = new Chart(ctx, {

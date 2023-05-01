@@ -34,11 +34,13 @@
                                     <div class="card h-100">
                                         <img class="card-img-top" src="/img/user.png" alt="Editar usuario">
                                         <div class="card-body d-flex flex-column">
-                                            <h5 class="card-title">Editar nombre usuario</h5>
-                                            <p class="card-text">Cambia tu nombre</p>
+                                            <h5 class="card-title">Editar usuario</h5>
+                                            <p class="card-text">En este apartado puedes editar contraseña,email y nombre de
+                                                usuario</p>
                                         </div>
                                         <div class="card-footer d-flex justify-content-center">
-                                            <a class="btn btn-danger btn-block" href="#">Editar</a>
+                                            <a class="btn btn-danger btn-block"
+                                                href="{{ route('edit-menu.user') }}">Editar</a>
                                         </div>
                                     </div>
                                 </div>

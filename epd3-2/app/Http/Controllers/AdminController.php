@@ -72,19 +72,6 @@ class adminController extends Controller
             $cantidadesVendidas[] = $producto->total_vendido;
         }
 
-        // $productosMasFavoritos = DB::table('favorites')
-        //     ->select('products_id', DB::raw('COUNT(*) as total_favoritos'))
-        //     ->groupBy('products_id')
-        //     ->orderByDesc('total_favoritos')
-        //     ->limit(5)
-        //     ->get();
-        // $nombresProductos_fav = [];
-        // $cantidadFavoritos = [];
-        // foreach ($productosMasFavoritos as $producto) {
-        //     $product = Products::find($producto->products_id);
-        //     $nombresProductos_fav[] = $product->name;
-        //     $cantidadFavoritos[] = $producto->total_favoritos;
-        // }
 
         $productosFavoritos = DB::table('favorites')
         ->select('products.id', 'products.name', DB::raw('COUNT(*) as cantidad'))

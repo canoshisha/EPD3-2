@@ -95,4 +95,8 @@ class userController extends Controller
 
     return redirect()->back();
 }
+
+public function show_menu_user(){
+    return view('menu_edit');
+}
 }
