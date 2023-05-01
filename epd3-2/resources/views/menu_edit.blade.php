@@ -2,6 +2,7 @@
 @section('title', 'Editar perfil')
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/menu_edit.css') }}">
+    <script src="js/menu_form_user.js"></script>
 @endsection
 @section('content')
     <div class="container">
@@ -56,9 +57,9 @@
                                     name="password_nuevo_confirm">
                             </div>
 
-
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="submit" class="btn btn-primary">{{ __('Guardar cambios') }}</button>
+                                <button type="submit" class="btn btn-primary"
+                                    onclick="return validarFormulario()">{{ __('Actualizar') }}</button>
                             </div>
                         </form>
                     </div>
