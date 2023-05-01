@@ -2,7 +2,6 @@
 @section('title', 'Editar perfil')
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/menu_edit.css') }}">
-    <script src="js/menu_form_user.js"></script>
 @endsection
 @section('content')
     <div class="container">
@@ -19,7 +18,7 @@
                             <div class="mb-3">
                                 <label for="select-option" class="form-label">{{ __('Modificar') }}</label>
                                 <select class="form-select" id="select-option" name="opcion">
-                                    <option value="nombre">{{ __('Nombre') }}</option>
+                                    <option value="nombre" selected>{{ __('Nombre') }}</option>
                                     <option value="email">{{ __('Email') }}</option>
                                     <option value="password">{{ __('Contraseña') }}</option>
                                 </select>
@@ -57,9 +56,9 @@
                                     name="password_nuevo_confirm">
                             </div>
 
+
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="submit" class="btn btn-primary"
-                                    onclick="return validarFormulario()">{{ __('Actualizar') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Guardar cambios') }}</button>
                             </div>
                         </form>
                     </div>
@@ -67,4 +66,59 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const selectOption = document.getElementById('select-option');
+            const nombreSection = document.getElementById('nombre-section');
+            const emailSection = document.getElementById('email-section');
+            const passwordSection = document.getElementById('password-section');
+            const passwordNuevo = document.getElementById('input-password-nuevo');
+            const passwordNuevoConfirm = document.getElementById('input-password-nuevo-confirm');
+
+            // Mostrar la sección correspondiente al valor seleccionado por defecto
+            switch (selectOption.value) {
+                case 'nombre':
+                    nombreSection.classList.remove('d-none');
+                    break;
+                case 'email':
+                    emailSection.classList.remove('d-none');
+                    break;
+                case 'password':
+                    passwordSection.classList.remove('d-none');
+                    break;
+            }
+
+            selectOption.addEventListener('change', (event) => {
+                const selectedOption = event.target.value;
+
+                nombreSection.classList.add('d-none');
+                emailSection.classList.add('d-none');
+                passwordSection.classList.add('d-none');
+
+                switch (selectedOption) {
+                    case 'nombre':
+                        nombreSection.classList.remove('d-none');
+                        break;
+                    case 'email':
+                        emailSection.classList.remove('d-none');
+                        break;
+                    case 'password':
+                        passwordSection.classList.remove('d-none');
+                        break;
+                }
+            });
+
+            function validatePassword() {
+                if (passwordNuevo.value !== passwordNuevoConfirm.value) {
+                    passwordNuevoConfirm.setCustomValidity('Las contraseñas no coinciden');
+                } else {
+                    passwordNuevoConfirm.setCustomValidity('');
+                }
+            }
+
+            passwordNuevo.addEventListener('input', validatePassword);
+            passwordNuevoConfirm.addEventListener('input', validatePassword);
+        });
+    </script>
+
 @endsection
