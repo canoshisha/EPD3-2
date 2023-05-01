@@ -31,5 +31,10 @@ class Products extends Model
         return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id');
     }
 
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'size_product', 'product_id', 'size_id');
+    }
+
 
 }

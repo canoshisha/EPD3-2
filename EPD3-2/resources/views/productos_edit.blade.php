@@ -1,8 +1,4 @@
-@extends('welcome')
-@section('title',"UPOF1")
-@section('scs')
-<link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
-@endsection
+@extends('template_admin')
 @section('contenido')
 <div class="container">
     <form method="POST" action="{{route('product.update',$product)}}">
@@ -49,7 +45,7 @@
         </div>
     
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="{{url('/home')}}" class="btn btn-danger">Volver</a>
+        <a href="{{url('/productos')}}" class="btn btn-danger">Volver</a>
     </form>
 </div>
 
