@@ -83,6 +83,7 @@ class userController extends Controller
         $nombreNuevo = $request->input('nombre_nuevo');
         $user->name = $nombreNuevo;
         $user->save();
+        return redirect()->route('perfil.user')->with('success-perfil', 'Nombre actualizado con éxito.');
     }
 
     // Actualizar el correo electrónico
@@ -97,6 +98,7 @@ class userController extends Controller
 
         $user->email = $emailNuevo;
         $user->save();
+        return redirect()->route('perfil.user')->with('success-perfil', 'Email actualizado con éxito.');
     }
 
     // Actualizar la contraseña
@@ -109,10 +111,12 @@ class userController extends Controller
             $user->password = Hash::make($passwordNuevo);
             $user->save();
         }
+        return redirect()->route('perfil.user')->with('success-perfil', 'Contraseña actualizada con éxito.');
     }
 
     // Redirigir a la página de perfil con un mensaje de éxito
-    return redirect()->route('perfil.user');
+    // return redirect()->route('perfil.user')->with('success-perfil', 'Perfil actualizado con éxito.');
+
 }
 
 

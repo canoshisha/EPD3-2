@@ -2,7 +2,17 @@
 @section('title', 'Mi perfil')
 
 @section('content')
-
+    @if (session('success-perfil'))
+        <script>
+            const swal = window.swal;
+            swal({
+                title: 'Actualización',
+                text: '{{ session('success-perfil') }}',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+    @endif
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -17,7 +27,7 @@
                                 {{ session('status') }}
                             </div>
                         @else
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col">
                                     <div class="d-flex justify-content-center">
                                         @if (session('mensaje'))
@@ -27,7 +37,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
 
                                 <div class="col-md-4 mt-4">
@@ -69,19 +79,6 @@
                                         <div class="card-footer d-flex justify-content-center">
                                             <a class="btn btn-danger btn-block"
                                                 href="{{ route('creditCard.read') }}">Ver</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mt-4">
-                                    <div class="card h-100">
-                                        <img class="card-img-top" src="/img/pass.png" alt="Mi método de pago">
-                                        <div class="card-body d-flex flex-column">
-                                            <h5 class="card-title">Editar contraseña</h5>
-                                            <p class="card-text">Cambia tu contraseña.
-                                            </p>
-                                        </div>
-                                        <div class="card-footer d-flex justify-content-center">
-                                            <a class="btn btn-danger btn-block" href="#">Editar</a>
                                         </div>
                                     </div>
                                 </div>
