@@ -9,7 +9,7 @@ class SizeProduct extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = 'size_product';
+    protected $table = 'size_products';
 
     public function sizes()
     {

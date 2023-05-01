@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Category;
 use App\Models\CategoryProduct;
+use App\Models\SizeProduct;
+use App\Models\Size;
 use App\Models\Favorites;
 use App\Models\ImgProducts;
 use App\Models\User;
@@ -51,22 +53,42 @@ class productosController extends Controller
             'name' => 'required|max:120',
             'categories' => 'required',
             'price' => 'required|max:4',
-            'stock' => 'required|max:3',
+            'talla' => 'required',
+            'stock' => 'required',
             'description' => 'required|max:120',
         ]);
         $product = new Products();
         $product->name = $request->name;
         $product->price = $request->price;
-        $product->stock = $request->stock;
         $product->description = $request->description;
         $product->discount = $request->discount;
         $product->save();
+        $tallas = $request->input('talla');
+        $stocks = $request->input('stock');
+
+        $productBBDD = Products::where('name',$request->name)->first();
+        for($i = 0; $i < count($tallas); $i++)
+        {
+            $size = new Size();
+            $size->stock = $stocks[$i];
+            $size->size = $tallas[$i];
+            $size->name_product =$request->name; 
+            $size->save();
+
+
+            $sizeProduct = new SizeProduct();
+            $sizeBBDD = Size::where('size',$tallas[$i])->where('name_product',$request->name)->first();
+            $sizeProduct->size_id = $sizeBBDD->id;
+            $sizeProduct->product_id = $productBBDD->id;
+            $sizeProduct->save();
+        }
+
 
         $categorias = $request->input('categories');
         foreach($categorias as $categoria)
         {
             $categoryBBDD = Category::where('type',$categoria)->first();
-            $productBBDD = Products::where('name',$request->name)->first();
+            
             $aux2 = new CategoryProduct();
             $aux2->product_id = $productBBDD->id;
             $aux2->category_id = $categoryBBDD->id;
@@ -117,15 +139,13 @@ class productosController extends Controller
             'name' => 'required|max:120',
             'categories' => 'required',
             'price' => 'required|max:4',
-            'stock' => 'required|max:3',
             'description' => 'required|max:120',
         ]);
         $product->name = $request->name;
         $product->price = $request->price;
-        $product->stock = $request->stock;
         $product->description = $request->description;
         $product->save();
-
+        
 
 
         $categorias = $request->input('categories');
@@ -182,8 +202,11 @@ class productosController extends Controller
      */
     public function destroy($id)
     {
-        $relacionProduct = CategoryProduct::where('product_id',$id)->first();
-        $relacionProduct->delete();
+        $relacionProduct = CategoryProduct::where('product_id',$id)->get();
+        foreach($relacionProduct as $aux){
+            $aux->delete();
+        }
+        
         $product = Products::where('id',$id)->first();
         $product->delete();
         return redirect()->route('admin.products')->with('mensaje','La eliminación del producto ha sido un éxito.');

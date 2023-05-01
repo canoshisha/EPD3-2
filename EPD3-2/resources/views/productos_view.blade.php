@@ -14,6 +14,17 @@
                 @endif
             </div>
         </div>
+        {{-- @if (session('success-perfil'))
+        <script>
+            const swal = window.swal;
+            swal({
+                title: 'Actualización',
+                text: '{{ session('success-perfil') }}',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+        @endif --}}
         <table class="table table-striped">
             <thead>
                 <tr>

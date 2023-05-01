@@ -29,11 +29,7 @@
             <label for="price">Precio</label>
             <input type="number" name="price" class="form-control" id="price" value="{{$product->price}}">
         </div>
-    
-        <div class="form-group">
-            <label for="stock">Stock</label>
-            <input type="number" name="stock" class="form-control" id="stock" value="{{$product->stock}}">
-        </div>
+
     
         <div class="form-group">
             <label for="description">Descripción del producto</label>
@@ -43,7 +39,7 @@
             <label for="discount">Descuento</label>
             <input type="text" name="discount" class="form-control" id="discount" value="{{$product->discount}}">
         </div>
-    
+        <br>
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a href="{{url('/productos')}}" class="btn btn-danger">Volver</a>
     </form>

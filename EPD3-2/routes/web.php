@@ -40,7 +40,7 @@ Route::post('categories/addCategory', [categoryController::class, 'create'])->na
 Route::get('/products', [productosController::class, 'index'])->name('products.menu');
 Route::get('products/{product}/descripcion', [productosController::class, 'show'])->name('producto.descripcion');
 Route::get('products/form/create', [productosController::class, 'create'])->name('product.create');
-Route::get('products/create', [productosController::class, 'store'])->name('product.store');
+Route::post('products/create', [productosController::class, 'store'])->name('product.store');
 Route::get('products/form/edit/{product}', [productosController::class, 'edit'])->name('product.edit');
 Route::put('products/update/{product}', [productosController::class, 'update'])->name('product.update');
 Route::delete('products/form/delete/{product}', [productosController::class, 'destroy'])->name('product.destroy');
