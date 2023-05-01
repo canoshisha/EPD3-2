@@ -49,6 +49,7 @@ class productosController extends Controller
     {
         $request->validate([
             'name' => 'required|max:120',
+            'categories' => 'required',
             'price' => 'required|max:4',
             'stock' => 'required|max:3',
             'description' => 'required|max:120',
@@ -62,14 +63,16 @@ class productosController extends Controller
         $product->save();
 
         $categorias = $request->input('categories');
-        $categoryBBDD = Category::where('type',$categorias)->get();
-        dd($categoryBBDD);
-        $productBBDD = Products::where('name',$request->name)->first();
         foreach($categorias as $categoria)
-        $aux2 = new CategoryProduct();
-        $aux2->product_id = $productBBDD->id;
-        $aux2->category_id = $categoria->id;
-        $aux2->save();
+        {
+            $categoryBBDD = Category::where('type',$categoria)->first();
+            $productBBDD = Products::where('name',$request->name)->first();
+            $aux2 = new CategoryProduct();
+            $aux2->product_id = $productBBDD->id;
+            $aux2->category_id = $categoryBBDD->id;
+            $aux2->save();
+        }
+        
 
         return redirect()->route('admin.products')->with('mensaje','La creación del producto ha sido un éxito.');
     }
@@ -95,8 +98,10 @@ class productosController extends Controller
      */
     public function edit($id)
     {
-        $product = Products::find('id',$id)->get();
-        return view('productos_edit',compact('product'));
+        $product = Products::where('id',$id)->first();
+        $categorias = $product->category;
+        $todasCategorias = Category::all();
+        return view('productos_edit',compact('product','categorias','todasCategorias'));
     }
 
     /**
@@ -110,8 +115,9 @@ class productosController extends Controller
     {
         $request->validate([
             'name' => 'required|max:120',
-            'price' => 'required|digits:4',
-            'stock' => 'required|digits:3',
+            'categories' => 'required',
+            'price' => 'required|max:4',
+            'stock' => 'required|max:3',
             'description' => 'required|max:120',
         ]);
         $product->name = $request->name;
@@ -119,8 +125,51 @@ class productosController extends Controller
         $product->stock = $request->stock;
         $product->description = $request->description;
         $product->save();
-        //return
 
+
+
+        $categorias = array_reverse($request->input('categories'),True);
+        
+        $categoryProducts = $product->category;
+        
+            foreach($categoryProducts as $categoryProduct)
+            {
+                
+                if(!empty($categorias)){
+                    foreach($categorias as $aux)
+                    {
+                        
+                        if($aux == $categoryProduct->type)
+                        {
+                            array_pop($categorias);
+                            break;
+                        
+                        }
+                    }
+                    
+                }else
+                {
+                    $aux2 = CategoryProduct::where('product_id', $product->id)->where('category_id',$categoryProduct->id)->first();
+                    $aux2->delete();
+                }
+                
+    
+            }
+            
+
+            while(count($categorias) >= 1)
+            {
+                $categoria = array_pop($categorias);
+                $categoryBBDD = Category::where('type',$categoria)->first();
+                $aux2 = new CategoryProduct();
+                $aux2->product_id = $product->id;
+                $aux2->category_id = $categoryBBDD->id;
+                $aux2->save();
+            }
+            
+        
+
+        return redirect()->route('admin.products')->with('mensaje','La modificación del producto ha sido un éxito.');
     }
 
     /**

@@ -5,7 +5,7 @@
 @endsection
 @section('contenido')
 <div class="container">
-    <form method="POST" action="{{route('product.update')}}">
+    <form method="POST" action="{{route('product.update',$product)}}">
         @method('put')
         @csrf
     
@@ -17,8 +17,15 @@
             <label for="category">Categoría</label>
             
                 @foreach ($categorias as $category)
-                <input type="checkbox"value="{{$category->type}}">{{$category->type}}/>  
+                @if ($todasCategorias->contains($category))
+                <label for="{{ $category->type }}">{{ $category->type }}</label>
+                <input type="checkbox" value="{{ $category->type }}" id="{{ $category->type }}" name="categories[]" checked>
+                @else
+                <label for="{{ $category->type }}">{{ $category->type }}</label>
+                <input type="checkbox" value="{{ $category->type }}" id="{{ $category->type }}" name="categories[]">
+                @endif
                 @endforeach
+
             
         </div>
     
