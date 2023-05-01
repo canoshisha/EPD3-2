@@ -220,9 +220,10 @@ public function showFavorites()
         $product = Products::find($favorite->products_id);
         $products[] = $product;
     }
+    $imgProducts = DB::table('img_products')->where('tipo', 'imagenMenu')->get();
 
 
-    return view('favorites', compact('products'));
+    return view('favorites', compact('products','imgProducts'));
 }
 
 }
