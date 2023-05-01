@@ -128,20 +128,21 @@ class productosController extends Controller
 
 
 
-        $categorias = array_reverse($request->input('categories'),True);
-        
+        $categorias = $request->input('categories');
         $categoryProducts = $product->category;
-        
             foreach($categoryProducts as $categoryProduct)
             {
-                
                 if(!empty($categorias)){
                     foreach($categorias as $aux)
                     {
                         
                         if($aux == $categoryProduct->type)
                         {
-                            array_pop($categorias);
+                            $aux2 = array_search($aux,$categorias);
+                            
+                            // unset($categorias[$aux2]);
+                            $categorias = array_diff($categorias, array($aux));
+                            
                             break;
                         
                         }
@@ -149,6 +150,7 @@ class productosController extends Controller
                     
                 }else
                 {
+                    
                     $aux2 = CategoryProduct::where('product_id', $product->id)->where('category_id',$categoryProduct->id)->first();
                     $aux2->delete();
                 }
@@ -156,7 +158,6 @@ class productosController extends Controller
     
             }
             
-
             while(count($categorias) >= 1)
             {
                 $categoria = array_pop($categorias);
@@ -171,6 +172,7 @@ class productosController extends Controller
 
         return redirect()->route('admin.products')->with('mensaje','La modificación del producto ha sido un éxito.');
     }
+
 
     /**
      * Remove the specified resource from storage.
