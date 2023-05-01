@@ -72,19 +72,35 @@ class adminController extends Controller
             $cantidadesVendidas[] = $producto->total_vendido;
         }
 
-        $productosMasFavoritos = DB::table('favorites')
-            ->select('products_id', DB::raw('COUNT(*) as total_favoritos'))
-            ->groupBy('products_id')
-            ->orderByDesc('total_favoritos')
-            ->limit(5)
-            ->get();
-        $nombresProductos_fav = [];
-        $cantidadFavoritos = [];
-        foreach ($productosMasFavoritos as $producto) {
-            $productoDetalle = $productosDetalles->where('id', $producto->product_id)->first();
-            $nombresProductos_fav[] = $productoDetalle->name;
-            $cantidadFavoritos[] = $producto->total_favoritos;
-        }
+        // $productosMasFavoritos = DB::table('favorites')
+        //     ->select('products_id', DB::raw('COUNT(*) as total_favoritos'))
+        //     ->groupBy('products_id')
+        //     ->orderByDesc('total_favoritos')
+        //     ->limit(5)
+        //     ->get();
+        // $nombresProductos_fav = [];
+        // $cantidadFavoritos = [];
+        // foreach ($productosMasFavoritos as $producto) {
+        //     $product = Products::find($producto->products_id);
+        //     $nombresProductos_fav[] = $product->name;
+        //     $cantidadFavoritos[] = $producto->total_favoritos;
+        // }
+
+        $productosFavoritos = DB::table('favorites')
+        ->select('products.id', 'products.name', DB::raw('COUNT(*) as cantidad'))
+        ->join('products', 'favorites.products_id', '=', 'products.id')
+        ->groupBy('products.id', 'products.name')
+        ->orderByDesc('cantidad')
+        ->limit(4)
+        ->get();
+
+    // Crear dos arreglos con los nombres de los productos y las cantidades de veces que aparecen
+    $nombresProductos_fav = [];
+    $cantidadFavoritos = [];
+    foreach ($productosFavoritos as $producto) {
+        $nombresProductos_fav[] = $producto->name;
+        $cantidadFavoritos[] = $producto->cantidad;
+    }
 
         // Renderizar la vista con los datos
         return view('dashboard', [
