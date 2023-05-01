@@ -106,9 +106,13 @@
                                 @csrf
                                 <button type="submit" class="btn btn-outline-danger">
                                     @if (Auth::user()->favorites()->where('products_id', $product->id)->exists())
-                                        Remove from favorites
+                                        <img src="{{ URL::asset('/img/me-gusta.png') }}" alt="Imagen" class="me-2"
+                                            width="24" height="24">
+                                        Favorito
                                     @else
-                                        Add to favorites
+                                        <img src="{{ URL::asset('/img/no-me-gusta.png') }}" alt="Imagen" class="me-2"
+                                            width="24" height="24">
+                                        Añadir a favorito
                                     @endif
                                 </button>
                             </form>
