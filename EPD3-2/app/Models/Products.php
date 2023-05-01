@@ -16,7 +16,7 @@ class Products extends Model
     return $this->belongsToMany(Order::class, 'order_product')
                 ->withPivot('quantity','size');
     }
-    
+
     public function imgProducts(){
         return $this->hasMany(ImgProducts::class,'img_products_id');
     }
@@ -24,12 +24,12 @@ class Products extends Model
         return $this->hasOne(Discount::class,'discounts_id');
     }
     public function favorites(){
-        return $this->hasOne(Favorites::class,'favorites_id');
+        return $this->hasOne(Favorites::class,'products_id');
     }
     public function category()
     {
     return $this->belongsToMany(Category::class, 'category_product');
     }
-    
+
 
 }

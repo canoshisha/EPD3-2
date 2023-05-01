@@ -53,7 +53,7 @@ Route::get('/misPedidos', [cestaController::class, 'misPedidos'])->name('cesta.m
 
 Route::get('/cesta', [cestaController::class, 'show'])->name('cesta.show')->Middleware('auth', 'verified');
 Route::put('cesta/{shoppingBasket}/actualizar', [cestaController::class, 'update'])->name('cesta.update');
-
+Route::post('/favorites/{product}', [productosController::class, 'toggleFavorite'])->name('favorites.toggle')->Middleware('auth', 'verified');
 Route::put('cesta/{shoppingBasket}/actualizarCantidad', [cestaController::class, 'updateCantidad'])->name('cesta.updateCantidad');
 Route::delete('cesta/eliminar', [cestaController::class, 'destroy'])->name('cesta.destroy')->Middleware('auth', 'verified');
 Route::delete('/user/{user}', [userController::class, 'destroy'])->name('users.destroy');

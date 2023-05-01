@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Category;
 use App\Models\CategoryProduct;
+use App\Models\Favorites;
 use App\Models\ImgProducts;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 
 class productosController extends Controller
 {
@@ -17,8 +21,8 @@ class productosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        
+    {
+
         $products = Products::paginate(9);
         $imgProducts = DB::table('img_products')->where('tipo', 'imagenMenu')->get();
         return view('productos', compact('products','imgProducts'));
@@ -91,7 +95,7 @@ class productosController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find('id',$id)->get();
+        $product = Products::find('id',$id)->get();
         return view('productos_edit',compact('product'));
     }
 
@@ -102,7 +106,7 @@ class productosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Products $product)
     {
         $request->validate([
             'name' => 'required|max:120',
@@ -133,4 +137,29 @@ class productosController extends Controller
         $product->delete();
         return redirect()->route('admin.products')->with('mensaje','La eliminación del producto ha sido un éxito.');
     }
+
+    public function toggleFavorite(Products $product)
+{
+    $user = User::find(Auth::id());
+    // $favorite = Favorites::where('products_id', $product->id)->where('users_id', $user->id)->first();
+    $favorite = $user->favorites()->where('products_id', $product->id)->first();
+    if ($favorite) {
+        $favorite->delete();
+    } else {
+        $new_favorite = new Favorites();
+        $new_favorite->products_id = $product->id;
+        $new_favorite->users_id = $user->id;
+        $new_favorite->save();
+    }
+    return redirect()->back();
+
+    // $user = User::find(Auth::id());
+    // if ($user->favorites()->where('products_id', $product->id)->exists()) {
+    //     $user->favorites()->detach($product->id);
+    // } else {
+    //     $user->favorites()->attach($product->id);
+    // }
+    // return redirect()->back();
+}
+
 }
