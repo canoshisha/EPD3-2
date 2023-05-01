@@ -162,4 +162,18 @@ class productosController extends Controller
     // return redirect()->back();
 }
 
+public function showFavorites()
+{
+    $user = User::find(Auth::id());
+    $favorites = $user->favorites;
+    $products = [];
+    foreach ($favorites as $favorite){
+        $product = Products::find($favorite->products_id);
+        $products[] = $product;
+    }
+
+
+    return view('favorites', compact('products'));
+}
+
 }

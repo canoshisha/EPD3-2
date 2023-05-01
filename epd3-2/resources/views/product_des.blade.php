@@ -104,17 +104,17 @@
                         <div class="mb-3">
                             <form action="{{ route('favorites.toggle', $product) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-danger">
-                                    @if (Auth::user()->favorites()->where('products_id', $product->id)->exists())
-                                        <img src="{{ URL::asset('/img/me-gusta.png') }}" alt="Imagen" class="me-2"
-                                            width="24" height="24">
-                                        Favorito
-                                    @else
-                                        <img src="{{ URL::asset('/img/no-me-gusta.png') }}" alt="Imagen" class="me-2"
-                                            width="24" height="24">
-                                        Añadir a favorito
-                                    @endif
-                                </button>
+
+                                @if (Auth::user()->favorites()->where('products_id', $product->id)->exists())
+                                    <button type="submit" class="btn btn-icon btn-danger"> <img
+                                            src="{{ URL::asset('/img/me-gusta.png') }}" alt="Is fav"
+                                            class="btn-icon__img" width="24" height="24"></button>
+                                @else
+                                    <button type="submit" class="btn btn-icon btn-outline-danger"> <img
+                                            src="{{ URL::asset('/img/no-me-gusta.png') }}" alt="No is fav"
+                                            class="btn-icon__img" width="24" height="24"></button>
+                                @endif
+
                             </form>
                         </div>
                     @endif

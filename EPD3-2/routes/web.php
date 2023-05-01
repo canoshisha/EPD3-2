@@ -47,6 +47,7 @@ Route::get('products/create', [productosController::class, 'store'])->name('prod
 Route::put('products/form/update/{product}', [productosController::class, 'update'])->name('product.update');
 Route::delete('products/form/delete/{product}', [productosController::class, 'destroy'])->name('product.destroy');
 
+Route::get('/favs', [productosController::class, 'showFavorites'])->name('products.favs');
 
 
 Route::get('/misPedidos', [cestaController::class, 'misPedidos'])->name('cesta.mispedidos')->Middleware('auth', 'verified');

@@ -35,9 +35,13 @@
                     <li class="nav-item">
                         <a class="nav-link " href="{{ route('products.menu') }}">Productos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">Contacto</a>
-                    </li>
+                    @if (Route::has('login'))
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link " href="{{ route('products.favs') }}">Favoritos</a>
+                            </li>
+                        @endauth
+                    @endif
 
                 </ul>
                 <div class="navbar-nav ms-auto">
