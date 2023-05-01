@@ -32,7 +32,7 @@ class categoryController extends Controller
             $category->type = $type;
             $category->save();
         }
-        return redirect()->route('admin.category');
+        return redirect()->back()->with('success-perfil', 'Categoría creada con exito.');
     }
 
 
@@ -87,7 +87,7 @@ class categoryController extends Controller
 
         $category->save(); // guardar los cambios en la base de datos
 
-        return redirect()->route('admin.category'); // redirigir al listado de categorías
+        return redirect()->back()->with('success-perfil', 'Categoría actualizada con éxito.');; // redirigir al listado de categorías
     }
 
 
@@ -100,6 +100,6 @@ class categoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success-perfil', 'Categoría eliminada con éxito.');;
     }
 }
