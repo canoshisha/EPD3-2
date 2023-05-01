@@ -1,10 +1,9 @@
 const botonMostrarFormulario = document.getElementById('crear_show');
 const formulario = document.getElementById('crear');
-const botonMostrarAct = document.getElementById('actualizar_show');
+const botonesMostrarAct = document.querySelectorAll('.actualizar_show');
 const form_update = document.getElementById('actualizar_form');
-//me falta poner la confirmacion con el formulario de actualizar
 
-const swal = window.swal;
+
 
 botonMostrarFormulario.onclick = function() {
     console.log("Mostrando formulario...");
@@ -12,11 +11,13 @@ botonMostrarFormulario.onclick = function() {
     formulario.style.display = 'block';
 };
 
-botonMostrarAct.onclick = function() {
-    console.log("Mostrando formulario...");
-    botonMostrarAct.style.display = 'none';
-    form_update.style.display = 'block';
-}
+botonesMostrarAct.forEach(boton => {
+    boton.onclick = function() {
+        console.log("Mostrando formulario...");
+        boton.style.display = 'none';
+        form_update.style.display = 'block';
+    }
+});
 
 
 $('#eliminar').click(function(e) {
@@ -31,11 +32,7 @@ $('#eliminar').click(function(e) {
         })
         .then((willDelete) => {
             if (willDelete) {
-                swal("Type borrado correctamente", {
-                    icon: "success",
-                }).then(() => {
-                    form.submit();
-                });
+                form.submit();
 
             }
         });
@@ -54,7 +51,7 @@ form_update.onsubmit = function(event) {
             .then(response => {
                 if (response.ok) {
                     form_update.style.display = 'none';
-                    botonMostrarAct.style.display = 'block';
+                    this.style.display = 'block'; // Hacer referencia al botón actual usando "this"
                     console.log("Formulario enviado correctamente.");
                     window.location.href = "/categories"; // Redireccionar a la ruta correspondiente
                 } else {
