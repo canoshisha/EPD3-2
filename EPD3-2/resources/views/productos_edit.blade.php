@@ -6,18 +6,18 @@
 @section('contenido')
 <div class="container">
     <form method="POST" action="{{route('product.update',$product)}}">
-        @method('put')
+        
         @csrf
-    
+        @method('put')
         <div class="form-group">
             <label for="name">Nombre del producto</label>
             <input type="text" name="name" class="form-control" id="name" value="{{$product->name}}">
         </div>
         <div class="form-group">
-            <label for="category">Categoría</label>
+            <label for="category">Categorías</label>
             
-                @foreach ($categorias as $category)
-                @if ($todasCategorias->contains($category))
+                @foreach ($todasCategorias as $category)
+                @if ($categorias->contains($category))
                 <label for="{{ $category->type }}">{{ $category->type }}</label>
                 <input type="checkbox" value="{{ $category->type }}" id="{{ $category->type }}" name="categories[]" checked>
                 @else

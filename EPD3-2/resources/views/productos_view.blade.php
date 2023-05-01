@@ -33,8 +33,7 @@
                         <td>{{ $product->description }}</td>
                         <td>{{ $product->discount }}</td>
                         <td>
-                            <form id=actualizar_form method="POST" action="{{ route('product.update', $product->id) }}"
-                                >
+                            <form id=actualizar_form method="POST" action="{{ route('product.edit', $product->id) }}">
                                 @csrf
                                 @method('get')
                                 <button id='actualizar' type="submit" class="btn btn-primary">actualizar</button>
