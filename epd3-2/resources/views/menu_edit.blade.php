@@ -66,59 +66,7 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const selectOption = document.getElementById('select-option');
-            const nombreSection = document.getElementById('nombre-section');
-            const emailSection = document.getElementById('email-section');
-            const passwordSection = document.getElementById('password-section');
-            const passwordNuevo = document.getElementById('input-password-nuevo');
-            const passwordNuevoConfirm = document.getElementById('input-password-nuevo-confirm');
+    <script src="/js/form_user.js"></script>
 
-            // Mostrar la sección correspondiente al valor seleccionado por defecto
-            switch (selectOption.value) {
-                case 'nombre':
-                    nombreSection.classList.remove('d-none');
-                    break;
-                case 'email':
-                    emailSection.classList.remove('d-none');
-                    break;
-                case 'password':
-                    passwordSection.classList.remove('d-none');
-                    break;
-            }
-
-            selectOption.addEventListener('change', (event) => {
-                const selectedOption = event.target.value;
-
-                nombreSection.classList.add('d-none');
-                emailSection.classList.add('d-none');
-                passwordSection.classList.add('d-none');
-
-                switch (selectedOption) {
-                    case 'nombre':
-                        nombreSection.classList.remove('d-none');
-                        break;
-                    case 'email':
-                        emailSection.classList.remove('d-none');
-                        break;
-                    case 'password':
-                        passwordSection.classList.remove('d-none');
-                        break;
-                }
-            });
-
-            function validatePassword() {
-                if (passwordNuevo.value !== passwordNuevoConfirm.value) {
-                    passwordNuevoConfirm.setCustomValidity('Las contraseñas no coinciden');
-                } else {
-                    passwordNuevoConfirm.setCustomValidity('');
-                }
-            }
-
-            passwordNuevo.addEventListener('input', validatePassword);
-            passwordNuevoConfirm.addEventListener('input', validatePassword);
-        });
-    </script>
 
 @endsection

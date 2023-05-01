@@ -1,56 +1,40 @@
-function mostrarCampo() {
-    var opcionSeleccionada = document.getElementById("select-option").value;
-    var campoNombre = document.getElementById("campo-nombre");
-    var campoEmail = document.getElementById("campo-email");
-    var campoPassword = document.getElementById("campo-password");
+const selectOption = document.getElementById('select-option');
+const nombreSection = document.getElementById('nombre-section');
+const emailSection = document.getElementById('email-section');
+const passwordSection = document.getElementById('password-section');
+const passwordNuevo = document.getElementById('input-password-nuevo');
+const passwordNuevoConfirm = document.getElementById('input-password-nuevo-confirm');
 
-    // Oculta todos los campos
-    campoNombre.style.display = "none";
-    campoEmail.style.display = "none";
-    campoPassword.style.display = "none";
+function showSelectedSection() {
+    const selectedOption = selectOption.value;
 
-    // Muestra el campo correspondiente
-    if (opcionSeleccionada == "nombre") {
-        campoNombre.style.display = "block";
-    } else if (opcionSeleccionada == "email") {
-        campoEmail.style.display = "block";
-    } else if (opcionSeleccionada == "password") {
-        campoPassword.style.display = "block";
+    nombreSection.classList.add('d-none');
+    emailSection.classList.add('d-none');
+    passwordSection.classList.add('d-none');
+
+    switch (selectedOption) {
+        case 'nombre':
+            nombreSection.classList.remove('d-none');
+            break;
+        case 'email':
+            emailSection.classList.remove('d-none');
+            break;
+        case 'password':
+            passwordSection.classList.remove('d-none');
+            break;
     }
 }
 
-function validarFormulario() {
-    var opcionSeleccionada = document.getElementById("select-option").value;
-    var inputValor = document.getElementById("input-valor");
-    var inputOldPassword = document.getElementById("input-old-password");
-    var inputNewPassword = document.getElementById("input-new-password");
-    var inputNewPasswordConfirm = document.getElementById("input-new-password-confirm");
+selectOption.addEventListener('change', showSelectedSection);
+showSelectedSection();
 
-    if (opcionSeleccionada == "nombre") {
-        if (inputValor.value.trim() == "") {
-            alert("Por favor, introduce un nombre válido.");
-            return false;
-        }
-    } else if (opcionSeleccionada == "email") {
-        var inputOldEmail = document.getElementById("input-old-email");
-        if (inputOldEmail.value.trim() == "" || inputValor.value.trim() == "") {
-            alert("Por favor, introduce un correo electrónico válido.");
-            return false;
-        }
-    } else if (opcionSeleccionada == "password") {
-        if (inputOldPassword.value.trim() == "") {
-            alert("Por favor, introduce la contraseña actual.");
-            return false;
-        }
-        if (inputNewPassword.value.trim() == "" || inputNewPasswordConfirm.value.trim() == "") {
-            alert("Por favor, introduce la nueva contraseña y confírmala.");
-            return false;
-        }
-        if (inputNewPassword.value != inputNewPasswordConfirm.value) {
-            alert("Las nuevas contraseñas no coinciden.");
-            return false;
-        }
+function validatePassword() {
+    if (passwordNuevo.value !== passwordNuevoConfirm.value) {
+        passwordNuevoConfirm.setCustomValidity('Las contraseñas no coinciden');
+    } else {
+        passwordNuevoConfirm.setCustomValidity('');
     }
-
-    return true;
 }
+
+passwordNuevo.addEventListener('input', validatePassword);
+passwordNuevoConfirm.addEventListener('input', validatePassword);
