@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Phone;
 use App\Models\User;
-use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
-
 
 class userController extends Controller
 {
@@ -73,51 +71,49 @@ class userController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
-        $user = auth()->user();
+{
+    // Obtener el usuario actualmente autenticado
+    $user = User::where('id', Auth::id())->first();
 
-        switch ($request->opcion) {
-            case 'nombre':
-                $user->name = $request->nombre_nuevo;
-                break;
-            case 'email':
-                $validator = Validator::make($request->all(), [
-                    'email_actual' => 'required|email',
-                    'email_nuevo' => 'required|email|unique:users,email,'.$user->id,
-                ]);
+    // Obtener el valor del campo "opcion" del formulario
+    $opcion = $request->input('opcion');
 
-                if ($validator->fails()) {
-                    return back()->withErrors($validator)->withInput();
-                }
-
-                if ($user->email !== $request->email_actual) {
-                    return back()->withErrors(['email_actual' => 'El email actual no coincide con el registrado'])->withInput();
-                }
-
-                $user->email = $request->email_nuevo;
-                break;
-            case 'password':
-                $validator = Validator::make($request->all(), [
-                    'password_actual' => 'required',
-                    'password_nuevo' => 'required|min:8|confirmed',
-                ]);
-
-                if ($validator->fails()) {
-                    return back()->withErrors($validator)->withInput();
-                }
-
-                if (!Hash::check($request->password_actual, $user->password)) {
-                    return back()->withErrors(['password_actual' => 'La contraseña actual no coincide con la registrada'])->withInput();
-                }
-
-                $user->password = Hash::make($request->password_nuevo);
-                break;
-        }
-
+    // Actualizar el nombre
+    if ($opcion == 'nombre') {
+        $nombreNuevo = $request->input('nombre_nuevo');
+        $user->name = $nombreNuevo;
         $user->save();
-
-        return redirect()->route('perfil.index')->with('success', 'Perfil actualizado correctamente');
     }
+
+    // Actualizar el correo electrónico
+    if ($opcion == 'email') {
+        $emailNuevo = $request->input('email_nuevo');
+        $correoActual = $user->email;
+
+        // Validar que el correo electrónico nuevo sea una dirección de correo electrónico válida
+        $validatedData = $request->validate([
+            'email_nuevo' => 'required|email|unique:users,email,'.$user->id,
+        ]);
+
+        $user->email = $emailNuevo;
+        $user->save();
+    }
+
+    // Actualizar la contraseña
+    if ($opcion == 'password') {
+        $passwordNuevo = $request->input('password_nuevo');
+        $passwordActual = $request->input('password_actual');
+
+        // Verificar que la contraseña actual sea correcta antes de actualizar la contraseña
+        if (Hash::check($passwordActual, $user->password)) {
+            $user->password = Hash::make($passwordNuevo);
+            $user->save();
+        }
+    }
+
+    // Redirigir a la página de perfil con un mensaje de éxito
+    return redirect()->route('perfil.user');
+}
 
 
     /**

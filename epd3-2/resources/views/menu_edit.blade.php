@@ -11,8 +11,7 @@
                     <div class="card-header">{{ __('Mi Perfil') }}</div>
 
                     <div class="card-body">
-                        {{-- <form method="POST" action="{{ route('perfil.update') }}"> --}}
-                        <form method="POST" action=#>
+                        <form method="POST" action="{{ route('perfil.update') }}">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">

@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('auth.dashboard');
-})->middleware('auth', 'verified');
+})->middleware('auth', 'verified')->name('perfil.user');
 
 Route::get('/des_producto', function () {
     return view('product_des');
@@ -35,6 +35,7 @@ Route::get('/productos', [adminController::class, 'show_products'])->name('admin
 Route::get('/orders', [adminController::class, 'show_order'])->name('admin.order')->middleware(['auth', 'verified']);
 
 Route::get('/menu/user/edit', [userController::class, 'show_menu_user'])->name('edit-menu.user')->middleware(['auth', 'verified']);
+Route::put('user/update', [userController::class, 'update'])->name('perfil.update')->middleware(['auth', 'verified']);
 
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth', 'verified');
 
