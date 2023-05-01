@@ -11,12 +11,7 @@ $('button[type="submit"]').click(function(e) {
         })
         .then((willDelete) => {
             if (willDelete) {
-                swal("Usuario borrado correctamente", {
-                    icon: "success",
-                }).then(() => {
-                    form.submit();
-                });
-
+                form.submit();
             }
         });
 });

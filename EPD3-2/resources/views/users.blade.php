@@ -1,5 +1,16 @@
 @extends('template_admin')
 @section('contenido')
+    @if (session('success-perfil'))
+        <script>
+            const swal = window.swal;
+            swal({
+                title: 'Actualización',
+                text: '{{ session('success-perfil') }}',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+    @endif
     <div class="container">
         <h1>Lista de usuarios</h1>
         <hr>

@@ -139,7 +139,7 @@ class userController extends Controller
     // Eliminar al usuario
     $user->delete();
 
-    return redirect()->back();
+    return redirect()->back()->with('success-perfil', 'Usuario eliminado con exito');
 }
 
 public function show_menu_user(){
