@@ -41,6 +41,11 @@ class Products extends Model
 {
     return SizeProduct::where('product_id', $this->id)->sum('stock');
 }
+public function stock_act($size_id)
+{
+    return SizeProduct::where('product_id', $this->id)->where('size_id', $size_id)->sum('stock');
+}
+
 
 
 }

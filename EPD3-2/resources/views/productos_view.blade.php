@@ -42,7 +42,7 @@
                     <tr>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->price }}</td>
-                        <td>{{ $product->sizes}}</td>
+                        <td>{{ $product->stock_p() }}</td>
                         <td>{{ $product->description }}</td>
                         <td>{{ $product->discount }}</td>
                         <td>

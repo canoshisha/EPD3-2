@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Type\Integer;
 use App\Mail\OrderConfirmation;
+use App\Models\Size;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -88,14 +89,17 @@ class cestaController extends Controller
             ]
         );
         $shopping_basket = ShoppingBasket::where('users_id', Auth::id())->first();
+        $size = Size::where('size', $request->input('talla'))->first();
+        $talla_id = $size->id;
 
         $enCesta = False;
         foreach ($shopping_basket->productBasket as $productB) {
             if ($productB->product_id == $request->input('product_id')) {
                 $enCesta = True;
                 $product = Products::find($productB->product_id);
-                if($request->input('cantidad') + $productB->cantidad >$product->stock){
-                    $queda = $product->stock - $productB->cantidad;
+
+                if($request->input('cantidad') + $productB->cantidad >$product->stock_act($talla_id)){
+                    $queda = $product->stock_act($talla_id) - $productB->cantidad;
                     return redirect()->route('producto.descripcion',$product)->withErrors(['mensaje' => 'No hay suficiente stock, con lo de la cesta solo quedan '.$queda]);
                 }
                 $productB->cantidad = $request->input('cantidad') + $productB->cantidad;
@@ -105,7 +109,7 @@ class cestaController extends Controller
         }
         if (!$enCesta) {
             $productBasket = new ProductBasket();
-            $productBasket->size = $request->input('talla');
+            $productBasket->size = $size->size;
             $productBasket->cantidad = $request->input('cantidad');
             $productBasket->product_id = $request->input('product_id');
             $productBasket->shopping_basket_id = $shopping_basket->id;

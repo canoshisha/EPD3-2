@@ -10,10 +10,12 @@ use App\Models\Products;
 class SizeProductsSeeder extends Seeder
 {
     public function run()
-    {
-        for ($i = 1; $i <= 100; $i++) {
-            $size = Size::inRandomOrder()->first();
-            $product = Products::inRandomOrder()->first();
+{
+    $products = Products::all();
+    $sizes = Size::all();
+
+    foreach ($products as $product) {
+        foreach ($sizes as $size) {
             SizeProduct::create([
                 'size_id' => $size->id,
                 'product_id' => $product->id,
@@ -21,4 +23,5 @@ class SizeProductsSeeder extends Seeder
             ]);
         }
     }
+}
 }

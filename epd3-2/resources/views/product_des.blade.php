@@ -25,7 +25,7 @@
                 <div class="col-md-6">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <?php
-                        
+
                         $img1 = $imgProduct->first();
                         $img2 = $imgProduct->last();
                         ?>
@@ -64,35 +64,31 @@
                             <select id="talla" name="talla" class="form-select custom-select" required
                                 data-error="Por favor, selecciona una talla">
                                 <option class="opt" selected disabled value="">Selecciona una talla</option>
-                                <option class="opt" value="S">S</option>
-                                <option class="opt" value="M">M</option>
-                                <option class="opt" value="L">L</option>
-                                <option class="opt" value="XL">XL</option>
-                                <option class="opt" value="XXL">XXL</option>
-                                <option class="opt" value="XXXL">XXXL</option>
+                                @foreach ($sizes as $size)
+                                    <option value="{{ $size->size }}" class="opt">{{ $size->size }}</option>
+                                @endforeach
                             </select>
                             @if ($errors->has('talla'))
                                 <div class="alert alert-danger">{{ $errors->first('talla') }}</div>
                             @endif
-
-
                         </div>
+
                         <div class="mb-3">
                             <label for="cantidad" class="form-label">Cantidad</label>
                             <select id="cantidad" name="cantidad" class="form-select custom-select" required
                                 data-error="Por favor, selecciona una cantidad">
                                 <option class="opt" selected disabled value="">Selecciona una cantidad</option>
-                                @for ($i = 1; $i <= min($product->stock, 10); $i++)
-                                    <option class="opt" value="{{ $i }}">{{ $i }}</option>
-                                @endfor
-                            </select>
+                                @if (isset($product))
 
+                                    @for ($i = 1; $i <= 10; $i++)
+                                        <option class="opt" value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                @endif
+                            </select>
                             @if ($errors->has('cantidad'))
                                 <div class="alert alert-danger">{{ $errors->first('cantidad') }}</div>
                             @endif
-
                         </div>
-
 
 
                         <input type="hidden" name="product_id" value="{{ $product->id }}">

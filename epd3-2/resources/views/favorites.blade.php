@@ -16,7 +16,7 @@
                             @php $count = 0; @endphp
                             <!-- initialize a count variable -->
                             @foreach ($products as $product)
-                                @if ($product->stock > 0)
+                                @if ($product->stock_p() > 0)
                                     @if ($count % 3 == 0)
                                         <!-- if count is divisible by 3, start a new row -->
                                         <div class="row">
