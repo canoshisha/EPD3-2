@@ -110,8 +110,10 @@ class productosController extends Controller
         $sizes = [];
 
         foreach($product_sizes as $size_product) {
+            if($size_product->stock>0){
             $size= DB::table('sizes')->where('id', $size_product->size_id)->first();
             $sizes[] = $size;
+            }
         }
 
         return view('product_des',compact('product','imgProduct','sizes'));
