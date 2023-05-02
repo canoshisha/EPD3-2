@@ -37,5 +37,10 @@ class Products extends Model
         ->withPivot('stock');
     }
 
+    public function stock_p()
+{
+    return SizeProduct::where('product_id', $this->id)->sum('stock');
+}
+
 
 }

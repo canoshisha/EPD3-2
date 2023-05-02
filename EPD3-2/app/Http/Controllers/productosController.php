@@ -85,13 +85,13 @@ class productosController extends Controller
         foreach($categorias as $categoria)
         {
             $categoryBBDD = Category::where('type',$categoria)->first();
-            
+
             $aux2 = new CategoryProduct();
             $aux2->product_id = $productBBDD->id;
             $aux2->category_id = $categoryBBDD->id;
             $aux2->save();
         }
-        
+
 
         return redirect()->route('admin.products')->with('mensaje','La creación del producto ha sido un éxito.');
     }
@@ -106,6 +106,14 @@ class productosController extends Controller
     {
         $id = $product->id;
         $imgProduct = DB::table('img_products')->where('products_id', $id)->get();
+        $product_sizes = SizeProduct::where('product_id', $product->id)->get();
+        $sizes = [];
+
+        foreach($product_sizes as $size_product) {
+            $size = $size_product->sizes->type;
+            $sizes[] = $size;
+        }
+
         return view('product_des',compact('product','imgProduct'));
     }
 
@@ -142,7 +150,7 @@ class productosController extends Controller
         $product->price = $request->price;
         $product->description = $request->description;
         $product->save();
-        
+
 
 
         $categorias = $request->input('categories');
@@ -152,29 +160,29 @@ class productosController extends Controller
                 if(!empty($categorias)){
                     foreach($categorias as $aux)
                     {
-                        
+
                         if($aux == $categoryProduct->type)
                         {
                             $aux2 = array_search($aux,$categorias);
-                            
+
                             // unset($categorias[$aux2]);
                             $categorias = array_diff($categorias, array($aux));
-                            
+
                             break;
-                        
+
                         }
                     }
-                    
+
                 }else
                 {
-                    
+
                     $aux2 = CategoryProduct::where('product_id', $product->id)->where('category_id',$categoryProduct->id)->first();
                     $aux2->delete();
                 }
-                
-    
+
+
             }
-            
+
             while(count($categorias) >= 1)
             {
                 $categoria = array_pop($categorias);
@@ -184,8 +192,8 @@ class productosController extends Controller
                 $aux2->category_id = $categoryBBDD->id;
                 $aux2->save();
             }
-            
-        
+
+
 
         return redirect()->route('admin.products')->with('mensaje','La modificación del producto ha sido un éxito.');
     }
@@ -203,7 +211,7 @@ class productosController extends Controller
         foreach($relacionProduct as $aux){
             $aux->delete();
         }
-        
+
         $product = Products::where('id',$id)->first();
         $product->delete();
         return redirect()->route('admin.products')->with('mensaje','La eliminación del producto ha sido un éxito.');

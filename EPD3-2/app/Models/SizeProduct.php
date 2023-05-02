@@ -20,4 +20,5 @@ class SizeProduct extends Model
     {
         return $this->belongsTo(Products::class);
     }
+
 }
