@@ -34,6 +34,7 @@
                     <th>Stock</th>
                     <th>Description</th>
                     <th>Discount</th>
+                    <th>Talla</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,7 +42,7 @@
                     <tr>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->price }}</td>
-                        <td>{{ $product->stock }}</td>
+                        <td>{{ $product->sizes}}</td>
                         <td>{{ $product->description }}</td>
                         <td>{{ $product->discount }}</td>
                         <td>

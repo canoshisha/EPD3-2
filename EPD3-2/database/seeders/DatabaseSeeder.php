@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             SizeTableSeeder::class,
             PhonesTableSeeder::class,
             ImgProductsTableSeeder::class,
+            CategorySeeder::class,
+            CategoryProductSeeder::class,
             SizeProductsSeeder::class,
         ]);
     }
