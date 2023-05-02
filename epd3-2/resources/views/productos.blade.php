@@ -4,6 +4,17 @@
     <link rel="stylesheet" href="{{ asset('css/productos.css') }}">
 @endsection
 @section('contenido')
+    @if (session('mensaje'))
+        <script>
+            const swal = window.swal;
+            swal({
+                title: 'Cesta',
+                text: '{{ session('mensaje') }}',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+    @endif
     <section class="products">
         <div class="container">
             <div class="row justify-content-center">
@@ -11,17 +22,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Productos</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="d-flex justify-content-center">
-                                    @if (session('mensaje'))
-                                        <div class="alert alert-success my-4 text-center">
-                                            {{ session('mensaje') }}
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
                         </div>
                         <div class="card-body">
                             @php $count = 0; @endphp

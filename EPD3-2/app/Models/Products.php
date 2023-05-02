@@ -46,6 +46,9 @@ public function stock_act($size_id)
     return SizeProduct::where('product_id', $this->id)->where('size_id', $size_id)->sum('stock');
 }
 
+public function sizeProduct($size_id){
+    return SizeProduct::where('product_id', $this->id)->where('size_id', $size_id)->first();
+}
 
 
 }

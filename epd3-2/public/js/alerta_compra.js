@@ -11,12 +11,8 @@ $('#compra').click(function(e) {
         })
         .then((willBuy) => {
             if (willBuy) {
-                swal("¡Compra realizada con éxito!", {
-                        icon: "success",
-                    })
-                    .then(() => {
-                        form.submit();
-                    });
+                form.submit();
+
             }
         });
 });

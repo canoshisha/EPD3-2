@@ -5,19 +5,17 @@
 @endsection
 @section('contenido')
     <div class="container py-5">
-        <div class="row">
-            <div class="col">
-                <div class="d-flex justify-content-center">
-                    @if ($errors->has('mensaje'))
-                        <div class="alert alert-danger" role="alert"
-                            style="background-color:#f8d7da; border-color:#f5c6cb; color:#721c24;">
-                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                            {{ $errors->first('mensaje') }}
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
+        @if ($errors->has('mensaje'))
+            <script>
+                const swal = window.swal;
+                swal({
+                    title: 'ERROR',
+                    text: '{{ $errors->first('mensaje') }}',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+        @endif
 
 
         <div class="card h-100">
@@ -25,7 +23,7 @@
                 <div class="col-md-6">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <?php
-
+                        
                         $img1 = $imgProduct->first();
                         $img2 = $imgProduct->last();
                         ?>

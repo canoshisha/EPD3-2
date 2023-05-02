@@ -84,7 +84,7 @@ class cestaController extends Controller
     {
         $datos = $request->validate(
             [
-                'talla' => 'required|in:S,M,L,XL XXL,XXXL',
+                'talla' => 'required|in:S,M,L,XL,XXL,XXXL',
                 'cantidad' => 'required|in:1,2,3,4,5,6,7,8,9,10'
             ]
         );
@@ -98,16 +98,22 @@ class cestaController extends Controller
                 $enCesta = True;
                 $product = Products::find($productB->product_id);
 
-                if($request->input('cantidad') + $productB->cantidad >$product->stock_act($talla_id)){
+                if($request->input('cantidad') + $productB->cantidad > $product->stock_act($talla_id)){
                     $queda = $product->stock_act($talla_id) - $productB->cantidad;
                     return redirect()->route('producto.descripcion',$product)->withErrors(['mensaje' => 'No hay suficiente stock, con lo de la cesta solo quedan '.$queda]);
                 }
+
                 $productB->cantidad = $request->input('cantidad') + $productB->cantidad;
                 $productB->save();
                 break;
             }
         }
         if (!$enCesta) {
+            $product = Products::find($request->input('product_id'));
+            if($request->input('cantidad') > $product->stock_act($talla_id)){
+
+                return redirect()->route('producto.descripcion',$product)->withErrors(['mensaje' => 'No hay suficiente stock, con lo de la cesta solo quedan '.$product->stock_act($talla_id)]);
+            }
             $productBasket = new ProductBasket();
             $productBasket->size = $size->size;
             $productBasket->cantidad = $request->input('cantidad');
@@ -147,6 +153,7 @@ class cestaController extends Controller
     {
         $cantidad = $request->input("cantidad");
 
+
         if ($cantidad == 0) {
             $productId = $request->input("productB_id"); // id del producto que deseas eliminar
             $productB = productBasket::find($productId);
@@ -156,7 +163,10 @@ class cestaController extends Controller
         else{
             $productId = $request->input("productB_id"); // id del producto que deseas eliminar
             $productB = productBasket::find($productId);
-            $stock = $productB->product->stock - $cantidad;
+            $size = Size::where('size', $request->input('talla'))->first();
+            $talla_id = $size->id;
+
+            $stock = $productB->product->stock_act($talla_id) - $cantidad;
             if ($stock < 0) {
                 return redirect()->route('cesta.show')->withErrors(['mensaje' => 'El producto ' . $productB->product->name . ' no dispone de más stock']);
 
@@ -199,8 +209,9 @@ class cestaController extends Controller
         $shoppingBasket = ShoppingBasket::where('users_id', Auth::id())->first();
 
         foreach ($shoppingBasket->productBasket as $productB) {
-
-            $stock = $productB->product->stock - $productB->cantidad;
+            $size = Size::where('size', $productB->size)->first();
+            $talla_id = $size->id;
+            $stock = $productB->product->stock_act($talla_id) - $productB->cantidad;
             if ($stock < 0) {
                 return redirect()->route('cesta.show')->withErrors(['mensaje' => 'El producto ' . $productB->product->name . ' no tiene suficiente stock para la venta, retirelo de la cesta']);
 
@@ -215,9 +226,9 @@ class cestaController extends Controller
         $order->users_id = $shoppingBasket->users_id;
         $order->save();
         foreach ($shoppingBasket->productBasket as $productB) {
-
-            $productB->product->stock = $productB->product->stock - $productB->cantidad;
-            $productB->product->save();
+            $sizeProduct = $productB->product->sizeProduct($talla_id);
+            $sizeProduct->stock = $sizeProduct->stock - $productB->cantidad;
+            $sizeProduct->save();
             $order->products()->attach($productB->product_id, ['quantity' => $productB->cantidad, 'size' => $productB->size]);
 
 

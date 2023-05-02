@@ -8,13 +8,16 @@
         <h1>Cesta de Compra</h1>
         <hr>
         @if ($errors->has('mensaje'))
-            <div class="alert alert-danger" role="alert"
-                style="background-color:#f8d7da; border-color:#f5c6cb; color:#721c24;">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                {{ $errors->first('mensaje') }}
-            </div>
+            <script>
+                const swal = window.swal;
+                swal({
+                    title: 'ERROR',
+                    text: '{{ $errors->first('mensaje') }}',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
         @endif
-
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -52,6 +55,7 @@
                                     @csrf
                                     <input type="hidden" name="productB_id" value="{{ $productB->id }}">
                                     <input type="hidden" name="cantidad" value="{{ $productB->cantidad + 1 }}">
+                                    <input type="hidden" name="talla" value="{{ $productB->size }}">
                                     <div class="input-group h-100">
                                         <button type="submit" class="input-group-text">+</button>
                                     </div>
