@@ -64,9 +64,12 @@ class categoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function showUpdate(Request $request)
     {
-        //
+        $id= $request->input('id');
+        $category = Category::findOrFail($id); // encontrar la categoría a actualizar
+        $type = $request->input('type');
+        return view('category_act_view',compact('category','type'));
     }
 
     /**
@@ -87,7 +90,7 @@ class categoryController extends Controller
 
         $category->save(); // guardar los cambios en la base de datos
 
-        return redirect()->back()->with('success-perfil', 'Categoría actualizada con éxito.');; // redirigir al listado de categorías
+        return redirect()->route('admin.category')->with('success-perfil', 'Categoría actualizada con éxito.');; // redirigir al listado de categorías
     }
 
 

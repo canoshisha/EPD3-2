@@ -38,14 +38,14 @@
                     <tr>
                         <td>{{ $category->type }}</td>
                         <td>
-                            <form id=actualizar_form method="POST" action="{{ route('category.update', $category->id) }}"
-                                style="display:none;">
+                            <form method="POST" action="{{ route('category.supdate') }}">
                                 @csrf
-                                @method('put')
-                                <input type="text" value="{{ $category->type }}" name="type" id="type">
+                                @method('GET')
+                                <input type="hidden" name="type" id="type" value="{{ $category->type }}">
+                                <input type="hidden" name="id" id="id" value="{{ $category->id }}">
                                 <button id='actualizar' type="submit" class="btn btn-primary">actualizar</button>
                             </form>
-                            <button id='actualizar_show' type="button" class="btn btn-primary">actualizar</button>
+
                         </td>
                         <td>
                             <form method="POST" action="{{ route('category.destroy', $category->id) }}">

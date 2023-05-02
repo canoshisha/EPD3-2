@@ -1,30 +1,31 @@
 @extends('template_admin')
 @section('contenido')
+    @if (session('mensaje'))
+        <script>
+            const swal = window.swal;
+            swal({
+                title: 'Actualización',
+                text: '{{ session('mensaje') }}',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+    @endif
     <div class="container">
         <h1>Lista de Productos</h1>
         <hr>
         <a href="{{ route('product.create') }}" class="btn btn-primary mb-3">Crear Producto</a>
         <hr>
-        <div class="col">
+        {{-- <div class="col">
             <div class="d-flex justify-content-center">
                 @if (session('mensaje'))
-                <div class="alert alert-success my-4 text-center">
-                    {{ session('mensaje') }}
-                </div>
+                    <div class="alert alert-success my-4 text-center">
+                        {{ session('mensaje') }}
+                    </div>
                 @endif
             </div>
-        </div>
-        {{-- @if (session('success-perfil'))
-        <script>
-            const swal = window.swal;
-            swal({
-                title: 'Actualización',
-                text: '{{ session('success-perfil') }}',
-                icon: 'success',
-                confirmButtonText: 'Aceptar'
-            });
-        </script>
-        @endif --}}
+        </div> --}}
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -49,7 +50,7 @@
                                 @method('get')
                                 <button id='actualizar' type="submit" class="btn btn-primary">actualizar</button>
                             </form>
-                            
+
                         </td>
                         <td>
                             <form method="POST" action="{{ route('product.destroy', $product->id) }}">
@@ -64,6 +65,4 @@
         </table>
         {{ $products->links() }}
     </div>
-
-    <script src="js/alerta_category.js"></script>
 @endsection
