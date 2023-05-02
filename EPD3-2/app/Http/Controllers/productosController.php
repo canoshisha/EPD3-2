@@ -56,6 +56,7 @@ class productosController extends Controller
             'talla' => 'required',
             'stock' => 'required',
             'description' => 'required|max:120',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $product = new Products();
         $product->name = $request->name;
@@ -67,6 +68,19 @@ class productosController extends Controller
         $stocks = $request->input('stock');
 
         $productBBDD = Products::where('name',$request->name)->first();
+        
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+            $image->storeAs('img', $imageName, 'public');
+
+            $imgProduct = new ImgProducts();
+            $imgProduct->routeImg = '/img/'.$imageName;
+            $imgProduct->tipo = $request->tipoImagen;
+            $imgProduct->products_id = $productBBDD->id;
+            $imgProduct->save();
+        }
+
         for($i = 0; $i < count($tallas); $i++)
         {
             // $size = new Size();

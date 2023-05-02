@@ -1,7 +1,7 @@
 @extends('template_admin')
 @section('contenido')
 <div class="container">
-    <form method="POST" action="{{route('product.store')}}">
+    <form method="POST" action="{{route('product.store')}}" enctype="multipart/form-data">
         @method('post')
         @csrf
     
@@ -51,6 +51,20 @@
             <input type="text" name="discount" class="form-control" id="discount" placeholder="Descuento">
         </div>
         <br>
+        <div class="form-group">
+            <label for="image">Imagen:</label>
+            <input type="file" id="image" name="image">
+        </div>
+        <br>
+        <div>
+            <label for="tipoImagen">Tipo de Imagen:</label>
+		    <select id="tipoImagen" name="tipoImagen">
+			    <option value="imagenMenu">imagenMenu</option>
+			    <option value="imagen">imagen</option>
+		    </select>
+        </div>
+        <br>
+
     
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a href="{{url('/productos')}}" class="btn btn-danger">Volver</a>
