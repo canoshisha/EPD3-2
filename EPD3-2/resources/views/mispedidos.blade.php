@@ -1,9 +1,10 @@
 @extends('auth.template')
-@section('title',"Mis pedidos")
+@section('title', 'Mis pedidos')
 @section('content')
     <div class="container">
         <h1>Mis pedidos</h1>
-        @foreach($orders->reverse() as $order)
+        <a href="{{ url('/home') }}" class="btn btn-danger">Volver</a>
+        @foreach ($orders->reverse() as $order)
             <div class="card my-3">
                 <div class="card-header">
                     Pedido #{{ $order->id }}
@@ -12,10 +13,11 @@
                 <div class="card-body">
                     <h5 class="card-title">Productos</h5>
                     <ul class="list-group list-group-flush">
-                        @foreach($order->products as $product)
+                        @foreach ($order->products as $product)
                             <li class="list-group-item">
                                 {{ $product->name }}
-                                <span class="float-end">{{ $product->pivot->quantity }} x {{ $product->pivot->size }}  {{$product->price}} €</span>
+                                <span class="float-end">{{ $product->pivot->quantity }} x {{ $product->pivot->size }}
+                                    {{ $product->price }} €</span>
                             </li>
                         @endforeach
                     </ul>
@@ -27,7 +29,9 @@
                 </div>
             </div>
         @endforeach
-        {{$orders->links()}}
+
+        {{ $orders->links() }}
     </div>
-    
+
+
 @endsection

@@ -37,6 +37,7 @@
                                 Tarjeta</a>
                             <a class="btn btn-primary" href="{{ route('creditCard.edit', $tarjeta) }}">Editar tarjeta</a>
                         @endif
+                        <a href="{{ url('/home') }}" class="btn btn-primary col-4 mx-auto">Volver</a>
                     </div>
                 </div>
             </div>
