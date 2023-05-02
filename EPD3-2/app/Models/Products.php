@@ -33,7 +33,8 @@ class Products extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany(Size::class, 'size_products', 'product_id', 'size_id');
+        return $this->belongsToMany(Size::class, 'size_products', 'product_id', 'size_id')
+        ->withPivot('stock');
     }
 
 

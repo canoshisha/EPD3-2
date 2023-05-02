@@ -69,17 +69,14 @@ class productosController extends Controller
         $productBBDD = Products::where('name',$request->name)->first();
         for($i = 0; $i < count($tallas); $i++)
         {
-            $size = new Size();
-            $size->stock = $stocks[$i];
-            $size->size = $tallas[$i];
-            $size->name_product =$request->name; 
-            $size->save();
-
-
+            // $size = new Size();
+            // $size->size = $tallas[$i];
+            // $size->save();
             $sizeProduct = new SizeProduct();
-            $sizeBBDD = Size::where('size',$tallas[$i])->where('name_product',$request->name)->first();
+            $sizeBBDD = Size::where('size',$tallas[$i])->first();
             $sizeProduct->size_id = $sizeBBDD->id;
             $sizeProduct->product_id = $productBBDD->id;
+            $sizeProduct->stock = $stocks[$i];
             $sizeProduct->save();
         }
 
