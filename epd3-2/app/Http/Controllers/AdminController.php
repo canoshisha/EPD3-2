@@ -99,7 +99,7 @@ class adminController extends Controller
     }
     public function show_user()
     {
-        $users = User::paginate(9);
+        $users = User::orderBy('id','desc')->paginate(9);
         return view('users', ['users' => $users]);
     }
 
