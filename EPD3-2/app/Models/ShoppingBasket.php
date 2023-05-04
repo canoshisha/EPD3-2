@@ -10,7 +10,7 @@ class ShoppingBasket extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'shopping_baskets';
-    
+
 
     protected $primaryKey = 'id';
 
@@ -27,7 +27,18 @@ class ShoppingBasket extends Model
             $total = $total + $productB->product->price * $productB->cantidad;
         }
 
-        return $total;
+        return number_format($total, 2, ',', '.');
     }
+
+    public function calcularTotalDiscount(){
+        $products = $this->productBasket;
+        $total=0;
+        foreach ($products as $productB){
+            $total = $total + $productB->product->finalPrice() * $productB->cantidad;
+        }
+
+        return number_format($total, 2, ',', '.');
+    }
+
 
 }

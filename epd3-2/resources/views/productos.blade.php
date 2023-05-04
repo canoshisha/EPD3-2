@@ -40,10 +40,23 @@
                                                 alt="{{ $product->description }}">
                                             <div class="card-body d-flex flex-column">
                                                 <p class="text-center fs-5">{{ $product->name }}</p>
+
+                                                @if ($product->discount)
+                                                    <b>
+                                                        <p class='text-center discount-message'>Ahora con
+                                                            {{ $product->discount }}% de
+                                                            decuento</p>
+                                                        <p class="text-center">Antes: <del>{{ $product->price }}€</del></p>
+                                                        <p class="text-center">Ahora:
+                                                            {{ $product->finalPrice() }}€</p>
+                                                    </b>
+                                                @else
+                                                    <p class="text-center fs-5"><b>Precio:{{ $product->price }}€ </b></p>
+                                                @endif
                                             </div>
                                             <div class="card-footer d-flex justify-content-center">
                                                 <a class="btn btn-danger col-4 mx-auto"
-                                                    href="{{ route('producto.descripcion', $product) }}">{{ $product->price }}€</a>
+                                                    href="{{ route('producto.descripcion', $product) }}">Ver</a>
                                             </div>
                                         </div>
                                     </div>

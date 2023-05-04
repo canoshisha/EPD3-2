@@ -23,7 +23,7 @@
                 <div class="col-md-6">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <?php
-                        
+
                         $img1 = $imgProduct->first();
                         $img2 = $imgProduct->last();
                         ?>
@@ -54,7 +54,13 @@
                     <p class="lead">Descripción:<br>
                         {{ $product->description }}
                     </p>
-                    <p class="lead">{{ $product->price }}€</p>
+                    @if (!$product->discount)
+                        <p class="lead">{{ $product->price }}€</p>
+                    @else
+                        <div class="discount-message">Descuento del {{ $product->discount }}%</div>
+                        <p class="lead"><del class="strike">{{ $product->price }}€</del>
+                            <b>{{ $product->finalPrice() }}€</b> </p>
+                    @endif
                     <form class="needs-validation" action="{{ route('cesta.addProductB') }}" method="POST" novalidate>
                         @csrf
                         <div class="mb-3">

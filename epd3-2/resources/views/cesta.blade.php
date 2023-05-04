@@ -33,7 +33,18 @@
                     @foreach ($shoppingBasket->productBasket as $productB)
                         <tr>
                             <td>{{ $productB->product->name }}</td>
-                            <td>{{ $productB->product->price }} €</td>
+                            @if (!$productB->product->discount)
+                                <td>
+                                    <p>{{ $productB->product->price }}€</p>
+                                </td>
+                            @else
+                                <td>
+                                    <p><del>{{ $productB->product->price }}€</del>
+                                        <b>{{ $productB->product->finalPrice() }}€</b>
+
+                                    </p>
+                                </td>
+                            @endif
                             <td class="d-flex align-items-center">
 
                                 <form action="{{ route('cesta.updateCantidad', $shoppingBasket) }}" method="POST"
@@ -75,7 +86,12 @@
                     @endforeach
                     <tr>
                         <td colspan="4" class="text-end fw-bold">Total:</td>
-                        <td colspan="1" class="fw-bold">{{ $shoppingBasket->calcularTotal() }} €</td>
+                        @if (!$productB->product->discount)
+                            <td colspan="1" class="fw-bold">{{ $shoppingBasket->calcularTotal() }} €</td>
+                        @else
+                            <td colspan="1" class="fw-bold"><del>{{ $shoppingBasket->calcularTotal() }}€</del>
+                                {{ $shoppingBasket->calcularTotalDiscount() }}€ </td>
+                        @endif
                     </tr>
                 </tbody>
             </table>

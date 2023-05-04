@@ -77,3 +77,11 @@ select.custom-select option:hover {
 .img-product {
     object-fit: cover;
 }
+
+.strike {
+    text-decoration: line-through;
+}
+
+.discount-message {
+    color: #d50000;
+}

@@ -50,5 +50,10 @@ public function sizeProduct($size_id){
     return SizeProduct::where('product_id', $this->id)->where('size_id', $size_id)->first();
 }
 
+public function finalPrice(){
+    $finalPrice = $this->price - ($this->price * ($this->discount / 100));
+    return number_format($finalPrice, 2);
+}
+
 
 }
