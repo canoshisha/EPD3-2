@@ -42,6 +42,7 @@
                                     @csrf
                                     <input type="hidden" name="productB_id" value="{{ $productB->id }}">
                                     <input type="hidden" name="cantidad" value="{{ $productB->cantidad - 1 }}">
+                                    <input type="hidden" name="talla" value="{{ $productB->size }}">
                                     <div class="input-group h-100">
                                         <button type="submit" class="input-group-text">-</button>
                                     </div>
