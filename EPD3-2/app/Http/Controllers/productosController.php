@@ -25,7 +25,7 @@ class productosController extends Controller
     public function index()
     {
 
-        $products = Products::paginate(9);
+        $products = Products::orderBy('id','desc')->paginate(9);
         $imgProducts = DB::table('img_products')->where('tipo', 'imagenMenu')->get();
         return view('productos', compact('products','imgProducts'));
     }
@@ -50,12 +50,12 @@ class productosController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:120',
+            'name' => 'required|max:700',
             'categories' => 'required',
             'price' => 'required|max:4',
             'talla' => 'required',
             'stock' => 'required',
-            'description' => 'required|max:120',
+            'description' => 'required|max:700',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $product = new Products();
@@ -68,11 +68,15 @@ class productosController extends Controller
         $stocks = $request->input('stock');
 
         $productBBDD = Products::where('name',$request->name)->first();
-        
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = $image->getClientOriginalName();
-            $image->storeAs('img', $imageName, 'public');
+            $path = public_path('img');
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $image->move($path, $imageName);
 
             $imgProduct = new ImgProducts();
             $imgProduct->routeImg = '/img/'.$imageName;
@@ -226,6 +230,11 @@ class productosController extends Controller
         $relacionProduct = CategoryProduct::where('product_id',$id)->get();
         foreach($relacionProduct as $aux){
             $aux->delete();
+        }
+
+        $imagenesProduct = ImgProducts::where('products_id',$id)->get();
+        foreach($imagenesProduct as $img){
+            $img->delete();
         }
 
         $product = Products::where('id',$id)->first();
