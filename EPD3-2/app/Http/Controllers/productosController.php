@@ -56,7 +56,7 @@ class productosController extends Controller
             'talla' => 'required',
             'stock' => 'required',
             'description' => 'required|max:700',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
         ]);
         $product = new Products();
         $product->name = $request->name;

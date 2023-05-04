@@ -111,7 +111,7 @@ class adminController extends Controller
     }
     public function show_products()
     {
-        $products = Products::paginate(9);
+        $products = Products::orderBy('id','desc')->paginate(9);
         return view('productos_view',compact('products'));
     }
     public function show_order()
