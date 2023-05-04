@@ -161,14 +161,15 @@ class productosController extends Controller
     public function update(Request $request, Products $product)
     {
         $request->validate([
-            'name' => 'required|max:120',
+            'name' => 'required|max:700',
             'categories' => 'required',
             'price' => 'required|max:4',
-            'description' => 'required|max:120',
+            'description' => 'required|max:700',
         ]);
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;
+        $product->discount = $request->discount;
         $product->save();
 
 
