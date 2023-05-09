@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\Hash;
 
 class userController extends Controller
 {
+
+    public function updateLanguage(Request $request)
+{
+    $request->validate([
+        'language' => 'required|string|in:en,es' // Asegúrate de incluir todos los idiomas soportados aquí
+    ]);
+
+    $user = User::where('id', Auth::id())->first();
+    $user->language = $request->input('language');
+    $user->save();
+
+    return back()->with('success', 'Idioma actualizado con éxito');
+}
     /**
      * Display a listing of the resource.
      *
