@@ -226,6 +226,8 @@ class cestaController extends Controller
         $order->users_id = $shoppingBasket->users_id;
         $order->save();
         foreach ($shoppingBasket->productBasket as $productB) {
+            $size = Size::where('size', $productB->size)->first();
+            $talla_id = $size->id;
             $sizeProduct = $productB->product->sizeProduct($talla_id);
             $sizeProduct->stock = $sizeProduct->stock - $productB->cantidad;
             $sizeProduct->save();
@@ -238,7 +240,7 @@ class cestaController extends Controller
 
 
         $ticket = new Ticket();
-        $ticket->price_total = $shoppingBasket->calcularTotal();
+        $ticket->price_total = $shoppingBasket->calcularTotalDiscount();
         $ticket->date = $fechaActual;
         $ticket->orders_id = $order->id;
         $ticket->save();

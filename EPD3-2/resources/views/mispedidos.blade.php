@@ -23,9 +23,11 @@
                     </ul>
                 </div>
                 <div class="card-footer">
-                    <p class="mb-0"><strong>Total:</strong> {{ $order->ticket->price_total }} €</p>
-                    <p class="mb-0"><strong>Estado:</strong> {{ $order->state }}</p>
-                    <p class="mb-0"><strong>Método de pago:</strong> {{ $order->pagement }}</p>
+                    @if (isset($order->ticket->price_total))
+                        <p class="mb-0"><strong>Total:</strong> {{ $order->ticket->price_total }} €</p>
+                        <p class="mb-0"><strong>Estado:</strong> {{ $order->state }}</p>
+                        <p class="mb-0"><strong>Método de pago:</strong> {{ $order->pagement }}</p>
+                    @endif
                 </div>
             </div>
         @endforeach

@@ -18,7 +18,9 @@ return new class extends Migration
             $table->foreignId('shopping_basket_id')->constrained('shopping_baskets')->nullable()
             ->cascadeOnUpdate()
             ->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('product_id')->constrained('products')
+            ->cascadeOnUpdate()
+            ->cascadeOnDelete();
             $table->integer('cantidad');
             $table->string('size');
         });

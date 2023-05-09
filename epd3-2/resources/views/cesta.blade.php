@@ -86,7 +86,7 @@
                     @endforeach
                     <tr>
                         <td colspan="4" class="text-end fw-bold">Total:</td>
-                        @if (!$productB->product->discount)
+                        @if (!$shoppingBasket->haveDiscount())
                             <td colspan="1" class="fw-bold">{{ $shoppingBasket->calcularTotal() }} €</td>
                         @else
                             <td colspan="1" class="fw-bold"><del>{{ $shoppingBasket->calcularTotal() }}€</del>

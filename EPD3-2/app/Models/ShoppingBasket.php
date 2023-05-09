@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use SebastianBergmann\Type\TrueType;
 
 class ShoppingBasket extends Model
 {
@@ -38,6 +39,19 @@ class ShoppingBasket extends Model
         }
 
         return number_format($total, 2, ',', '.');
+    }
+    public function haveDiscount(){
+        $products = $this->productBasket;
+        $total=0;
+        $descuento = False;
+        foreach ($products as $productB){
+           if ($productB->product->discount>0){
+            $descuento = True;
+            break;
+           }
+        }
+
+        return $descuento;
     }
 
 
