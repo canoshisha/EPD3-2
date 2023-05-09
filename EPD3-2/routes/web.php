@@ -69,3 +69,4 @@ Route::put('/tarjeta/update/{tarjeta}', [tarjetaController::class, 'update'])->n
 Route::get('/tarjeta/{tarjeta}/delete', [tarjetaController::class, 'destroy'])->name('creditCard.delete')->Middleware('auth', 'verified');
 
 Route::get('categories/showupdate', [categoryController::class, 'showUpdate'])->name('category.supdate')->Middleware('auth', 'verified');
+Route::put('/cambiarIdioma', [userController::class, 'updateLanguage'])->name('language.update')->Middleware('auth', 'verified');

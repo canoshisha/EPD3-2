@@ -21,7 +21,7 @@ class userController extends Controller
     $user->language = $request->input('language');
     $user->save();
 
-    return back()->with('success', 'Idioma actualizado con éxito');
+    return view('home');
 }
     /**
      * Display a listing of the resource.

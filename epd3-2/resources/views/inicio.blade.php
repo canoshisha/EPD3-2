@@ -20,16 +20,16 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="jumbotron text-center my-auto">
-                        <h1 class="display-4">Bienvenidos a F1 UPO</h1>
-                        <p class="lead">Encuentra la mejor selección de merchandising de Fórmula 1 en nuestra tienda
-                            online.
+                        <h1 class="display-4">{{ __('messages.titleWelcome') }}</h1>
+                        <p class="lead">
+                            {{ __('messages.textWelcome') }}
                         </p>
                         <hr class="my-4">
                         <form action="{{ route('products.menu') }}" method="POST">
                             @method('get')
                             @csrf
                             <div>
-                                <button type="submit" class="btn btn-danger btn-lg">Comprar ahora</button>
+                                <button type="submit" class="btn btn-danger btn-lg">{{ __('messages.buyNow') }}</button>
                             </div>
                         </form>
                     </div>

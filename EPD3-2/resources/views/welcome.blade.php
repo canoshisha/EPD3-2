@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html
-    lang="{{ isset($user) && isset($user->language) ? str_replace('_', '-', app()->getLocale($user->language)) : str_replace('_', '-', app()->getLocale('es')) }}">
 
+@auth
+    <!-- Usuario autenticado -->
+    <html lang="{{ str_replace('_', '-', app()->setLocale(auth()->user()->language)) }}">
+@else
+    <!-- Usuario no autenticado -->
+    <html lang="{{ str_replace('_', '-', app()->setLocale('en')) }}">
+@endauth
 
 <head>
     <meta charset="utf-8">

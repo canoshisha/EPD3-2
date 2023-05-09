@@ -1,5 +1,12 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+@auth
+    <!-- Usuario autenticado -->
+    <html lang="{{ str_replace('_', '-', app()->setLocale(auth()->user()->language)) }}">
+@else
+    <!-- Usuario no autenticado -->
+    <html lang="{{ str_replace('_', '-', app()->setLocale('en')) }}">
+@endauth
 
 <head>
     <meta charset="utf-8">
@@ -37,20 +44,21 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('messages.login') }}</a>
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('messages.register') }}</a>
                             </li>
                         @endif
                     @else
                         <li class="nav-item">
-                            <a href="{{ url('/home') }}" class="nav-link ">Mi perfil</a>
+                            <a href="{{ url('/home') }}" class="nav-link ">{{ __('messages.miperfil') }}</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('messages.logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -71,9 +79,24 @@
                         <use xlink:href="#bootstrap"></use>
                     </svg>
                 </a>
-                <span class="mb-3 mb-md-0">© 2023 UPO-F1, Inc</span>
+                <span class="mb-3 mb-md-0">{{ __('messages.copyright') }}</span>
             </div>
             <ul class="nav mx-auto col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="nav-item">
+                    <form>
+                        @csrf
+                        @method('PUT')
+                        <select name="language" id="language">
+                            <option value="es" {{ auth()->user()->language === 'es' ? 'selected' : '' }}>
+                                Es
+                            </option>
+                            <option value="en" {{ auth()->user()->language === 'en' ? 'selected' : '' }}>
+                                En
+                            </option>
+                        </select>
+                    </form>
+
+                </li>
                 <li class="ms-3"><a class="text-muted" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-twitter">
                             <path
@@ -93,6 +116,34 @@
 
         </footer>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#language').change(function() {
+                var selectedLanguage = $(this).val();
+                var formData = new FormData();
+                formData.append('_token', '{{ csrf_token() }}');
+                formData.append('_method', 'PUT');
+                formData.append('language', selectedLanguage);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('language.update') }}',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        console.log('Idioma actualizado correctamente');
+                        location.reload(); // Actualizar la página
+                    },
+                    error: function(xhr) {
+                        console.log('Error al actualizar el idioma');
+                    }
+                });
+            });
+        });
+    </script>
+
 
 
 </body>
