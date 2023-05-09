@@ -5,7 +5,7 @@
 @endsection --}}
 @section('contenido')
     <div class="container">
-        <section class="products">
+        <section class="favorites">
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="card">
@@ -15,7 +15,7 @@
                         <div class="card-body">
                             @php $count = 0; @endphp
                             <!-- initialize a count variable -->
-                            @foreach ($products as $product)
+                            @forelse ($products as $product)
                                 @if ($product->stock_p() > 0)
                                     @if ($count % 3 == 0)
                                         <!-- if count is divisible by 3, start a new row -->
@@ -45,7 +45,9 @@
                         </div>
                         @endif
                         @endif
-                        @endforeach
+                    @empty
+                        <h4>Ahora mismo no tienes ningún producto en favorito</h4>
+                        @endforelse
                         @if ($count % 3 != 0)
                             <!-- if count is not divisible by 3, end the last row -->
                     </div>
