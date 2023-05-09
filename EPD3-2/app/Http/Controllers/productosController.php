@@ -56,7 +56,7 @@ class productosController extends Controller
             'talla' => 'required',
             'stock' => 'required',
             'description' => 'required|max:700',
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
+            'imagen' => 'required',
         ]);
         $product = new Products();
         $product->name = $request->name;
@@ -69,20 +69,24 @@ class productosController extends Controller
 
         $productBBDD = Products::where('name',$request->name)->first();
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = $image->getClientOriginalName();
-            $path = public_path('img');
-            if (!file_exists($path)) {
-                mkdir($path, 0777, true);
-            }
-            $image->move($path, $imageName);
+        if ($request->hasFile('imagen')) {
+            $tiposImagenes = $request->tipoImagen;
+            $images = $request->file('imagen');
+            for($i = 0; $i < count($images); $i++){
+                $imageName = $images[$i]->getClientOriginalName();
+                $path = public_path('img');
+                if (!file_exists($path)) {
+                    mkdir($path, 0777, true);
+                }
+                $images[$i]->move($path, $imageName);
 
-            $imgProduct = new ImgProducts();
-            $imgProduct->routeImg = '/img/'.$imageName;
-            $imgProduct->tipo = $request->tipoImagen;
-            $imgProduct->products_id = $productBBDD->id;
-            $imgProduct->save();
+                $imgProduct = new ImgProducts();
+                $imgProduct->routeImg = '/img/'.$imageName;
+                $imgProduct->tipo = $tiposImagenes[$i];
+                $imgProduct->products_id = $productBBDD->id;
+                $imgProduct->save();
+            }
+            
         }
 
         for($i = 0; $i < count($tallas); $i++)

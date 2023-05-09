@@ -22,7 +22,8 @@
 
             <label for="tallas">Tallas:</label>
             <select id="tallas" name="tallas">
-                <option value="1" selected>1</option>
+                <option value="Seleccione un numero" selected>Seleccione un número</option>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -37,11 +38,6 @@
                 <input type="number" name="price" class="form-control" id="price" placeholder="price">
             </div>
 
-            {{-- <div class="form-group">
-            <label for="stock">Stock</label>
-            <input type="number" name="stock" class="form-control" id="stock" placeholder="stock">
-        </div> --}}
-
             <div class="form-group">
                 <label for="description">Descripción del producto</label>
                 <input type="text" name="description" class="form-control" id="description"
@@ -52,18 +48,22 @@
                 <input type="text" name="discount" class="form-control" id="discount" placeholder="Descuento">
             </div>
             <br>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="image">Imagen:</label>
                 <input type="file" id="image" name="image">
-            </div>
+            </div> --}}
             <br>
-            <div>
-                <label for="tipoImagen">Tipo de Imagen:</label>
-                <select id="tipoImagen" name="tipoImagen">
-                    <option value="imagenMenu">imagenMenu</option>
-                    <option value="imagen">imagen</option>
-                </select>
-            </div>
+            <label for="cantImagen">Numero de Imagenes:</label>
+            <select id="cantImagen" name="cantImagen">
+                <option value="Seleccione un numero" selected>Seleccione un número</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <br>
+            <br>
+            <div id="contenedorImg"></div>
+            <br>
             <br>
 
 
@@ -114,13 +114,76 @@
                 cantidadInput.max = 10;
 
                 // Agregar los campos al div
+                
                 div.appendChild(tallaLabel);
                 div.appendChild(tallaSelect);
                 div.appendChild(cantidadLabel);
                 div.appendChild(cantidadInput);
+                
 
                 // Agregar el div al contenedor
                 contenedor.appendChild(div);
+            }
+        });
+
+        // Obtener el campo de selección y el contenedor
+        var cantidadImg = document.getElementById("cantImagen");
+        var contenedorImg = document.getElementById("contenedorImg");
+
+        // Escuchar cambios en el campo de selección
+        cantidadImg.addEventListener("change", function() {
+            // Obtener la cantidad seleccionada
+            var cantidad = parseInt(cantidadImg.value);
+
+            // Limpiar el contenedor
+            contenedorImg.innerHTML = "";
+
+            // Generar los campos dinámicamente
+            for (var i = 0; i < cantidad; i++) {
+                // Crear un div para agrupar los campos
+                var div = document.createElement("div");
+
+                // Crear un campo de selección de tallas
+                var imgLabel = document.createElement("label");
+                imgLabel.textContent = "Imagen:";
+                var imgFile = document.createElement("input");
+                imgFile.name = "imagen[]";
+                imgFile.id = "imagen";
+                imgFile.type = 'file';
+
+                // Crear un campo de selección de cantidad
+                var tipoImgLabel = document.createElement("label");
+                tipoImgLabel.textContent = "Tipo Imagen:";
+                var tipoImgInput = document.createElement("select");
+                tipoImgInput.name = "tipoImagen[]";
+                tipoImgInput.id = "tipoImagen";
+                if(i == 0){
+                    var tipos = ["Seleccione un tipo de imagen", "ImagenMenu"];
+                    for (var j = 0; j < tipos.length; j++) {
+                    var tipoOption = document.createElement("option");
+                    tipoOption.value = tipos[j];
+                    tipoOption.textContent = tipos[j];
+                    tipoImgInput.appendChild(tipoOption);
+                    }
+                }else{
+                    var tipos = ["Seleccione un tipo de imagen", "Imagen"];
+                    for (var j = 0; j < tipos.length; j++) {
+                    var tipoOption = document.createElement("option");
+                    tipoOption.value = tipos[j];
+                    tipoOption.textContent = tipos[j];
+                    tipoImgInput.appendChild(tipoOption);
+                    }
+                }
+                
+
+                // Agregar los campos al div
+                div.appendChild(imgLabel);
+                div.appendChild(imgFile);
+                div.appendChild(tipoImgLabel);
+                div.appendChild(tipoImgInput);
+
+                // Agregar el div al contenedor
+                contenedorImg.appendChild(div);
             }
         });
     </script>
