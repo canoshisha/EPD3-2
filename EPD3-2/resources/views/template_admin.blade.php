@@ -11,6 +11,7 @@
                     <a href="{{ route('admin.products') }}" class="list-group-item list-group-item-action">Productos</a>
                     <a href="{{ route('admin.order') }}" class="list-group-item list-group-item-action">Pedidos</a>
                     <a href="{{ route('admin.category') }}" class="list-group-item list-group-item-action">Categorias</a>
+                    <a href="{{ route('admin.addresses') }}" class="list-group-item list-group-item-action">Direcciones</a>
                 </div>
             </div>
             <div class="col-lg-9">

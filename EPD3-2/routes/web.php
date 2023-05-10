@@ -38,6 +38,7 @@ Route::get('/users', [adminController::class, 'show_user'])->name('admin.user')-
 Route::get('/categories', [adminController::class, 'show_category'])->name('admin.category')->middleware(['auth', 'verified']);
 Route::get('/productos', [adminController::class, 'show_products'])->name('admin.products')->middleware(['auth', 'verified']);
 Route::get('/orders', [adminController::class, 'show_order'])->name('admin.order')->middleware(['auth', 'verified']);
+Route::get('/addresses', [adminController::class, 'show_addresses'])->name('admin.addresses')->middleware(['auth', 'verified']);
 
 Route::get('/menu/user/edit', [userController::class, 'show_menu_user'])->name('edit-menu.user')->middleware(['auth', 'verified']);
 Route::put('user/update', [userController::class, 'update'])->name('perfil.update')->middleware(['auth', 'verified']);

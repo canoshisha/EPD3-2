@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Products;
+use App\Models\Address;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -124,6 +125,11 @@ class adminController extends Controller
         }
 
         return view('pedidos_admin', ['orders' => $orders]);
+    }
+    public function show_addresses()
+    {
+        $addresses = Address::orderBy('id','desc')->paginate(9);
+        return view('addresses_view',compact('addresses'));
     }
 
 

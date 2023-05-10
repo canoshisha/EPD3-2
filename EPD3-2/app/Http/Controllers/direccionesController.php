@@ -19,7 +19,7 @@ class direccionesController extends Controller
     {
         $user = User::where('id', Auth::id())->first();
         $addresses = Address::where('users_id',$user->id)->paginate(3);
-        return view('address_view', compact('addresses')); 
+        return view('address_read', compact('addresses')); 
     }
 
     /**
@@ -116,6 +116,13 @@ class direccionesController extends Controller
     {
         $address = Address::find($id);
         $address->delete();
+        if(Auth::user()->is_admin)
+        {
+        return redirect()->route('admin.addresses')->with('mensaje','La eliminación de la dirección ha sido un éxito.');
+        }else
+        {
         return redirect()->route('address.read')->with('mensaje','La eliminación de la dirección ha sido un éxito.');
+        }
+        
     }
 }
