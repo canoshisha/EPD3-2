@@ -16,15 +16,6 @@
         <hr>
         <a href="{{ route('product.create') }}" class="btn btn-primary mb-3">Crear Producto</a>
         <hr>
-        {{-- <div class="col">
-            <div class="d-flex justify-content-center">
-                @if (session('mensaje'))
-                    <div class="alert alert-success my-4 text-center">
-                        {{ session('mensaje') }}
-                    </div>
-                @endif
-            </div>
-        </div> --}}
 
         <table class="table table-striped">
             <thead>

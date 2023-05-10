@@ -61,4 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Phone::class)->cascadeDelete();
     }
+    public function address(){
+        return $this->hasMany(Address::class)->cascadeDelete();
+    }
 }
