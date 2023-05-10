@@ -1,5 +1,5 @@
 @extends('welcome')
-@section('title', 'Productos')
+@section('title', __('messages.products'))
 @section('scs')
     <link rel="stylesheet" href="{{ asset('css/productos.css') }}">
 @endsection
@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="card-footer d-flex justify-content-center">
                                                 <a class="btn btn-danger col-4 mx-auto"
-                                                    href="{{ route('producto.descripcion', $product) }}">{{ __('messages.view') }}</a>
+                                                    href="{{ route('producto.descripcion', $product) }}">{{ __('messages.products') }}</a>
                                             </div>
                                         </div>
                                     </div>

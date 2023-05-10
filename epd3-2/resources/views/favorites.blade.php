@@ -1,5 +1,5 @@
 @extends('welcome')
-@section('title', 'Favoritos')
+@section('title', __('messages.favorites'))
 {{-- @section('scs')
     <link rel="stylesheet" href="{{ asset('css/product_des.css') }}">
 @endsection --}}

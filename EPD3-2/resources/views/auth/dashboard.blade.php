@@ -1,5 +1,5 @@
 @extends('auth.template')
-@section('title', 'Mi perfil')
+@section('title', __('messages.my_profile'))
 
 @section('content')
     @if (session('success-perfil'))
