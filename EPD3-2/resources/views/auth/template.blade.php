@@ -41,6 +41,9 @@
 
 
                 <div class="navbar-nav order-3 ms-auto">
+                    <?php
+                    $current_url = url()->current();
+                    ?>
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
@@ -53,7 +56,8 @@
                         @endif
                     @else
                         <li class="nav-item">
-                            <a href="{{ url('/home') }}" class="nav-link ">{{ __('messages.miperfil') }}</a>
+                            <a href="{{ url('/home') }}"
+                                class="nav-link {{ $current_url == url('/home') ? ' active' : '' }}">{{ __('messages.miperfil') }}</a>
                         </li>
 
                         <li class="nav-item">

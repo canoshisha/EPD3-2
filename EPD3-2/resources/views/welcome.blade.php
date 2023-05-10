@@ -36,22 +36,29 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <?php
+                    $current_url = url()->current();
+                    ?>
                     <li class="nav-item">
-                        <a class="nav-link " href="/">{{ __('messages.home') }}</a>
+                        <a class="nav-link{{ $current_url == url('/') ? ' active' : '' }}"
+                            href="/">{{ __('messages.home') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="{{ route('products.menu') }}">{{ __('messages.products') }}</a>
+                        <a class="nav-link{{ $current_url == url('/products') ? ' active' : '' }}"
+                            href="{{ route('products.menu') }}">{{ __('messages.products') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="{{ route('products.descuento') }}">{{ __('messages.discount') }}</a>
+                        <a class="nav-link{{ $current_url == url('/descuentos') ? ' active' : '' }}"
+                            href="{{ route('products.descuento') }}">{{ __('messages.discount') }}</a>
                     </li>
                     @if (Route::has('login'))
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link " href="{{ route('products.favs') }}">{{ __('messages.favorites') }}</a>
-                            @endauth
+                                <a class="nav-link{{ $current_url == url('/favs') ? ' active' : '' }}"
+                                    href="{{ route('products.favs') }}">{{ __('messages.favorites') }}</a>
+                            </li>
+                        @endauth
                     @endif
-
                 </ul>
                 <div class="navbar-nav ms-auto">
 
@@ -60,17 +67,16 @@
                             @auth
                                 <a href="{{ url('/home') }}" class="nav-link ">{{ __('messages.my_profile') }}</a>
 
-                                <a class="nav-link text-muted" href="/cesta"><svg xmlns="http://www.w3.org/2000/svg"
-                                        width="16" height="16" fill="currentColor" class="bi bi-cart">
+                                <a class="nav-link" href="/cesta"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                        height="16" fill="currentColor" class="bi bi-cart">
                                         <path
                                             d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                     </svg></a>
                             @else
-                                <a href="{{ route('login') }}" class="nav-link text-white">{{ __('messages.login') }}</a>
+                                <a href="{{ route('login') }}" class="nav-link ">{{ __('messages.login') }}</a>
 
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}"
-                                        class="nav-link text-white">{{ __('messages.register') }}</a>
+                                    <a href="{{ route('register') }}" class="nav-link ">{{ __('messages.register') }}</a>
                                 @endif
                             @endauth
                         </div>
