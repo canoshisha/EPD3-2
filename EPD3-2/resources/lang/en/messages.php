@@ -12,4 +12,5 @@ return [
 'buyNow'=> 'Buy Now',
 'textWelcome'=> 'Discover the finest selection of Formula 1 merchandise in our online store.',
 'titleWelcome'=>'Welcome to F1 UPO',
+'discount'=>'Discounts',
 ];

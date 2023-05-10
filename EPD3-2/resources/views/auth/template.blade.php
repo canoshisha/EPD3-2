@@ -82,21 +82,24 @@
                 <span class="mb-3 mb-md-0">{{ __('messages.copyright') }}</span>
             </div>
             <ul class="nav mx-auto col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="nav-item">
-                    <form>
-                        @csrf
-                        @method('PUT')
-                        <select name="language" id="language">
-                            <option value="es" {{ auth()->user()->language === 'es' ? 'selected' : '' }}>
-                                Es
-                            </option>
-                            <option value="en" {{ auth()->user()->language === 'en' ? 'selected' : '' }}>
-                                En
-                            </option>
-                        </select>
-                    </form>
+                @auth
+                    <li class="nav-item">
+                        <form>
+                            @csrf
+                            @method('PUT')
+                            <select name="language" id="language">
+                                <option value="es" {{ auth()->user()->language === 'es' ? 'selected' : '' }}>
+                                    Es
+                                </option>
+                                <option value="en" {{ auth()->user()->language === 'en' ? 'selected' : '' }}>
+                                    En
+                                </option>
+                            </select>
+                        </form>
 
-                </li>
+                    </li>
+                @endauth
+
                 <li class="ms-3"><a class="text-muted" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-twitter">
                             <path

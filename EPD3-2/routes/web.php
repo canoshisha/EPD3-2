@@ -39,6 +39,8 @@ Route::put('user/update', [userController::class, 'update'])->name('perfil.updat
 Route::post('cesta/addProductB', [cestaController::class, 'addProductB'])->name('cesta.addProductB')->Middleware('auth', 'verified');
 Route::post('categories/addCategory', [categoryController::class, 'create'])->name('category.create')->Middleware('auth', 'verified');
 Route::get('/products', [productosController::class, 'index'])->name('products.menu');
+Route::get('/descuentos', [productosController::class, 'viewDisconunt'])->name('products.descuento');
+
 
 Route::get('products/{product}/descripcion', [productosController::class, 'show'])->name('producto.descripcion');
 Route::get('products/form/create', [productosController::class, 'create'])->name('product.create');

@@ -30,6 +30,15 @@ class productosController extends Controller
         return view('productos', compact('products','imgProducts'));
     }
 
+    public function viewDisconunt()
+    {
+
+        $products = Products::orderBy('id','desc')->paginate(9);
+        $imgProducts = DB::table('img_products')->where('tipo', 'imagenMenu')->get();
+        return view('descuentos', compact('products','imgProducts'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -86,7 +95,7 @@ class productosController extends Controller
                 $imgProduct->products_id = $productBBDD->id;
                 $imgProduct->save();
             }
-            
+
         }
 
         for($i = 0; $i < count($tallas); $i++)

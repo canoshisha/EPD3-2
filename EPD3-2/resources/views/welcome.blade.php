@@ -42,6 +42,9 @@
                     <li class="nav-item">
                         <a class="nav-link " href="{{ route('products.menu') }}">{{ __('messages.products') }}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ route('products.descuento') }}">{{ __('messages.discount') }}</a>
+                    </li>
                     @if (Route::has('login'))
                         @auth
                             <li class="nav-item">
