@@ -1,6 +1,17 @@
 @extends('auth.template')
 @section('title', 'Mis Direcciones')
 @section('content')
+@if (session('mensaje'))
+<script>
+    const swal = window.swal;
+    swal({
+        title: 'Actualización',
+        text: '{{ session('mensaje') }}',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+    });
+</script>
+@endif
     <div class="container">
         <section class="favorites">
             <div class="row justify-content-center">
@@ -17,8 +28,6 @@
                                         <h1>Información Direcciones de Envío</h1>
                                     </div>
                                     <div class="card-body">
-                                            <a href="{{ url('address_create') }}" class="btn btn-danger col-4 mx-auto">Crear Dirección</a>
-                                        @else
                                             <div class="card" style="width: 18rem;">
                                                 {{-- <img src="{{ URL::asset('/img/visa-dual.png') }}" class="card-img-top"
                                                     alt="imagen tarjeta Visa"> --}}
@@ -48,16 +57,18 @@
                                             <a href="{{ route('address.delete', $address->id) }}" class="btn btn-danger ">Eliminar
                                                 Dirección</a>
                                             <a class="btn btn-primary" href="{{ route('address.edit', $address) }}">Editar Dirección</a>
-                                        @endif
-                                        <a href="{{ url('/home') }}" class="btn btn-primary col-4 mx-auto">Volver</a>
                                     </div>
                                 </div>
                             @empty
                                 <h4>No tiene ninguna dirección registrada.</h4>
+                                <a href="{{ url('address_create') }}" class="btn btn-danger col-4 mx-auto">Crear Dirección</a>
+                                
                             @endforelse
-
+                            
                             <div class="d-flex justify-content-between">
+                                <br>
                                 {{ $addresses->links() }}
+                                <br>
                                 <a href="{{ url('/home') }}" class="btn btn-danger btn-fit-content btn-lg">Volver</a>
                             </div>
                         </div>

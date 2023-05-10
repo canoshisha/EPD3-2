@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Address;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class direccionesController extends Controller
 {
@@ -13,7 +17,9 @@ class direccionesController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::where('id', Auth::id())->first();
+        $addresses = Address::where('users_id',$user->id)->paginate(3);
+        return view('address_view', compact('addresses')); 
     }
 
     /**
@@ -23,7 +29,7 @@ class direccionesController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +40,23 @@ class direccionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'street' => 'required|max:40',
+            'number' => 'required|max:3',
+            'country' => 'required|max:10',
+            'city' => 'required|max:15',
+            'other_description' => 'required|max:50',
+        ]);
+        $user = User::where('id', Auth::id())->first();
+        $address = new Address;
+        $address->street = $request->street;
+        $address->number = $request->number;
+        $address->country = $request->country;
+        $address->city = $request->city;
+        $address->other_description = $request->other_description;
+        $address->users_id = $user->id;
+        $address->save();
+        return redirect()->route('address.read')->with('mensaje','La creación de la dirección ha sido un éxito.');
     }
 
     /**
@@ -54,9 +76,9 @@ class direccionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Address $address)
     {
-        //
+        return view('address_edit',compact('address'));
     }
 
     /**
@@ -66,9 +88,22 @@ class direccionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Address $address)
     {
-        //
+        $request->validate([
+            'street' => 'required|max:40',
+            'number' => 'required|max:3',
+            'country' => 'required|max:10',
+            'city' => 'required|max:15',
+            'other_description' => 'required|max:50',
+        ]);
+        $address->street = $request->street;
+        $address->number = $request->number;
+        $address->country = $request->country;
+        $address->city = $request->city;
+        $address->other_description = $request->other_description;
+        $address->save();
+        return redirect()->route('address.read')->with('mensaje','La modificación de la dirección ha sido un éxito.');
     }
 
     /**
@@ -79,6 +114,8 @@ class direccionesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $address = Address::find($id);
+        $address->delete();
+        return redirect()->route('address.read')->with('mensaje','La eliminación de la dirección ha sido un éxito.');
     }
 }

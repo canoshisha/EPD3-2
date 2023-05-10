@@ -71,6 +71,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4 mt-4">
+                                    <div class="card h-100">
+                                        <img class="card-img-top" src="/img/direccion.png" alt="Mis direcciones">
+                                        <div class="card-body d-flex flex-column">
+                                            <h5 class="card-title">Mis direcciones</h5>
+                                            <p class="card-text">Administra tus direcciones y configura tus
+                                                preferencias.
+                                            </p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-center">
+                                            <a class="btn btn-danger btn-block"
+                                                href="{{ route('address.read') }}">Ver</a>
+                                        </div>
+                                    </div>
+                                </div>
                                 @if (Auth::check() && Auth::user()->is_admin)
                                     <div class="col-md-4 mt-4">
                                         <div class="card h-100">

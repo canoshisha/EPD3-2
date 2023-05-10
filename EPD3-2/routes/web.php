@@ -7,6 +7,7 @@ use App\Http\Controllers\productosController;
 use App\Http\Controllers\cestaController;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\tarjetaController;
+use App\Http\Controllers\direccionesController;
 use App\Http\Controllers\userController;
 
 use GuzzleHttp\Middleware;
@@ -26,6 +27,10 @@ Route::get('/des_producto', function () {
 });
 Route::get('/tarjeta_create', function () {
     return view('tarjeta_create');
+});
+
+Route::get('/address_create', function () {
+    return view('address_create');
 });
 
 Route::get('/dashboard', [adminController::class, 'show'])->name('admin.dashboard')->middleware(['auth', 'verified']);
@@ -72,3 +77,9 @@ Route::get('/tarjeta/{tarjeta}/delete', [tarjetaController::class, 'destroy'])->
 
 Route::get('categories/showupdate', [categoryController::class, 'showUpdate'])->name('category.supdate')->Middleware('auth', 'verified');
 Route::put('/cambiarIdioma', [userController::class, 'updateLanguage'])->name('language.update')->Middleware('auth', 'verified');
+
+Route::get('/address/read', [direccionesController::class, 'index'])->name('address.read')->Middleware('auth', 'verified');
+Route::post('/address/store', [direccionesController::class, 'store'])->name('address.store')->Middleware('auth', 'verified');
+Route::get('/address/edit/{address}', [direccionesController::class, 'edit'])->name('address.edit')->Middleware('auth', 'verified');
+Route::put('/address/update/{address}', [direccionesController::class, 'update'])->name('address.update')->Middleware('auth', 'verified');
+Route::get('/address/delete/{id}', [direccionesController::class, 'destroy'])->name('address.delete')->Middleware('auth', 'verified');

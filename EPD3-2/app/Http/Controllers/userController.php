@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Phone;
 use App\Models\User;
+use App\Models\Address;
+use App\Models\ShoppingBasket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -148,6 +150,16 @@ class userController extends Controller
     foreach ($phones as $phone) {
         $phone->delete();
     }
+    // Seleccionar los registros de addresses con el mismo users_id que el usuario que se va a eliminar
+    $addresses = Address::where('users_id', $user->id)->get();
+
+    // Borrar los registros de phones
+    foreach ($addresses as $address) {
+        $address->delete();
+    }
+
+    $shopping = ShoppingBasket::where('users_id', $user->id)->first();
+    $shopping->delete();
 
     // Eliminar al usuario
     $user->delete();
