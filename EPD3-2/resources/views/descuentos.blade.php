@@ -21,7 +21,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Ofertas</h3>
+                            <h3>{{ __('messages.discount') }}</h3>
                         </div>
                         <div class="card-body">
                             @php $count = 0; @endphp

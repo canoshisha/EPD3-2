@@ -18,7 +18,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Mi perfil</h3>
+                        <h3>{{ __('messages.my_profile') }}</h3>
                     </div>
 
                     <div class="card-body">
@@ -27,17 +27,6 @@
                                 {{ session('status') }}
                             </div>
                         @else
-                            {{-- <div class="row">
-                                <div class="col">
-                                    <div class="d-flex justify-content-center">
-                                        @if (session('mensaje'))
-                                            <div class="alert alert-success my-4 text-center">
-                                                {{ session('mensaje') }}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div> --}}
                             <div class="row">
 
                                 <div class="col-md-4 mt-4">

@@ -21,7 +21,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Productos</h3>
+                            <h3>{{ __('messages.products') }}</h3>
                         </div>
                         <div class="card-body">
                             @php $count = 0; @endphp

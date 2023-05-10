@@ -12,5 +12,5 @@ return [
 'buyNow'=> 'Comprar ahora',
 'textWelcome'=> 'Encuentra la mejor selección de merchandising de Fórmula 1 en nuestra tienda online.',
 'titleWelcome'=>'Bienvenidos a F1 UPO',
-'discount'=>'Descuentos',
+'discount'=>'Ofertas',
 ];
