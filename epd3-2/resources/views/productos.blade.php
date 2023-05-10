@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="card-footer d-flex justify-content-center">
                                                 <a class="btn btn-danger col-4 mx-auto"
-                                                    href="{{ route('producto.descripcion', $product) }}">{{ __('messages.products') }}</a>
+                                                    href="{{ route('producto.descripcion', $product) }}">{{ __('messages.view') }}</a>
                                             </div>
                                         </div>
                                     </div>
