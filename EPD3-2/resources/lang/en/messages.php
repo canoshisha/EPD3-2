@@ -14,4 +14,5 @@ return [
 'titleWelcome'=>'Welcome to F1 UPO',
 'discount'=>'Offers',
 'view'=>'View',
+'edit'=>'Edit',
 ];

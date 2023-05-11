@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="card-footer d-flex justify-content-center">
                                             <a class="btn btn-danger btn-block"
-                                                href="{{ route('edit-menu.user') }}">Editar</a>
+                                                href="{{ route('edit-menu.user') }}">{{ __('messages.edit') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                         </div>
                                         <div class="card-footer d-flex justify-content-center">
                                             <a class="btn btn-danger btn-block"
-                                                href="{{ route('cesta.mispedidos') }}">Ver</a>
+                                                href="{{ route('cesta.mispedidos') }}">{{ __('messages.view') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="card-footer d-flex justify-content-center">
                                             <a class="btn btn-danger btn-block"
-                                                href="{{ route('creditCard.read') }}">Ver</a>
+                                                href="{{ route('creditCard.read') }}">{{ __('messages.view') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="card-footer d-flex justify-content-center">
                                             <a class="btn btn-danger btn-block"
-                                                href="{{ route('address.read') }}">Ver</a>
+                                                href="{{ route('address.read') }}">{{ __('messages.view') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                             </div>
                                             <div class="card-footer d-flex justify-content-center">
                                                 <a class="btn btn-danger btn-block" href="{{ route('admin.dashboard') }}"
-                                                    class="nav-link">Ir</a>
+                                                    class="nav-link">{{ __('messages.view') }}</a>
                                             </div>
                                         </div>
                                     </div>
