@@ -137,14 +137,13 @@
                             @endforeach
                         </select>
                     </div>
+                    @if ($shoppingBasket->productBasket->isNotEmpty())
+                        <input type="hidden" name="shoppingBasket" value="{{ $shoppingBasket }}">
+                        <button type="submit" id='compra' class="btn btn-danger"><i
+                                class="fas fa-credit-card me-2"></i>Realizar
+                            Compra</button>
+                    @endif
                 </form>
-                @if ($shoppingBasket->productBasket->isNotEmpty())
-                    <input type="hidden" name="shoppingBasket" value="{{ $shoppingBasket }}">
-                    <button type="submit" id='compra' class="btn btn-danger"><i
-                            class="fas fa-credit-card me-2"></i>Realizar
-                        Compra</button>
-                    </form>
-                @endif
             </div>
         </div>
     </div>
