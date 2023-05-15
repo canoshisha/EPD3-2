@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('other_description')->nullable($value = true);
             $table->string('country');
             $table->foreignId('users_id')->constrained();
+            // $table->foreignId('orders_id')->constrained();
         });
     }
 

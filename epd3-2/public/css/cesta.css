@@ -3,3 +3,35 @@
     border-color: black;
     }
 
+.btn-danger {
+        background-color: #d50000;
+        border-color: #d50000;
+    }
+
+.btn-danger:hover {
+        background-color: black;
+        border-color: black;
+    }
+select#select-option.form-select:focus {
+        border-color: #b0b0b0;
+        box-shadow: 0 0 0 0.25rem rgba(176, 176, 176, 0.25);
+    }
+
+option:focus {
+        background-color: #b0b0b0;
+    }
+
+input#input-password-actual.form-control:focus {
+        border-color: #b0b0b0;
+        box-shadow: 0 0 0 0.25rem rgba(176, 176, 176, 0.25);
+    }
+
+input#input-password-nuevo.form-control:focus {
+        border-color: #b0b0b0;
+        box-shadow: 0 0 0 0.25rem rgba(176, 176, 176, 0.25);
+    }
+
+input#input-password-nuevo-confirm.form-control:focus {
+        border-color: #b0b0b0;
+        box-shadow: 0 0 0 0.25rem rgba(176, 176, 176, 0.25);
+    }

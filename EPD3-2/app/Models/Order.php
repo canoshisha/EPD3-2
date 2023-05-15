@@ -21,7 +21,11 @@ class Order extends Model
         return $this->belongsToMany(Products::class, 'order_product', 'order_id', 'product_id')
                     ->withPivot('quantity','size');
     }
-    
+
+    public function direccion(){
+        return $this->hasOne(Address::class,"id");
+    }
+
     public function ticket(){
         return $this->hasOne(Ticket::class,"id");
     }

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Type\Integer;
 use App\Mail\OrderConfirmation;
+use App\Models\Address;
+use App\Models\CreditCard;
 use App\Models\Size;
 use Illuminate\Support\Facades\Mail;
 
@@ -64,10 +66,10 @@ class cestaController extends Controller
     {
         // $user = User::where('id', Auth::id())->first();
         $shoppingBasket = ShoppingBasket::where('users_id', Auth::id())->first();
-
-
+        $tarjetas = CreditCard::where('users_id', Auth::id())->get();
+        $direcciones = Address::where('users_id', Auth::id())->get();
         // $shopping_basket = DB::table('product_baskets')->where('shopping_basket_id', $shoppingBasket->id )->get();
-        return view('cesta', compact('shoppingBasket'));
+        return view('cesta', compact('shoppingBasket','tarjetas','direcciones'));
     }
 
     /**
@@ -206,6 +208,10 @@ class cestaController extends Controller
      */
     public function destroy(Request $request)
     {
+        $request->validate([
+            'tarjeta' => 'required',
+            'direccion' => 'required',
+        ]);
         $shoppingBasket = ShoppingBasket::where('users_id', Auth::id())->first();
 
         foreach ($shoppingBasket->productBasket as $productB) {
@@ -220,7 +226,8 @@ class cestaController extends Controller
 
         $fechaActual = Carbon::now();
         $order = new Order();
-        $order->pagement = 'online';
+        $order->pagement = $request->input("tarjeta");
+        $order->addresses_id = $request->input("direccion");
         $order->date = $fechaActual;
         $order->state = 'enviado';
         $order->users_id = $shoppingBasket->users_id;

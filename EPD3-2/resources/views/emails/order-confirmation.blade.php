@@ -56,6 +56,11 @@
 
                         <p class="lead">Total: {{ $ticket->price_total }} €</p>
 
+                        <p>Metodo de pago: {{ $order->pagement }}</p>
+                        <p>
+                        <Address>Address: {{ $order->direccion->street }}</Address>
+                        </p>
+
                         <p>¡Esperamos que disfrutes tu compra!</p>
 
                         <p>Saludos,<br>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table-> date('date');
             $table->string('state');
             $table->foreignId('users_id')->constrained();
+            $table->foreignId('addresses_id')->constrained();
             // $table->foreignId('products_id')->constrained();
         });
     }

@@ -14,4 +14,7 @@ class Address extends Model
     public function user(){
         return $this->belongsTo(User::class,"users_id");
     }
+    public function orders(){
+        return $this->belongsTo(Order::class,"id");
+    }
 }
