@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('state');
             $table->foreignId('users_id')->constrained();
             $table->foreignId('addresses_id')->constrained();
+            $table->foreignId('credit_cards_id')->constrained();
             // $table->foreignId('products_id')->constrained();
         });
     }

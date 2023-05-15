@@ -26,6 +26,10 @@ class Order extends Model
         return $this->hasOne(Address::class,"id");
     }
 
+    public function credit_card(){
+        return $this->hasOne(CreditCard::class,"id");
+    }
+
     public function ticket(){
         return $this->hasOne(Ticket::class,"id");
     }

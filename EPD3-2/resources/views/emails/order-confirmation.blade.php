@@ -58,9 +58,12 @@
 
                         <p>Metodo de pago: {{ $order->pagement }}</p>
                         <p>
-                        <Address>Address: {{ $order->direccion->street }}</Address>
+                            Address:
+                            {{ $order->direccion->street }},{{ $order->direccion->number }},{{ $order->direccion->other_description }}
                         </p>
-
+                        <p>
+                            {{ $order->direccion->city }},{{ $order->direccion->country }}
+                        </p>
                         <p>¡Esperamos que disfrutes tu compra!</p>
 
                         <p>Saludos,<br>

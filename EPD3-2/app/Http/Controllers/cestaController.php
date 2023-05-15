@@ -226,7 +226,7 @@ class cestaController extends Controller
 
         $fechaActual = Carbon::now();
         $order = new Order();
-        $order->pagement_id = $request->input("tarjeta");
+        $order->credit_cards_id = $request->input("tarjeta");
         $order->addresses_id = $request->input("direccion");
         $order->date = $fechaActual;
         $order->state = 'enviado';
