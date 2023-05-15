@@ -253,10 +253,11 @@ class cestaController extends Controller
         $ticket->save();
 
         $shoppingBasket->delete();
-
+        //falla aqui no se por que
         $user = User::where('id', Auth::id())->first();
-
-        Mail::to(Auth::user()->email)->send(new OrderConfirmation($user, $order, $ticket));
+        $creditCard = $order->credit_card;
+        $address = $order->address;
+        Mail::to(Auth::user()->email)->send(new OrderConfirmation($user,$order,$ticket, $creditCard,$address));
 
         return redirect()->route('inicio')->with('mensaje', 'Pedido realizado con éxito');
 

@@ -56,13 +56,13 @@
 
                         <p class="lead">Total: {{ $ticket->price_total }} €</p>
 
-                        <p>Metodo de pago: {{ $order->credit_card->numero_tarjeta }}</p>
+                        <p>Metodo de pago: {{ $credit_card->numero_tarjeta }}</p>
                         <p>
                             Address:
-                            {{ $order->direccion->street }},{{ $order->direccion->number }},{{ $order->direccion->other_description }}
+                            {{ $address->street }},{{ $address->number }},{{ $address->other_description }}
                         </p>
                         <p>
-                            {{ $order->direccion->city }},{{ $order->direccion->country }}
+                            {{ $address->city }},{{ $address->country }}
                         </p>
                         <p>¡Esperamos que disfrutes tu compra!</p>
 
