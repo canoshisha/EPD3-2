@@ -17,6 +17,16 @@
             <div class="col-lg-9">
                 @yield('scs')
                 @yield('js')
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 @yield('contenido')
             </div>
         </div>
