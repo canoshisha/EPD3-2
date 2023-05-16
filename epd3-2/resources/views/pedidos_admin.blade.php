@@ -10,6 +10,7 @@
                     <th>Pagement</th>
                     <th>State</th>
                     <th>Fecha</th>
+                    <th>Direccion</th>
                     <th>Email user</th>
                 </tr>
             </thead>
@@ -17,9 +18,11 @@
                 @foreach ($orders as $order)
                     <tr>
                         <td>{{ $order->user->name }}</td>
-                        <td>{{ $order->pagement }}</td>
+                        <td>{{ $order->credit_card->numero_tarjeta }}</td>
                         <td>{{ $order->state }}</td>
                         <td>{{ $order->date }}</td>
+                        <td>{{ $order->direccion->street }},{{ $order->direccion->number }},{{ $order->direccion->other_description }},
+                            {{ $order->direccion->city }},{{ $order->direccion->country }}</td>
                         <td>{{ $order->user->email }}</td>
                         <td>
                             <form method="POST" action="{{ route('orders.destroy', $order->id) }}">

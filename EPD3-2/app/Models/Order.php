@@ -27,7 +27,7 @@ class Order extends Model
     }
 
     public function credit_card(){
-        return $this->hasOne(CreditCard::class);
+        return $this->hasOne(CreditCard::class,"id");
     }
 
     public function ticket(){

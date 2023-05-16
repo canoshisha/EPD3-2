@@ -55,14 +55,8 @@
                         </table>
 
                         <p class="lead">Total: {{ $ticket->price_total }} €</p>
-                        <?php
-                        dd($order->credit_card);
-                        ?>
-
-                        <p>Metodo de pago: {{ $order->credit_card() }}</p>
-                        <p>
-                            Address:
-                            {{ $order->direccion->street }},{{ $order->direccion->number }},{{ $order->direccion->other_description }}
+                        Address:
+                        {{ $order->direccion->street }},{{ $order->direccion->number }},{{ $order->direccion->other_description }}
                         </p>
                         <p>
                             {{ $order->direccion->city }},{{ $order->direccion->country }}

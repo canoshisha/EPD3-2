@@ -15,6 +15,6 @@ class CreditCard extends Model
         return $this->belongsTo(User::class,"users_id");
     }
     public function orders(){
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class,"id");
     }
 }
