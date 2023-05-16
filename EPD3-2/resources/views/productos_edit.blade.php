@@ -8,6 +8,9 @@
             <div class="form-group">
                 <label for="name">Nombre del producto</label>
                 <input type="text" name="name" class="form-control" id="name" value="{{ $product->name }}">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="form-group">
                 <label for="category">Categorías</label>
@@ -29,6 +32,9 @@
             <div class="form-group">
                 <label for="price">Precio</label>
                 <input type="number" name="price" class="form-control" id="price" value="{{ $product->price }}">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
 
 
@@ -43,7 +49,11 @@
             <div class="form-group">
                 <label for="discount">Descuento</label>
                 <input type="text" name="discount" class="form-control" id="discount" value="{{ $product->discount }}">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
+            
             <br>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="{{ url('/productos') }}" class="btn btn-danger">Volver</a>

@@ -7,7 +7,10 @@
 
             <div class="form-group">
                 <label for="name">Nombre del producto</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Producto">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Producto" required>
+                @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
             </div>
             <div class="form-group">
                 <label for="category">Categorías</label>
@@ -16,8 +19,9 @@
                     <label for="{{ $category->type }}">{{ $category->type }}</label>
                     <input type="checkbox" value="{{ $category->type }}" id="{{ $category->type }}" name="categories[]">
                 @endforeach
-
-
+                @error('categories')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
             </div>
 
             <label for="tallas">Tallas:</label>
@@ -31,27 +35,37 @@
             </select>
             <br>
             <br>
-            <div id="contenedor"></div>
+            <div id="contenedor">
+                @error('talla')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+            </div>
             <br>
             <div class="form-group">
                 <label for="price">Precio</label>
                 <input type="number" name="price" class="form-control" id="price" placeholder="price">
+                @error('price')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="description">Descripción del producto</label>
                 <input type="text" name="description" class="form-control" id="description"
                     placeholder="Descripción del producto">
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
             </div>
             <div class="form-group">
                 <label for="discount">Descuento</label>
                 <input type="text" name="discount" class="form-control" id="discount" placeholder="Descuento">
+                @error('discount')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <br>
-            {{-- <div class="form-group">
-                <label for="image">Imagen:</label>
-                <input type="file" id="image" name="image">
-            </div> --}}
+
             <br>
             <label for="cantImagen">Numero de Imagenes:</label>
             <select id="cantImagen" name="cantImagen">
@@ -62,7 +76,11 @@
             </select>
             <br>
             <br>
-            <div id="contenedorImg"></div>
+            <div id="contenedorImg">
+                @error('name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
             <br>
             <br>
 

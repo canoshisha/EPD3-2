@@ -93,9 +93,9 @@ class direccionesController extends Controller
         $request->validate([
             'street' => 'required|max:40',
             'number' => 'required|max:3',
-            'country' => 'required|max:10',
-            'city' => 'required|max:15',
-            'other_description' => 'required|max:50',
+            'country' => 'required|max:20',
+            'city' => 'required|max:20',
+            'other_description' => 'max:50',
         ]);
         $address->street = $request->street;
         $address->number = $request->number;

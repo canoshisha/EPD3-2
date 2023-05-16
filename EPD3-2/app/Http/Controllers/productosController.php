@@ -13,6 +13,8 @@ use App\Models\ImgProducts;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class productosController extends Controller
@@ -58,15 +60,33 @@ class productosController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required|max:700',
             'categories' => 'required',
             'price' => 'required|max:4',
+            'discount'=>'required|max:2',
             'talla' => 'required',
             'stock' => 'required',
             'description' => 'required|max:700',
             'imagen' => 'required',
-        ]);
+        ];
+        $messages = [
+            'name.required' => 'El campo Nombre del producto es obligatorio.',
+            'categories.required' => 'El campo Categorias del producto es obligatorio.',
+            'price.required' => 'El campo Precio es obligatorio y numérico.',
+            'discount.required'=>'El campo Discount es obligatorio. Puede ser un 0.',
+            'description.required' => 'El campo Descripción del producto es obligatorio.',
+            'talla.required' => 'El campo Talla del producto es obligatorio.',
+            'stock.required' => 'El campo stock del producto es obligatorio y numérico.',
+            'imagen.required' => 'El campo imagen del producto es obligatorio.',
+
+        ];
+    
+        $validator = Validator::make($request->all(), $rules, $messages);
+    
+        if ($validator->fails()) {
+            return redirect()->route('product.create')->withErrors($validator)->withInput();
+        }
         $product = new Products();
         $product->name = $request->name;
         $product->price = $request->price;
