@@ -257,7 +257,7 @@ class cestaController extends Controller
         $user = User::where('id', Auth::id())->first();
         $creditCard = $order->credit_card;
         $address = $order->address;
-        Mail::to(Auth::user()->email)->send(new OrderConfirmation($user,$order,$ticket, $creditCard,$address));
+        Mail::to(Auth::user()->email)->send(new OrderConfirmation($user,$order,$ticket));
 
         return redirect()->route('inicio')->with('mensaje', 'Pedido realizado con éxito');
 

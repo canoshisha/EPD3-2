@@ -20,16 +20,16 @@ class OrderConfirmation extends Mailable
     public $order;
     public $ticket;
     public $user;
-    public $creditCard;
-    public $address;
+    // public $creditCard;
+    // public $address;
 
-    public function __construct(User $user,Order $order, Ticket $ticket,CreditCard $creditCard , Address $address)
+    public function __construct(User $user,Order $order, Ticket $ticket)
     {
         $this->user = $user;
         $this->order = $order;
         $this->ticket = $ticket;
-        $this->creditCard = $creditCard;
-        $this->address = $address;
+        // $this->creditCard = $creditCard;
+        // $this->address = $address;
     }
 
     public function build()
