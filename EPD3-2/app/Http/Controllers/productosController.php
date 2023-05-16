@@ -63,7 +63,7 @@ class productosController extends Controller
         $rules = [
             'name' => 'required|max:700',
             'categories' => 'required',
-            'price' => 'required|max:4',
+            'price' => 'required|max:5',
             'discount'=>'required|max:2',
             'talla' => 'required',
             'stock' => 'required',
@@ -120,9 +120,7 @@ class productosController extends Controller
 
         for($i = 0; $i < count($tallas); $i++)
         {
-            // $size = new Size();
-            // $size->size = $tallas[$i];
-            // $size->save();
+
             $sizeProduct = new SizeProduct();
             $sizeBBDD = Size::where('size',$tallas[$i])->first();
             $sizeProduct->size_id = $sizeBBDD->id;
@@ -193,12 +191,27 @@ class productosController extends Controller
      */
     public function update(Request $request, Products $product)
     {
-        $request->validate([
-            'name' => 'required|max:700',
+        $rules = [
+            'name' => 'required|max:800',
             'categories' => 'required',
-            'price' => 'required|max:4',
-            'description' => 'required|max:700',
-        ]);
+            'price' => 'required|max:5',
+            'discount'=>'required|max:2',
+            'description' => 'required|max:800',
+        ];
+        $messages = [
+            'name.required' => 'El campo Nombre del producto es obligatorio y menor que 800 caracteres.',
+            'categories.required' => 'El campo Categorias del producto es obligatorio.',
+            'price.required' => 'El campo Precio es obligatorio y numérico.',
+            'discount.required'=>'El campo Discount es obligatorio. Puede ser un 0.',
+            'description.required' => 'El campo Descripción del producto es obligatorio y menor que 800 caracteres.',
+
+        ];
+    
+        $validator = Validator::make($request->all(), $rules, $messages);
+    
+        if ($validator->fails()) {
+            return redirect()->route('product.edit', $product->id)->withErrors($validator)->withInput();
+        }
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;

@@ -18,7 +18,7 @@
                 @foreach ($orders as $order)
                     <tr>
                         <td>{{ $order->user->name }}</td>
-                        <td>{{ $order->credit_card->numero_tarjeta }}</td>
+                        <td>{{ $order->credit_card }}</td>
                         <td>{{ $order->state }}</td>
                         <td>{{ $order->date }}</td>
                         <td>{{ $order->direccion->street }},{{ $order->direccion->number }},{{ $order->direccion->other_description }},

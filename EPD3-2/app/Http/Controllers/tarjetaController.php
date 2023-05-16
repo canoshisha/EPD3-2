@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\CreditCard;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class tarjetaController extends Controller
      */
     public function create()
     {
-  
+        return view('tarjeta_create');
 
 
     }
@@ -41,12 +42,24 @@ class tarjetaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'titular_tarjeta' => 'required',
             'numero_tarjeta' => 'required|digits:16',
             'fecha_caducidad' => 'required|regex:/^\d{2}\/\d{2}$/',
             'cvc' => 'required|digits:3',
-        ]);
+        ];
+        $messages = [
+            'titular_tarjeta.required' => 'El campo Titular de la Tarjeta es obligatorio.',
+            'numero_tarjeta.required' => 'El campo Número de Tarjeta es obligatorio y debe tener 16 dígitos.',
+            'fecha_caducidad.required' => 'El campo Fecha de caducidad es obligatorio y debe tener formato mes/año.',
+            'cvc.required' => 'El campo CVC es obligatorio y debe tener 3 dígitos.',
+        ];
+    
+        $validator = Validator::make($request->all(), $rules, $messages);
+    
+        if ($validator->fails()) {
+            return redirect()->route('creditCard.create')->withErrors($validator)->withInput();
+        }
         $user = User::where('id', Auth::id())->first();
         $tarjeta = new CreditCard;
         $tarjeta->users_id = $user->id;
@@ -88,11 +101,23 @@ class tarjetaController extends Controller
      */
     public function update(Request $request, CreditCard $tarjeta)
     {
-        $request->validate([
+
+        $rules = [
             'numero_tarjeta' => 'required|digits:16',
             'fecha_caducidad' => 'required|regex:/^\d{2}\/\d{2}$/',
             'cvc' => 'required|digits:3',
-        ]);
+        ];
+        $messages = [
+            'numero_tarjeta.required' => 'El campo Número de Tarjeta es obligatorio y debe tener 16 dígitos.',
+            'fecha_caducidad.required' => 'El campo Fecha de caducidad es obligatorio y debe tener formato mes/año.',
+            'cvc.required' => 'El campo CVC es obligatorio y debe tener 3 dígitos.',
+        ];
+    
+        $validator = Validator::make($request->all(), $rules, $messages);
+    
+        if ($validator->fails()) {
+            return redirect()->route('creditCard.edit', $tarjeta)->withErrors($validator)->withInput();
+        }
         $tarjeta->numero_tarjeta = $request->numero_tarjeta;
         $tarjeta->fecha_caducidad = $request->fecha_caducidad;
         $tarjeta->CVC = $request->cvc;

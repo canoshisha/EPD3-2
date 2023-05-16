@@ -70,7 +70,8 @@ Route::delete('/category/{category}', [categoryController::class, 'destroy'])->n
 Route::put('/category/update/{category}', [categoryController::class, 'update'])->name('category.update');
 
 Route::get('/tarjeta/read', [tarjetaController::class, 'index'])->name('creditCard.read')->Middleware('auth', 'verified');
-Route::get('/tarjeta/create', [tarjetaController::class, 'store'])->name('creditCard.create')->Middleware('auth', 'verified');
+Route::get('/tarjeta/create', [tarjetaController::class, 'create'])->name('creditCard.create')->Middleware('auth', 'verified');
+Route::get('/tarjeta/store', [tarjetaController::class, 'store'])->name('creditCard.store')->Middleware('auth', 'verified');
 Route::get('/tarjeta/edit/{tarjeta}', [tarjetaController::class, 'edit'])->name('creditCard.edit')->Middleware('auth', 'verified');
 
 Route::put('/tarjeta/update/{tarjeta}', [tarjetaController::class, 'update'])->name('creditCard.update')->Middleware('auth', 'verified');

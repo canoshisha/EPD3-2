@@ -14,7 +14,7 @@
 
                         @if ($tarjeta == null)
                             <p>No tiene ninguna tarjeta registrada.</p>
-                            <a href="{{ url('tarjeta_create') }}" class="btn btn-danger col-4 mx-auto">Crear Tarjeta</a>
+                            <a href="{{ route('creditCard.create') }}" class="btn btn-danger col-4 mx-auto">Crear Tarjeta</a>
                         @else
                             <div class="card" style="width: 18rem;">
                                 <img src="{{ URL::asset('/img/visa-dual.png') }}" class="card-img-top"
