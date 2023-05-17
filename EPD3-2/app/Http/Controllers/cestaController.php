@@ -229,7 +229,7 @@ class cestaController extends Controller
         $order->credit_cards_id = $request->input("tarjeta");
         $order->addresses_id = $request->input("direccion");
         $order->date = $fechaActual;
-        $order->state = 'enviado';
+        $order->state = 'entregado';
         $order->users_id = $shoppingBasket->users_id;
         $order->save();
         foreach ($shoppingBasket->productBasket as $productB) {

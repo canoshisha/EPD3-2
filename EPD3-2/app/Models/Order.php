@@ -22,11 +22,11 @@ class Order extends Model
                     ->withPivot('quantity','size');
     }
 
-    public function direccion(){
+    public function address(){
         return $this->hasOne(Address::class,"id");
     }
 
-    public function credit_card(){
+    public function credit_cards(){
         return $this->hasOne(CreditCard::class,"id");
     }
 
