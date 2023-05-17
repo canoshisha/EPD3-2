@@ -20,6 +20,9 @@
                 <div class="col-8">
                     <div class="input-group">
                         <input id="type" name="type" type="text" placeholder="type" class="form-control">
+                        @error('type')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                         <button name="submit" id='crear_btn' type="submit" class="btn btn-primary">Crear</button>
                     </div>
                 </div>

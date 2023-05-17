@@ -77,10 +77,11 @@ Route::get('/tarjeta/edit/{tarjeta}', [tarjetaController::class, 'edit'])->name(
 Route::put('/tarjeta/update/{tarjeta}', [tarjetaController::class, 'update'])->name('creditCard.update')->Middleware('auth', 'verified');
 Route::get('/tarjeta/{tarjeta}/delete', [tarjetaController::class, 'destroy'])->name('creditCard.delete')->Middleware('auth', 'verified');
 
-Route::get('categories/showupdate', [categoryController::class, 'showUpdate'])->name('category.supdate')->Middleware('auth', 'verified');
+Route::get('/categories/showupdate', [categoryController::class, 'showUpdate'])->name('category.supdate')->Middleware('auth', 'verified');
 Route::put('/cambiarIdioma', [userController::class, 'updateLanguage'])->name('language.update')->Middleware('auth', 'verified');
 
 Route::get('/address/read', [direccionesController::class, 'index'])->name('address.read')->Middleware('auth', 'verified');
+Route::get('/address/create', [direccionesController::class, 'create'])->name('address.create')->Middleware('auth', 'verified');
 Route::post('/address/store', [direccionesController::class, 'store'])->name('address.store')->Middleware('auth', 'verified');
 Route::get('/address/edit/{address}', [direccionesController::class, 'edit'])->name('address.edit')->Middleware('auth', 'verified');
 Route::put('/address/update/{address}', [direccionesController::class, 'update'])->name('address.update')->Middleware('auth', 'verified');

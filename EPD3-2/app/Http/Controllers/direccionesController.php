@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Address;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class direccionesController extends Controller
 {
@@ -29,7 +30,7 @@ class direccionesController extends Controller
      */
     public function create()
     {
-        
+        return view('address_create');
     }
 
     /**
@@ -40,13 +41,26 @@ class direccionesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'street' => 'required|max:40',
             'number' => 'required|max:3',
             'country' => 'required|max:10',
             'city' => 'required|max:15',
             'other_description' => 'required|max:50',
-        ]);
+        ];
+        $messages = [
+            'street.required' => 'El campo calle es obligatorio.',
+            'number.required' => 'El campo número es obligatorio.',
+            'country.required' => 'El campo país es obligatorio.',
+            'city.required' => 'El campo ciudad es obligatorio.',
+            'other_description.required' => 'El campo otra descripción es obligatorio.',
+        ];
+    
+        $validator = Validator::make($request->all(), $rules, $messages);
+    
+        if ($validator->fails()) {
+            return redirect()->route('address.create')->withErrors($validator)->withInput();
+        }
         $user = User::where('id', Auth::id())->first();
         $address = new Address;
         $address->street = $request->street;
@@ -90,13 +104,26 @@ class direccionesController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        $request->validate([
+        $rules = [
             'street' => 'required|max:40',
             'number' => 'required|max:3',
-            'country' => 'required|max:20',
-            'city' => 'required|max:20',
-            'other_description' => 'max:50',
-        ]);
+            'country' => 'required|max:10',
+            'city' => 'required|max:15',
+            'other_description' => 'required|max:50',
+        ];
+        $messages = [
+            'street.required' => 'El campo calle es obligatorio.',
+            'number.required' => 'El campo número es obligatorio.',
+            'country.required' => 'El campo país es obligatorio.',
+            'city.required' => 'El campo ciudad es obligatorio.',
+            'other_description.required' => 'El campo otra descripción es obligatorio.',
+        ];
+    
+        $validator = Validator::make($request->all(), $rules, $messages);
+    
+        if ($validator->fails()) {
+            return redirect()->route('address.edit',$address->id)->withErrors($validator)->withInput();
+        }
         $address->street = $request->street;
         $address->number = $request->number;
         $address->country = $request->country;
