@@ -23,11 +23,11 @@ class Order extends Model
     }
 
     public function address(){
-        return $this->hasOne(Address::class,"id");
+        return $this->belongsTo(Address::class,"addresses_id");
     }
 
     public function credit_cards(){
-        return $this->hasOne(CreditCard::class,"id");
+        return $this->belongsTo(CreditCard::class,"credit_cards_id");
     }
 
     public function ticket(){

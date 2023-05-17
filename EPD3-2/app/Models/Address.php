@@ -9,12 +9,12 @@ class Address extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = 'addresses';
+
 
     public function user(){
         return $this->belongsTo(User::class,"users_id");
     }
     public function orders(){
-        return $this->belongsTo(Order::class,"id");
+        return $this->hasMany(Order::class,"id");
     }
 }

@@ -49,7 +49,6 @@
                                                 </div>
                                             @empty
                                                 <p>No hay direcciones disponibles.</p>
-                                                <a href="{{ route('address.create') }}" class="btn btn-danger col-4 mx-auto">Crear Dirección</a>
                                             @endforelse
                                         </div>
                                     </div>

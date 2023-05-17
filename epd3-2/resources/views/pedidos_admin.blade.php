@@ -18,11 +18,12 @@
                 @foreach ($orders as $order)
                     <tr>
                         <td>{{ $order->user->name }}</td>
-                        <td>{{ $order->credit_cards->numero_tarjeta }}</td>
+                        {{-- <td>{{ $order->credit_cards->numero_tarjeta }}</td> --}}
                         <td>{{ $order->state }}</td>
                         <td>{{ $order->date }}</td>
-                        <td>{{ $order->address->street }},{{ $order->address->number }},{{ $order->address->other_description }},
-                            {{ $order->address->city }},{{ $order->address->country }}</td>
+                        {{-- <td>{{ $order->address->street }},{{ $order->address->number }},{{ $order->address->other_description }},
+                            {{ $order->address->city }},{{ $order->address->country }}</td> --}}
+                        <td>{{$order}}</td>
                         <td>{{ $order->user->email }}</td>
                         <td>
                             <form method="POST" action="{{ route('orders.destroy', $order->id) }}">
