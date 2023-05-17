@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Products;
 use App\Models\Address;
+use App\Models\CreditCard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -121,7 +122,11 @@ class adminController extends Controller
 
         foreach ($orders as $order) {
             $user = User::find($order->users_id);
+            $addres = Address::find($order->addresses_id);
+            $credit_card = CreditCard::find($order->credit_cards_id);
             $order->user = $user;
+            $order->address = $addres;
+            $order->credit_cards = $credit_card;
         }
 
         return view('pedidos_admin', ['orders' => $orders]);

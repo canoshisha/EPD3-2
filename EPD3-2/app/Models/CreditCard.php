@@ -15,6 +15,6 @@ class CreditCard extends Model
         return $this->belongsTo(User::class,"users_id");
     }
     public function orders(){
-        return $this->hasMany(Order::class,"id");
+        return $this->belongsToMany(Order::class,"orders_id");
     }
 }
