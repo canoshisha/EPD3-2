@@ -98,6 +98,23 @@
             <span class="mb-3 mb-md-0">{{ __('messages.copyright') }}</span>
         </div>
         <ul class="nav mx-auto col-md-4 justify-content-end list-unstyled d-flex">
+            @auth
+                <li class="nav-item">
+                    <form>
+                        @csrf
+                        @method('PUT')
+                        <select name="language" id="language">
+                            <option value="es" {{ auth()->user()->language === 'es' ? 'selected' : '' }}>
+                                Es
+                            </option>
+                            <option value="en" {{ auth()->user()->language === 'en' ? 'selected' : '' }}>
+                                En
+                            </option>
+                        </select>
+                    </form>
+
+                </li>
+            @endauth
             <li class="ms-3"><a class="text-muted" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                         width="16" height="16" fill="currentColor" class="bi bi-twitter">
                         <path
@@ -116,7 +133,33 @@
         </ul>
 
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#language').change(function() {
+                var selectedLanguage = $(this).val();
+                var formData = new FormData();
+                formData.append('_token', '{{ csrf_token() }}');
+                formData.append('_method', 'PUT');
+                formData.append('language', selectedLanguage);
 
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('language.update') }}',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        console.log('Idioma actualizado correctamente');
+                        location.reload(); // Actualizar la página
+                    },
+                    error: function(xhr) {
+                        console.log('Error al actualizar el idioma');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
