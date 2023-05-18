@@ -8,7 +8,7 @@
             <div class="form-group">
                 <label for="name">Nombre del producto</label>
                 <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Producto"
-                    required>
+                    required value="{{old('name')}}">
                 @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -59,7 +59,7 @@
             <br>
             <div class="form-group">
                 <label for="price">Precio</label>
-                <input type="number" name="price" class="form-control" id="price" placeholder="price">
+                <input type="number" name="price" class="form-control" id="price" placeholder="price" value="{{old('price')}}">
                 @error('price')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -68,14 +68,14 @@
             <div class="form-group">
                 <label for="description">Descripción del producto</label>
                 <input type="text" name="description" class="form-control" id="description"
-                    placeholder="Descripción del producto">
+                    placeholder="Descripción del producto" value="{{old('description')}}">
                 @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="discount">Descuento</label>
-                <input type="text" name="discount" class="form-control" id="discount" placeholder="Descuento">
+                <input type="text" name="discount" class="form-control" id="discount" placeholder="Descuento" min="0" value="{{old('discount')}}">
                 @error('discount')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

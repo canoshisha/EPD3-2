@@ -119,11 +119,11 @@ class productosController extends Controller
 
         }
 
-        for($i = 0; $i < count($tallas); $i++)
+        for($i = 0; $i < count($stocks); $i++)
         {
-
+            if(!is_null($stocks[$i]))
             $sizeProduct = new SizeProduct();
-            $sizeBBDD = Size::where('size',$tallas[$i])->first();
+            $sizeBBDD = Size::find($i + 1);
             $sizeProduct->size_id = $sizeBBDD->id;
             $sizeProduct->product_id = $productBBDD->id;
             $sizeProduct->stock = $stocks[$i];
