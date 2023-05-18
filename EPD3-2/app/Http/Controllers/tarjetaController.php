@@ -138,6 +138,7 @@ class tarjetaController extends Controller
     {
         $user = User::where('id', Auth::id())->first();
         $tarjeta = CreditCard::where('users_id',$user->id)->first();
+        // dd($tarjeta);
         $pedidos = Order::where('credit_cards_id',$tarjeta->id)->get();
         $puede=True;
         foreach ($pedidos as $pedido ) {

@@ -19,10 +19,9 @@ return new class extends Migration
             $table-> date('date');
             $table->string('state');
             $table->foreignId('users_id')->constrained();
-            $table->foreignId('addresses_id')->constrained();
-            $table->foreignId('credit_cards_id')->constrained()
-            ->cascadeOnUpdate()
-            ->cascadeOnDelete();
+            $table->foreignId('addresses_id')->constrained()->onDelete('cascade');
+            $table->foreignId('credit_cards_id')->constrained()->onDelete('cascade');
+
 
             // $table->foreignId('products_id')->constrained();
         });
