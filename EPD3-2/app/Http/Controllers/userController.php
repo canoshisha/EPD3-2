@@ -95,12 +95,18 @@ class userController extends Controller
 
     // Actualizar el nombre
     if ($opcion == 'nombre') {
-        $nombreNuevo = $request->input('nombre_nuevo');
+    $nombreNuevo = $request->input('nombre_nuevo');
+
+    // Validar que el nombre no es un email
+    if (!filter_var($nombreNuevo, FILTER_VALIDATE_EMAIL)) {
         $user->name = $nombreNuevo;
         $user->save();
         return redirect()->route('perfil.user')->with('success-perfil', 'Nombre actualizado con éxito.');
+    } else {
+        // El nombre ingresado es un email, mostrar un mensaje de error
+        return redirect()->route('edit-menu.user')->withErrors(['mensaje'=> 'El nombre no puede ser un correo electrónico.']);
     }
-
+}
     // Actualizar el correo electrónico
     if ($opcion == 'email') {
         $emailNuevo = $request->input('email_nuevo');

@@ -6,6 +6,17 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
+            @if ($errors->has('mensaje'))
+                <script>
+                    const swal = window.swal;
+                    swal({
+                        title: 'ERROR',
+                        text: '{{ $errors->first('mensaje') }}',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                </script>
+            @endif
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Mi Perfil') }}</div>

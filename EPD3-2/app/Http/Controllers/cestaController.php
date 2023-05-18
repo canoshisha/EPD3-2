@@ -96,7 +96,7 @@ class cestaController extends Controller
 
         $enCesta = False;
         foreach ($shopping_basket->productBasket as $productB) {
-            if ($productB->product_id == $request->input('product_id')) {
+            if ($productB->product_id == $request->input('product_id') && $productB->size ==$size->size) {
                 $enCesta = True;
                 $product = Products::find($productB->product_id);
 
