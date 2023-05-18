@@ -81,9 +81,9 @@ class productosController extends Controller
             'imagen.required' => 'El campo imagen del producto es obligatorio.',
 
         ];
-
+    
         $validator = Validator::make($request->all(), $rules, $messages);
-
+    
         if ($validator->fails()) {
             return redirect()->route('product.create')->withErrors($validator)->withInput();
         }
@@ -206,9 +206,9 @@ class productosController extends Controller
             'description.required' => 'El campo Descripción del producto es obligatorio y menor que 800 caracteres.',
 
         ];
-
+    
         $validator = Validator::make($request->all(), $rules, $messages);
-
+    
         if ($validator->fails()) {
             return redirect()->route('product.edit', $product->id)->withErrors($validator)->withInput();
         }
@@ -283,8 +283,6 @@ class productosController extends Controller
         foreach($imagenesProduct as $img){
             $img->delete();
         }
-
-
 
         $product = Products::where('id',$id)->first();
         $product->delete();

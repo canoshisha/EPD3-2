@@ -31,16 +31,13 @@
                                     </ul>
 
                                 </div>
-                                <div class="card-footer d-flex justify-content-center">
-                                    <a href="{{ route('creditCard.delete', $tarjeta->id) }}"
-                                        class="btn btn-danger mr-2">Eliminar Tarjeta</a>
-                                    <a class="btn btn-primary" href="{{ route('creditCard.edit', $tarjeta) }}">Editar
-                                        tarjeta</a>
-                                </div>
-
                             </div>
+
+                            <a href="{{ route('creditCard.delete', $tarjeta->id) }}" class="btn btn-danger ">Eliminar
+                                Tarjeta</a>
+                            <a class="btn btn-primary" href="{{ route('creditCard.edit', $tarjeta) }}">Editar tarjeta</a>
                         @endif
-                        <a href="{{ url('/home') }}" class="btn btn-primary btn-fit-content ">Volver</a>
+                        <a href="{{ url('/home') }}" class="btn btn-primary col-4 mx-auto">Volver</a>
                     </div>
                 </div>
             </div>
