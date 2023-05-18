@@ -138,6 +138,15 @@ class cestaController extends Controller
     {
         $user = User::where('id', Auth::id())->first();
         $orders = Order::where('users_id',$user->id)->paginate(3);
+
+        foreach ($orders as $order) {
+            $user = User::find($order->users_id);
+            $addres = Address::find($order->addresses_id);
+            $credit_card = CreditCard::find($order->credit_cards_id);
+            $order->user = $user;
+            $order->address = $addres;
+            $order->credit_cards = $credit_card;
+        }
         return view('mispedidos', compact('orders'));
 
 
