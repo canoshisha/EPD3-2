@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Address;
+use App\Models\Order;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +22,7 @@ class direccionesController extends Controller
     {
         $user = User::where('id', Auth::id())->first();
         $addresses = Address::where('users_id',$user->id)->paginate(3);
-        return view('address_read', compact('addresses')); 
+        return view('address_read', compact('addresses'));
     }
 
     /**
@@ -55,9 +57,9 @@ class direccionesController extends Controller
             'city.required' => 'El campo ciudad es obligatorio.',
             'other_description.required' => 'El campo otra descripción es obligatorio.',
         ];
-    
+
         $validator = Validator::make($request->all(), $rules, $messages);
-    
+
         if ($validator->fails()) {
             return redirect()->route('address.create')->withErrors($validator)->withInput();
         }
@@ -118,9 +120,9 @@ class direccionesController extends Controller
             'city.required' => 'El campo ciudad es obligatorio.',
             'other_description.required' => 'El campo otra descripción es obligatorio.',
         ];
-    
+
         $validator = Validator::make($request->all(), $rules, $messages);
-    
+
         if ($validator->fails()) {
             return redirect()->route('address.edit',$address->id)->withErrors($validator)->withInput();
         }
@@ -142,6 +144,15 @@ class direccionesController extends Controller
     public function destroy($id)
     {
         $address = Address::find($id);
+        $orders = Order::where('addresses_id',$id)->get();
+        foreach ($orders as $order ) {
+            $tickets = Ticket::where('orders_id', $order->id)->get();
+            // Borrar los registros de tickets
+            foreach ($tickets as $ticket) {
+                $ticket->delete();
+            }
+            $order->delete();
+        }
         $address->delete();
         if(Auth::user()->is_admin)
         {
@@ -150,6 +161,6 @@ class direccionesController extends Controller
         {
         return redirect()->route('address.read')->with('mensaje','La eliminación de la dirección ha sido un éxito.');
         }
-        
+
     }
 }
