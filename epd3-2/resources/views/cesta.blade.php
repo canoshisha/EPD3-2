@@ -1,9 +1,9 @@
 @extends('welcome')
 @section('title', 'UPOF1')
-@section('scs')
+@section('css')
     <link rel="stylesheet" href="{{ asset('css/cesta.css') }}">
 @endsection
-@section('contenido')
+@section('content')
     <div class="container py-5">
         <h1>Cesta de Compra</h1>
         <hr>

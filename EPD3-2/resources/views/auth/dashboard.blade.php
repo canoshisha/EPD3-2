@@ -1,4 +1,4 @@
-@extends('auth.template')
+@extends('welcome')
 @section('title', __('messages.my_profile'))
 
 @section('content')

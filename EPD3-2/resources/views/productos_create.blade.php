@@ -7,10 +7,11 @@
 
             <div class="form-group">
                 <label for="name">Nombre del producto</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Producto" required>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Producto"
+                    required>
                 @error('name')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="category">Categorías</label>
@@ -20,8 +21,8 @@
                     <input type="checkbox" value="{{ $category->type }}" id="{{ $category->type }}" name="categories[]">
                 @endforeach
                 @error('categories')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <label for="tallas">Tallas:</label>
@@ -37,15 +38,15 @@
             <br>
             <div id="contenedor">
                 @error('talla')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <br>
             <div class="form-group">
                 <label for="price">Precio</label>
                 <input type="number" name="price" class="form-control" id="price" placeholder="price">
                 @error('price')
-                <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -53,9 +54,9 @@
                 <label for="description">Descripción del producto</label>
                 <input type="text" name="description" class="form-control" id="description"
                     placeholder="Descripción del producto">
-                    @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                @error('description')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="discount">Descuento</label>
@@ -132,12 +133,12 @@
                 cantidadInput.max = 10;
 
                 // Agregar los campos al div
-                
+
                 div.appendChild(tallaLabel);
                 div.appendChild(tallaSelect);
                 div.appendChild(cantidadLabel);
                 div.appendChild(cantidadInput);
-                
+
 
                 // Agregar el div al contenedor
                 contenedor.appendChild(div);
@@ -175,24 +176,24 @@
                 var tipoImgInput = document.createElement("select");
                 tipoImgInput.name = "tipoImagen[]";
                 tipoImgInput.id = "tipoImagen";
-                if(i == 0){
+                if (i == 0) {
                     var tipos = ["Seleccione un tipo de imagen", "ImagenMenu"];
                     for (var j = 0; j < tipos.length; j++) {
-                    var tipoOption = document.createElement("option");
-                    tipoOption.value = tipos[j];
-                    tipoOption.textContent = tipos[j];
-                    tipoImgInput.appendChild(tipoOption);
+                        var tipoOption = document.createElement("option");
+                        tipoOption.value = tipos[j];
+                        tipoOption.textContent = tipos[j];
+                        tipoImgInput.appendChild(tipoOption);
                     }
-                }else{
+                } else {
                     var tipos = ["Seleccione un tipo de imagen", "Imagen"];
                     for (var j = 0; j < tipos.length; j++) {
-                    var tipoOption = document.createElement("option");
-                    tipoOption.value = tipos[j];
-                    tipoOption.textContent = tipos[j];
-                    tipoImgInput.appendChild(tipoOption);
+                        var tipoOption = document.createElement("option");
+                        tipoOption.value = tipos[j];
+                        tipoOption.textContent = tipos[j];
+                        tipoImgInput.appendChild(tipoOption);
                     }
                 }
-                
+
 
                 // Agregar los campos al div
                 div.appendChild(imgLabel);

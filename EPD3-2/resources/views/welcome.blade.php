@@ -20,7 +20,8 @@
     <!-- Styles -->
     @vite(['resources/js/app.js', 'resources/css/app.scss'])
     <link rel="stylesheet" href="{{ asset('css/general.css') }}">
-    @yield('scs')
+    @yield('css')
+    <link rel="stylesheet" href="{{ asset('css/perfil.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -65,13 +66,19 @@
                     @if (Route::has('login'))
                         <div class="d-flex">
                             @auth
-                                <a href="{{ url('/home') }}" class="nav-link ">{{ __('messages.my_profile') }}</a>
-
                                 <a class="nav-link" id="icono_cesta" href="/cesta"><svg xmlns="http://www.w3.org/2000/svg"
                                         width="16" height="16" fill="currentColor" class="bi bi-cart">
                                         <path
                                             d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                     </svg></a>
+                                <a href="{{ url('/home') }}" class="nav-link ">{{ __('messages.my_profile') }}</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('messages.logout') }}</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
                             @else
                                 <a href="{{ route('login') }}" class="nav-link ">{{ __('messages.login') }}</a>
 
@@ -86,7 +93,7 @@
         </div>
     </nav>
     <main class="pt-4">
-        @yield('contenido')
+        @yield('content')
     </main>
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mx-auto border-top">
         <div class="col-md-4 d-flex align-items-center">

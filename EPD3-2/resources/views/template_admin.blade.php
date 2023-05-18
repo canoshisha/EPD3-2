@@ -1,4 +1,4 @@
-@extends('auth.template')
+@extends('welcome')
 @section('title', 'Panel admin')
 @section('content')
     <div class="container mt-4">
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                @yield('scs')
+                @yield('css')
                 @yield('js')
                 @if ($errors->any())
                     <div class="alert alert-danger">

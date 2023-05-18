@@ -1,5 +1,5 @@
 @extends('template_admin')
-@section('scs')
+@section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" />
 @endsection
 @section('js')

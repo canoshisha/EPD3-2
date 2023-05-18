@@ -1,9 +1,9 @@
 @extends('welcome')
 @section('title', __('messages.discount'))
-@section('scs')
+@section('css')
     <link rel="stylesheet" href="{{ asset('css/productos.css') }}">
 @endsection
-@section('contenido')
+@section('content')
     @if (session('mensaje'))
         <script>
             const swal = window.swal;

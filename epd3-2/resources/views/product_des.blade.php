@@ -1,9 +1,9 @@
 @extends('welcome')
 @section('title', "$product->name")
-@section('scs')
+@section('css')
     <link rel="stylesheet" href="{{ asset('css/product_des.css') }}">
 @endsection
-@section('contenido')
+@section('content')
     <div class="container py-5">
         @if ($errors->has('mensaje'))
             <script>
@@ -23,7 +23,7 @@
                 <div class="col-md-6">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <?php
-
+                        
                         $img1 = $imgProduct->first();
                         $img2 = $imgProduct->last();
                         ?>
@@ -59,7 +59,8 @@
                     @else
                         <div class="discount-message">Descuento del {{ $product->discount }}%</div>
                         <p class="lead"><del class="strike">{{ $product->price }}€</del>
-                            <b>{{ $product->finalPrice() }}€</b> </p>
+                            <b>{{ $product->finalPrice() }}€</b>
+                        </p>
                     @endif
                     <form class="needs-validation" action="{{ route('cesta.addProductB') }}" method="POST" novalidate>
                         @csrf

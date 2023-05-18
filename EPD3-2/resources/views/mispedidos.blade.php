@@ -1,4 +1,4 @@
-@extends('auth.template')
+@extends('welcome')
 @section('title', 'Mis pedidos')
 @section('content')
     <div class="container">

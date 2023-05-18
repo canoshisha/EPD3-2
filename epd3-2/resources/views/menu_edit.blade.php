@@ -1,4 +1,4 @@
-@extends('auth.template')
+@extends('welcome')
 @section('title', 'Editar perfil')
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/menu_edit.css') }}">

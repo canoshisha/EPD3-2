@@ -1,9 +1,9 @@
 @extends('welcome')
 @section('title', 'UPOF1')
-@section('scs')
+@section('css')
     <link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
 @endsection
-@section('contenido')
+@section('content')
     <div class="container mt-5">
         @if (session('mensaje'))
             <script>

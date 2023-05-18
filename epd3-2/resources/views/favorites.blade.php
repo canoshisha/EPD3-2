@@ -1,9 +1,9 @@
 @extends('welcome')
 @section('title', __('messages.favorites'))
-@section('scs')
+@section('css')
     <link rel="stylesheet" href="{{ asset('css/product_des.css') }}">
 @endsection
-@section('contenido')
+@section('content')
     <div class="container">
         <section class="favorites">
             <div class="row justify-content-center">
