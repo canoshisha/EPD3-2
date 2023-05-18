@@ -35,7 +35,26 @@
                                             <div class="card-footer d-flex justify-content-center">
                                                 <a class="btn btn-danger col-4 mx-auto"
                                                     href="{{ route('producto.descripcion', $product) }}">{{ __('messages.view') }}</a>
+                                                @if (Auth::user())
+                                                    <form action="{{ route('favorites.toggle', $product) }}" method="POST">
+                                                        @csrf
+
+                                                        @if (Auth::user()->favorites()->where('products_id', $product->id)->exists())
+                                                            <button type="submit" class="btn btn-icon btn-danger"> <img
+                                                                    src="{{ URL::asset('/img/me-gusta.png') }}"
+                                                                    alt="Is fav" class="btn-icon__img" width="24"
+                                                                    height="24"></button>
+                                                        @else
+                                                            <button type="submit" class="btn btn-icon btn-outline-danger">
+                                                                <img src="{{ URL::asset('/img/no-me-gusta.png') }}"
+                                                                    alt="No is fav" class="btn-icon__img" width="24"
+                                                                    height="24"></button>
+                                                        @endif
+
+                                                    </form>
+                                                @endif
                                             </div>
+
                                         </div>
                                     </div>
                                     @php $count++; @endphp
