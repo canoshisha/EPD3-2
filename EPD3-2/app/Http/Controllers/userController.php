@@ -165,7 +165,10 @@ class userController extends Controller
     }
 
     $shopping = ShoppingBasket::where('users_id', $user->id)->first();
-    $shopping->delete();
+    if(!is_null($shopping)){
+        $shopping->delete();
+    }
+    
 
     // Eliminar al usuario
     $user->delete();
