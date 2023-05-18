@@ -25,7 +25,7 @@
                 @enderror
             </div>
 
-            <label for="tallas">Tallas:</label>
+            {{-- <label for="tallas">Tallas:</label>
             <select id="tallas" name="tallas">
                 <option value="Seleccione un numero" selected>Seleccione un número</option>
                 <option value="1">1</option>
@@ -33,14 +33,29 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-            </select>
+            </select> --}}
             <br>
             <br>
-            <div id="contenedor">
-                @error('talla')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+            <div id="form-group">
+                <label for="size-s">Talla S:</label>
+                <input type="number" id="size-s" name="stock[]" min="0" value="0"><br><br>
+              
+                <label for="size-m">Talla M:</label>
+                <input type="number" id="size-m" name="stock[]" min="0" value="0"><br><br>
+              
+                <label for="size-l">Talla L:</label>
+                <input type="number" id="size-l" name="stock[]" min="0" value="0"><br><br>
+              
+                <label for="size-xl">Talla XL:</label>
+                <input type="number" id="size-xl" name="stock[]" min="0" value="0"><br><br>
+              
+                <label for="size-xxl">Talla XXL:</label>
+                <input type="number" id="size-xxl" name="stock[]" min="0" value="0"><br><br>
+              
+                <label for="size-xxxl">Talla XXXL:</label>
+                <input type="number" id="size-xxxl" name="stock[]" min="0" value="0"><br><br>
             </div>
+
             <br>
             <div class="form-group">
                 <label for="price">Precio</label>
@@ -92,58 +107,58 @@
     </div>
 
     <script>
-        // Obtener el campo de selección y el contenedor
-        var cantidadSelect = document.getElementById("tallas");
-        var contenedor = document.getElementById("contenedor");
+        // // Obtener el campo de selección y el contenedor
+        // var cantidadSelect = document.getElementById("tallas");
+        // var contenedor = document.getElementById("contenedor");
 
-        // Escuchar cambios en el campo de selección
-        cantidadSelect.addEventListener("change", function() {
-            // Obtener la cantidad seleccionada
-            var cantidad = parseInt(cantidadSelect.value);
+        // // Escuchar cambios en el campo de selección
+        // cantidadSelect.addEventListener("change", function() {
+        //     // Obtener la cantidad seleccionada
+        //     var cantidad = parseInt(cantidadSelect.value);
 
-            // Limpiar el contenedor
-            contenedor.innerHTML = "";
+        //     // Limpiar el contenedor
+        //     contenedor.innerHTML = "";
 
-            // Generar los campos dinámicamente
-            for (var i = 0; i < cantidad; i++) {
-                // Crear un div para agrupar los campos
-                var div = document.createElement("div");
+        //     // Generar los campos dinámicamente
+        //     for (var i = 0; i < cantidad; i++) {
+        //         // Crear un div para agrupar los campos
+        //         var div = document.createElement("div");
 
-                // Crear un campo de selección de tallas
-                var tallaLabel = document.createElement("label");
-                tallaLabel.textContent = "Talla:";
-                var tallaSelect = document.createElement("select");
-                tallaSelect.name = "talla[]";
-                tallaSelect.id = "talla";
-                var tallas = ["S", "M", "L", "XL", "XXL", "XXXL"];
-                for (var j = 0; j < tallas.length; j++) {
-                    var tallaOption = document.createElement("option");
-                    tallaOption.value = tallas[j];
-                    tallaOption.textContent = tallas[j];
-                    tallaSelect.appendChild(tallaOption);
-                }
+        //         // Crear un campo de selección de tallas
+        //         var tallaLabel = document.createElement("label");
+        //         tallaLabel.textContent = "Talla:";
+        //         var tallaSelect = document.createElement("select");
+        //         tallaSelect.name = "talla[]";
+        //         tallaSelect.id = "talla";
+        //         var tallas = ["S", "M", "L", "XL", "XXL", "XXXL"];
+        //         for (var j = 0; j < tallas.length; j++) {
+        //             var tallaOption = document.createElement("option");
+        //             tallaOption.value = tallas[j];
+        //             tallaOption.textContent = tallas[j];
+        //             tallaSelect.appendChild(tallaOption);
+        //         }
 
-                // Crear un campo de selección de cantidad
-                var cantidadLabel = document.createElement("label");
-                cantidadLabel.textContent = "stock:";
-                var cantidadInput = document.createElement("input");
-                cantidadInput.type = "number";
-                cantidadInput.name = "stock[]";
-                cantidadInput.min = 1;
-                cantidadInput.max = 10;
+        //         // Crear un campo de selección de cantidad
+        //         var cantidadLabel = document.createElement("label");
+        //         cantidadLabel.textContent = "stock:";
+        //         var cantidadInput = document.createElement("input");
+        //         cantidadInput.type = "number";
+        //         cantidadInput.name = "stock[]";
+        //         cantidadInput.min = 1;
+        //         cantidadInput.max = 10;
 
-                // Agregar los campos al div
+        //         // Agregar los campos al div
 
-                div.appendChild(tallaLabel);
-                div.appendChild(tallaSelect);
-                div.appendChild(cantidadLabel);
-                div.appendChild(cantidadInput);
+        //         div.appendChild(tallaLabel);
+        //         div.appendChild(tallaSelect);
+        //         div.appendChild(cantidadLabel);
+        //         div.appendChild(cantidadInput);
 
 
-                // Agregar el div al contenedor
-                contenedor.appendChild(div);
-            }
-        });
+        //         // Agregar el div al contenedor
+        //         contenedor.appendChild(div);
+        //     }
+        // });
 
         // Obtener el campo de selección y el contenedor
         var cantidadImg = document.getElementById("cantImagen");

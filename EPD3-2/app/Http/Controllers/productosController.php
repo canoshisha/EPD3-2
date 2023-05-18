@@ -65,19 +65,20 @@ class productosController extends Controller
             'categories' => 'required',
             'price' => 'required|max:5',
             'discount'=>'required|max:2',
-            'talla' => 'required',
-            'stock' => 'required',
+            // 'talla' => 'required',
+            'stock' => 'required|array',
+            'stock.*' => 'required|integer|min:0',
             'description' => 'required|max:700',
             'imagen' => 'required',
         ];
         $messages = [
             'name.required' => 'El campo Nombre del producto es obligatorio.',
             'categories.required' => 'El campo Categorias del producto es obligatorio.',
-            'price.required' => 'El campo Precio es obligatorio y numérico.',
+            'price.required' => 'El campo Precio es obligatorio y no puede ser negativo.',
             'discount.required'=>'El campo Discount es obligatorio. Puede ser un 0.',
             'description.required' => 'El campo Descripción del producto es obligatorio.',
-            'talla.required' => 'El campo Talla del producto es obligatorio.',
-            'stock.required' => 'El campo stock del producto es obligatorio y numérico.',
+            // 'talla.required' => 'El campo Talla del producto es obligatorio.',
+            'stock.required' => 'El campo stock del producto es obligatorio y no puede ser negativo.',
             'imagen.required' => 'El campo imagen del producto es obligatorio.',
 
         ];
@@ -93,7 +94,7 @@ class productosController extends Controller
         $product->description = $request->description;
         $product->discount = $request->discount;
         $product->save();
-        $tallas = $request->input('talla');
+        // $tallas = $request->input('talla');
         $stocks = $request->input('stock');
 
         $productBBDD = Products::where('name',$request->name)->first();
