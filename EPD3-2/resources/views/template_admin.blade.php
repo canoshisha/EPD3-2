@@ -17,7 +17,7 @@
             <div class="col-lg-9">
                 @yield('css')
                 @yield('js')
-                @if ($errors->any())
+                {{-- @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -25,7 +25,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                @endif --}}
 
                 @yield('contenido')
             </div>

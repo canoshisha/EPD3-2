@@ -13,64 +13,55 @@
                     </div>
 
                     <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         <form method="POST" action="{{ route('address.store') }}">
                             @csrf
 
                             <div class="form-group">
                                 <label for="street">Calle</label>
                                 <input type="text" name="street" id="street" class="form-control"
-                                    placeholder="Calle">
+                                    placeholder="Calle" value="{{old('street')}}">
                                 @error('street')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="number">Número</label>
-                                <input type="text" name="number" id="number" class="form-control"
-                                    placeholder="Número">
+                                <input type="number" name="number" id="number" class="form-control"
+                                    placeholder="Número" value="{{old('number')}}">
                                 @error('number')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="city">Ciudad</label>
                                 <input type="text" name="city" id="city" class="form-control"
-                                    placeholder="Ciudad">
+                                    placeholder="Ciudad" value="{{old('city')}}">
                                 @error('city')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="other_description">Otra Descripción</label>
-                                <textarea name="other_description" id="other_description" class="form-control" placeholder="Otra Descripción"></textarea>
+                                <textarea name="other_description" id="other_description" class="form-control" placeholder="Otra Descripción">{{old('other_description')}}</textarea>
                                 @error('other_description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="country">País</label>
-                                <input type="text" name="country" id="country" class="form-control" placeholder="País">
+                                <input type="text" name="country" id="country" class="form-control" placeholder="País" value="{{old('country')}}">
                                 @error('country')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
 
                             <hr>
                             <button type="submit" class="btn btn-primary">Guardar</button>
-                            <a href="{{ route('address.read') }}" class="btn btn-danger col-4 mx-auto">Volver</a>
+                            <a href="{{ route('address.read') }}" class="btn btn-danger">Volver</a>
                         </form>
 
                     </div>

@@ -4,15 +4,6 @@
 @section('content')
 
     <div class="container">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -28,18 +19,18 @@
                             <div class="form-group">
                                 <label for="titular_tarjeta">Titular de la Tarjeta</label>
                                 <input type="text" name="titular_tarjeta" class="form-control" id="titular_tarjeta"
-                                    placeholder="Nombre y Apellido">
+                                    placeholder="Nombre y Apellido" value="{{old('titular_tarjeta')}}">
                                 @error('titular_tarjeta')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="numero_tarjeta">Número de Tarjeta</label>
                                 <input type="number" name="numero_tarjeta" class="form-control" id="numero_tarjeta"
-                                    placeholder="xxxxxxxxxxxxxxxx">
+                                    placeholder="xxxxxxxxxxxxxxxx" value="{{old('numero_tarjeta')}}">
                                 @error('numero_tarjeta')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
 
                             </div>
@@ -47,17 +38,17 @@
                             <div class="form-group">
                                 <label for="fecha_caducidad">Fecha de Caducidad</label>
                                 <input type="text" name="fecha_caducidad" class="form-control" id="fecha_caducidad"
-                                    placeholder="mm/aa">
+                                    placeholder="mm/aa" value="{{old('fecha_caducidad')}}">
                                 @error('fecha_caducidad')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="cvc">CVC</label>
-                                <input type="password" name="cvc" class="form-control" id="cvc" placeholder="xxx">
+                                <input type="password" name="cvc" class="form-control" id="cvc" placeholder="xxx" value="{{old('cvc')}}">
                                 @error('cvc')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
                             <hr>

@@ -9,7 +9,7 @@
                 <label for="name">Nombre del producto</label>
                 <input type="text" name="name" class="form-control" id="name" value="{{ $product->name }}">
                 @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                <small style="color: red">{{ $message }}</small>
                 @enderror
             </div>
             <div class="form-group">
@@ -27,17 +27,27 @@
                     @endif
                 @endforeach
                 @error('categories')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                <small style="color: red">{{ $message }}</small>
                 @enderror
 
 
+            </div>
+            <br>
+            <div id="form-group">
+                @foreach ($product->sizes as $size)
+                <label for="size-s">Talla {{$size->size}}:</label>
+                <input type="number" id="size-s" name="stock[]" min="0" value="{{$size->pivot->stock}}"><br><br>
+                @endforeach
+                @error('stock')
+                <small style="color: red">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="price">Precio</label>
                 <input type="number" name="price" class="form-control" id="price" value="{{ $product->price }}">
                 @error('price')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                <small style="color: red">{{ $message }}</small>
                 @enderror
             </div>
 
@@ -47,15 +57,12 @@
                 <input type="text" name="description" class="form-control" id="description"
                     value="{{ $product->description }}">
                 @error('description')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                <small style="color: red">{{ $message }}</small>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="discount">Descuento</label>
                 <input type="text" name="discount" class="form-control" id="discount" value="{{ $product->discount }}">
-                @error('discount')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
             </div>
 
             <br>

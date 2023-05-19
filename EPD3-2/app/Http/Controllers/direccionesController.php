@@ -43,26 +43,25 @@ class direccionesController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
+
+        $validated = $request->validate([
             'street' => 'required|max:40',
-            'number' => 'required|max:3',
-            'country' => 'required|max:10',
+            'number' => 'required|numeric|min:0',
+            'country' => 'required|max:15',
             'city' => 'required|max:15',
             'other_description' => 'required|max:50',
-        ];
-        $messages = [
-            'street.required' => 'El campo calle es obligatorio.',
-            'number.required' => 'El campo número es obligatorio.',
-            'country.required' => 'El campo país es obligatorio.',
-            'city.required' => 'El campo ciudad es obligatorio.',
-            'other_description.required' => 'El campo otra descripción es obligatorio.',
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return redirect()->route('address.create')->withErrors($validator)->withInput();
-        }
+        ],
+        ['street.required' => 'El campo calle es obligatorio.',
+        'street.max' => 'El campo Calle no puede tener más de 40 caracteres.',
+        'number.required' => 'El campo Número es obligatorio.',
+        'number.min' => 'El campo Número no puede ser negativo.',
+        'country.required' => 'El campo país es obligatorio.',
+        'country.max' => 'El campo País no puede tener más de 15 caracteres.',
+        'city.required' => 'El campo ciudad es obligatorio.',
+        'city.max' => 'El campo Ciudad no puede tener más de 15 caracteres.',
+        'other_description.required' => 'El campo Otra descripción es obligatorio.',
+        'other_description.max' => 'El campo Otra descripción no puede tener más de 50 caracteres.',
+        ] );
         $user = User::where('id', Auth::id())->first();
         $address = new Address;
         $address->street = $request->street;
@@ -106,26 +105,26 @@ class direccionesController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        $rules = [
+        $validated = $request->validate([
             'street' => 'required|max:40',
-            'number' => 'required|max:3',
-            'country' => 'required|max:10',
+            'number' => 'required|numeric|min:0',
+            'country' => 'required|max:15',
             'city' => 'required|max:15',
             'other_description' => 'required|max:50',
-        ];
-        $messages = [
-            'street.required' => 'El campo calle es obligatorio.',
-            'number.required' => 'El campo número es obligatorio.',
-            'country.required' => 'El campo país es obligatorio.',
-            'city.required' => 'El campo ciudad es obligatorio.',
-            'other_description.required' => 'El campo otra descripción es obligatorio.',
-        ];
+        ],
+        ['street.required' => 'El campo calle es obligatorio.',
+        'street.max' => 'El campo Calle no puede tener más de 40 caracteres.',
+        'number.required' => 'El campo Número es obligatorio.',
+        'number.min' => 'El campo Número no puede ser negativo.',
+        'country.required' => 'El campo país es obligatorio.',
+        'country.max' => 'El campo País no puede tener más de 15 caracteres.',
+        'city.required' => 'El campo ciudad es obligatorio.',
+        'city.max' => 'El campo Ciudad no puede tener más de 15 caracteres.',
+        'other_description.required' => 'El campo Otra descripción es obligatorio.',
+        'other_description.max' => 'El campo Otra descripción no puede tener más de 50 caracteres.',
+        ] );
 
-        $validator = Validator::make($request->all(), $rules, $messages);
 
-        if ($validator->fails()) {
-            return redirect()->route('address.edit',$address->id)->withErrors($validator)->withInput();
-        }
         $address->street = $request->street;
         $address->number = $request->number;
         $address->country = $request->country;

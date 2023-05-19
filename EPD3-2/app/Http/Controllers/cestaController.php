@@ -88,8 +88,12 @@ class cestaController extends Controller
             [
                 'talla' => 'required|in:S,M,L,XL,XXL,XXXL',
                 'cantidad' => 'required|in:1,2,3,4,5,6,7,8,9,10'
-            ]
-        );
+            ],
+            ['talla.required' => 'El campo talla es obligatorio.',
+            'talla.in' => 'Debe seleccionar un valor en el campo Talla.',
+            'cantidad.required' => 'El campo Cantidad del producto es obligatorio.',
+            'cantidad.in' => 'Debe seleccionar un valor en el campo Cantidad.',]);
+
         $shopping_basket = ShoppingBasket::where('users_id', Auth::id())->first();
         $size = Size::where('size', $request->input('talla'))->first();
         $talla_id = $size->id;

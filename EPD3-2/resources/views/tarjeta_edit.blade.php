@@ -6,15 +6,6 @@
 @section('content')
 
     <div class="container">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -31,7 +22,7 @@
                                 <input type="number" name="numero_tarjeta" class="form-control" id="numero_tarjeta"
                                     value="{{ $tarjeta->numero_tarjeta }}">
                                 @error('numero_tarjeta')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
 
@@ -40,7 +31,7 @@
                                 <input type="text" name="fecha_caducidad" class="form-control" id="fecha_caducidad"
                                     value="{{ $tarjeta->fecha_caducidad }}">
                                 @error('fecha_caducidad')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
 
@@ -49,7 +40,7 @@
                                 <input type="password" name="cvc" class="form-control" id="cvc"
                                     value="{{ $tarjeta->CVC }}">
                                 @error('cvc')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Guardar</button>

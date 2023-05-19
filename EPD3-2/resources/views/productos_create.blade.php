@@ -8,9 +8,9 @@
             <div class="form-group">
                 <label for="name">Nombre del producto</label>
                 <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Producto"
-                    required value="{{old('name')}}">
+                     value="{{old('name')}}">
                 @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                <small style="color: red">{{ $message }}</small>
                 @enderror
             </div>
             <div class="form-group">
@@ -21,20 +21,11 @@
                     <input type="checkbox" value="{{ $category->type }}" id="{{ $category->type }}" name="categories[]">
                 @endforeach
                 @error('categories')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                <br>
+                <small style="color: red">{{ $message }}</small>
                 @enderror
             </div>
 
-            {{-- <label for="tallas">Tallas:</label>
-            <select id="tallas" name="tallas">
-                <option value="Seleccione un numero" selected>Seleccione un número</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select> --}}
-            <br>
             <br>
             <div id="form-group">
                 <label for="size-s">Talla S:</label>
@@ -54,15 +45,19 @@
               
                 <label for="size-xxxl">Talla XXXL:</label>
                 <input type="number" id="size-xxxl" name="stock[]" min="0" value="0"><br><br>
+                @error('stock')
+                <small style="color: red">{{ $message }}</small>
+                @enderror
             </div>
 
-            <br>
+
             <div class="form-group">
                 <label for="price">Precio</label>
                 <input type="number" name="price" class="form-control" id="price" placeholder="price" value="{{old('price')}}">
                 @error('price')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                <small style="color: red">{{ $message }}</small>
                 @enderror
+                
             </div>
 
             <div class="form-group">
@@ -70,15 +65,12 @@
                 <input type="text" name="description" class="form-control" id="description"
                     placeholder="Descripción del producto" value="{{old('description')}}">
                 @error('description')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                <small style="color: red">{{ $message }}</small>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="discount">Descuento</label>
                 <input type="text" name="discount" class="form-control" id="discount" placeholder="Descuento" min="0" value="{{old('discount')}}">
-                @error('discount')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
             </div>
             <br>
 
@@ -93,8 +85,12 @@
             <br>
             <br>
             <div id="contenedorImg">
-                @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                @error('imagen')
+                <small style="color: red">{{ $message }}</small>
+                @enderror
+                <br>
+                @error('tipoImagen')
+                <small style="color: red">{{ $message }}</small>
                 @enderror
             </div>
             <br>
@@ -107,59 +103,7 @@
     </div>
 
     <script>
-        // // Obtener el campo de selección y el contenedor
-        // var cantidadSelect = document.getElementById("tallas");
-        // var contenedor = document.getElementById("contenedor");
-
-        // // Escuchar cambios en el campo de selección
-        // cantidadSelect.addEventListener("change", function() {
-        //     // Obtener la cantidad seleccionada
-        //     var cantidad = parseInt(cantidadSelect.value);
-
-        //     // Limpiar el contenedor
-        //     contenedor.innerHTML = "";
-
-        //     // Generar los campos dinámicamente
-        //     for (var i = 0; i < cantidad; i++) {
-        //         // Crear un div para agrupar los campos
-        //         var div = document.createElement("div");
-
-        //         // Crear un campo de selección de tallas
-        //         var tallaLabel = document.createElement("label");
-        //         tallaLabel.textContent = "Talla:";
-        //         var tallaSelect = document.createElement("select");
-        //         tallaSelect.name = "talla[]";
-        //         tallaSelect.id = "talla";
-        //         var tallas = ["S", "M", "L", "XL", "XXL", "XXXL"];
-        //         for (var j = 0; j < tallas.length; j++) {
-        //             var tallaOption = document.createElement("option");
-        //             tallaOption.value = tallas[j];
-        //             tallaOption.textContent = tallas[j];
-        //             tallaSelect.appendChild(tallaOption);
-        //         }
-
-        //         // Crear un campo de selección de cantidad
-        //         var cantidadLabel = document.createElement("label");
-        //         cantidadLabel.textContent = "stock:";
-        //         var cantidadInput = document.createElement("input");
-        //         cantidadInput.type = "number";
-        //         cantidadInput.name = "stock[]";
-        //         cantidadInput.min = 1;
-        //         cantidadInput.max = 10;
-
-        //         // Agregar los campos al div
-
-        //         div.appendChild(tallaLabel);
-        //         div.appendChild(tallaSelect);
-        //         div.appendChild(cantidadLabel);
-        //         div.appendChild(cantidadInput);
-
-
-        //         // Agregar el div al contenedor
-        //         contenedor.appendChild(div);
-        //     }
-        // });
-
+        
         // Obtener el campo de selección y el contenedor
         var cantidadImg = document.getElementById("cantImagen");
         var contenedorImg = document.getElementById("contenedorImg");

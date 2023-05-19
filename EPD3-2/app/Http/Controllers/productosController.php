@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 
+
 class productosController extends Controller
 {
     /**
@@ -52,6 +53,7 @@ class productosController extends Controller
         return view('productos_create',compact('categorias'));
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -60,39 +62,58 @@ class productosController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
+        $validated = $request->validate([
             'name' => 'required|max:700',
             'categories' => 'required',
-            'price' => 'required|max:5',
-            'discount'=>'required|max:2',
-            // 'talla' => 'required',
-            'stock' => 'required|array',
-            'stock.*' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0|max:9999',
+            'tipoImagen'=>['required',
+            function ($attribute, $value, $fail) {
+                foreach ($value as $item) {
+                    if ($item == "Seleccione un tipo de imagen") {
+                        $fail('El campo TipoImagen debe tener el valor de Imagen o ImagenMenu.');
+                    }
+                }
+            }],
+            'stock' => ['required',
+            function ($attribute, $value, $fail) {
+                $contador = 0;
+                if (empty($value)) {
+                    $fail('El campo stock es obligatorio.');
+                }
+    
+                foreach ($value as $item) {
+                    if ($item < 0) {
+                        $fail('El campo stock no puede contener valores negativos.');
+                    }elseif($item == 0){
+                        $contador = $contador + 1;
+                        
+                    }
+                }
+                if($contador == 6){
+                    $fail('El campo stock es obligatorio.');
+                }
+            },
+        ],
             'description' => 'required|max:700',
             'imagen' => 'required',
-        ];
-        $messages = [
-            'name.required' => 'El campo Nombre del producto es obligatorio.',
+        ],
+        [   'name.required' => 'El campo Nombre del producto es obligatorio.',
             'categories.required' => 'El campo Categorias del producto es obligatorio.',
             'price.required' => 'El campo Precio es obligatorio y no puede ser negativo.',
-            'discount.required'=>'El campo Discount es obligatorio. Puede ser un 0.',
+            'price.min' => 'El campo Precio es obligatorio y no puede ser negativo.',
             'description.required' => 'El campo Descripción del producto es obligatorio.',
-            // 'talla.required' => 'El campo Talla del producto es obligatorio.',
-            'stock.required' => 'El campo stock del producto es obligatorio y no puede ser negativo.',
-            'imagen.required' => 'El campo imagen del producto es obligatorio.',
+            'imagen.required' => 'El campo imagen del producto es obligatorio.',] );
 
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return redirect()->route('product.create')->withErrors($validator)->withInput();
-        }
         $product = new Products();
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;
-        $product->discount = $request->discount;
+        if(is_null($request->discount) || empty($request->discount) || $request->discount < 0){
+            $product->discount = 0; 
+        }else{
+            $product->discount = $request->discount;
+        }
+        
         $product->save();
         // $tallas = $request->input('talla');
         $stocks = $request->input('stock');
@@ -121,7 +142,7 @@ class productosController extends Controller
 
         for($i = 0; $i < count($stocks); $i++)
         {
-            if(!is_null($stocks[$i]))
+            if(!is_null($stocks[$i]) || !empty($stocks[$i]))
             $sizeProduct = new SizeProduct();
             $sizeBBDD = Size::find($i + 1);
             $sizeProduct->size_id = $sizeBBDD->id;
@@ -145,6 +166,7 @@ class productosController extends Controller
 
         return redirect()->route('admin.products')->with('mensaje','La creación del producto ha sido un éxito.');
     }
+
 
     /**
      * Display the specified resource.
@@ -192,31 +214,48 @@ class productosController extends Controller
      */
     public function update(Request $request, Products $product)
     {
-        $rules = [
-            'name' => 'required|max:800',
+        $validated = $request->validate([
+            'name' => 'required|max:700',
             'categories' => 'required',
-            'price' => 'required|max:5',
-            'discount'=>'required|max:2',
-            'description' => 'required|max:800',
-        ];
-        $messages = [
-            'name.required' => 'El campo Nombre del producto es obligatorio y menor que 800 caracteres.',
+            'price' => 'required|numeric|min:0|max:9999',
+            'stock' => ['required',
+            function ($attribute, $value, $fail) {
+                $contador = 0;
+                if (empty($value)) {
+                    $fail('El campo stock es obligatorio.');
+                }
+    
+                foreach ($value as $item) {
+                    if ($item < 0) {
+                        $fail('El campo stock no puede contener valores negativos.');
+                    }elseif($item == 0){
+                        $contador = $contador + 1;
+                        
+                    }
+                }
+                if($contador == 6){
+                    $fail('El campo stock es obligatorio.');
+                }
+            },
+        ],
+            'description' => 'required|max:700',
+        ],
+        [   'name.required' => 'El campo Nombre del producto es obligatorio.',
+            'name.max' => 'El campo Nombre del producto no pued etener más de 700 caracteres.',
             'categories.required' => 'El campo Categorias del producto es obligatorio.',
-            'price.required' => 'El campo Precio es obligatorio y numérico.',
-            'discount.required'=>'El campo Discount es obligatorio. Puede ser un 0.',
-            'description.required' => 'El campo Descripción del producto es obligatorio y menor que 800 caracteres.',
+            'price.required' => 'El campo Precio es obligatorio y no puede ser negativo.',
+            'price.min' => 'El campo Precio no puede ser negativo.',
+            'description.required' => 'El campo Descripción del producto es obligatorio.',
+            'description.max' => 'El campo Descripción del producto no pued etener más de 700 caracteres.',] );
 
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return redirect()->route('product.edit', $product->id)->withErrors($validator)->withInput();
-        }
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;
-        $product->discount = $request->discount;
+        if(is_null($request->discount) || empty($request->discount) || $request->discount < 0){
+            $product->discount = 0; 
+        }else{
+            $product->discount = $request->discount;
+        }
         $product->save();
 
 
@@ -260,6 +299,18 @@ class productosController extends Controller
                 $aux2->category_id = $categoryBBDD->id;
                 $aux2->save();
             }
+
+            $stocks = $request->input('stock');
+            for($i = 0; $i < count($stocks); $i++)
+                {
+                    if(!is_null($stocks[$i]) || !empty($stocks[$i])){
+                        $sizeBBDD = Size::find($i + 1);
+                        $sizeProduct = SizeProduct::where('product_id',$product->id)->where('size_id',$sizeBBDD->id)->first();
+                        $sizeProduct->stock = $stocks[$i];
+                        $sizeProduct->save();
+                }
+            }
+            
 
 
 
