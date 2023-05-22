@@ -98,11 +98,14 @@ class userController extends Controller
     $nombreNuevo = $request->input('nombre_nuevo');
 
     // Validar que el nombre no es un email
-    if (!filter_var($nombreNuevo, FILTER_VALIDATE_EMAIL)) {
+    if (!empty($nombreNuevo) && !filter_var($nombreNuevo, FILTER_VALIDATE_EMAIL)) {
         $user->name = $nombreNuevo;
         $user->save();
         return redirect()->route('perfil.user')->with('success-perfil', 'Nombre actualizado con éxito.');
     } else {
+        if(empty($nombreNuevo)){
+            return redirect()->route('edit-menu.user')->withErrors(['mensaje'=> 'El nombre no puede estar vacío.']);
+        }
         // El nombre ingresado es un email, mostrar un mensaje de error
         return redirect()->route('edit-menu.user')->withErrors(['mensaje'=> 'El nombre no puede ser un correo electrónico.']);
     }
@@ -168,7 +171,7 @@ class userController extends Controller
     if(!is_null($shopping)){
         $shopping->delete();
     }
-    
+
 
     // Eliminar al usuario
     $user->delete();

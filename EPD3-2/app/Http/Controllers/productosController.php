@@ -35,8 +35,10 @@ class productosController extends Controller
 
     public function viewDisconunt()
     {
+        $products = Products::where('discount', '>', 0)
+                    ->orderBy('id', 'desc')
+                    ->paginate(9);
 
-        $products = Products::orderBy('id','desc')->paginate(9);
         $imgProducts = DB::table('img_products')->where('tipo', 'imagenMenu')->get();
         return view('descuentos', compact('products','imgProducts'));
     }
@@ -80,13 +82,13 @@ class productosController extends Controller
                 if (empty($value)) {
                     $fail('El campo stock es obligatorio.');
                 }
-    
+
                 foreach ($value as $item) {
                     if ($item < 0) {
                         $fail('El campo stock no puede contener valores negativos.');
                     }elseif($item == 0){
                         $contador = $contador + 1;
-                        
+
                     }
                 }
                 if($contador == 6){
@@ -109,11 +111,11 @@ class productosController extends Controller
         $product->price = $request->price;
         $product->description = $request->description;
         if(is_null($request->discount) || empty($request->discount) || $request->discount < 0){
-            $product->discount = 0; 
+            $product->discount = 0;
         }else{
             $product->discount = $request->discount;
         }
-        
+
         $product->save();
         // $tallas = $request->input('talla');
         $stocks = $request->input('stock');
@@ -224,13 +226,13 @@ class productosController extends Controller
                 if (empty($value)) {
                     $fail('El campo stock es obligatorio.');
                 }
-    
+
                 foreach ($value as $item) {
                     if ($item < 0) {
                         $fail('El campo stock no puede contener valores negativos.');
                     }elseif($item == 0){
                         $contador = $contador + 1;
-                        
+
                     }
                 }
                 if($contador == 6){
@@ -252,7 +254,7 @@ class productosController extends Controller
         $product->price = $request->price;
         $product->description = $request->description;
         if(is_null($request->discount) || empty($request->discount) || $request->discount < 0){
-            $product->discount = 0; 
+            $product->discount = 0;
         }else{
             $product->discount = $request->discount;
         }
@@ -310,7 +312,7 @@ class productosController extends Controller
                         $sizeProduct->save();
                 }
             }
-            
+
 
 
 

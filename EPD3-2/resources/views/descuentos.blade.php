@@ -26,7 +26,7 @@
                         <div class="card-body">
                             @php $count = 0; @endphp
                             @foreach ($products as $product)
-                                @if ($product->stock_p() > 0 and $product->discount > 0)
+                                @if ($product->stock_p() > 0)
                                     @if ($count % 3 == 0)
                                         <div class="row">
                                     @endif
