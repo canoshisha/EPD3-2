@@ -5,7 +5,7 @@
     <html lang="{{ str_replace('_', '-', app()->setLocale(auth()->user()->language)) }}">
 @else
     <!-- Usuario no autenticado -->
-    <html lang="{{ str_replace('_', '-', app()->setLocale('en')) }}">
+    <html lang="{{ str_replace('_', '-', app()->setLocale('es')) }}">
 @endauth
 
 <head>
